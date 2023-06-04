@@ -163,30 +163,32 @@ const OrderPage = () => {
   //   orderTotalValue: orderPriceTotalvalue,
   // };
 
-  if (typeof window !== "undefined") {
-    const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+  let OrderDetails;
 
-    if (orderItemsv) {
-      let orderTotalvalueArray = orderItemsv.map(
-        (item) => item.price * item.numberofitem
-      );
-      let orderPriceTotalvalue = orderTotalvalueArray.reduce(
-        (a, b) => a + b,
-        0
-      );
-      // console.log(orderPriceTotalvalue); // priceTotal
+  // if (typeof window !== "undefined") {
+  //   const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
 
-      // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
-      // total price down there and we got it too.
+  //   if (orderItemsv) {
+  //     let orderTotalvalueArray = orderItemsv.map(
+  //       (item) => item.price * item.numberofitem
+  //     );
+  //     let orderPriceTotalvalue = orderTotalvalueArray.reduce(
+  //       (a, b) => a + b,
+  //       0
+  //     );
+  //     // console.log(orderPriceTotalvalue); // priceTotal
 
-      const OrderDetails = {
-        orderProducts: [...orderItemsv],
-        orderTotalValue: orderPriceTotalvalue,
-      };
+  //     // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
+  //     // total price down there and we got it too.
 
-      setOrderDetailsValue(OrderDetails);
-    }
-  }
+  //     const OrderDetails = {
+  //       orderProducts: [...orderItemsv],
+  //       orderTotalValue: orderPriceTotalvalue,
+  //     };
+
+  //     setOrderDetailsValue(OrderDetails);
+  //   }
+  // }
 
   // console.log(orderItemsv);
 
