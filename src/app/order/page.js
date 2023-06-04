@@ -144,7 +144,11 @@ const OrderPage = () => {
   // ///////////////////////////////////////////
   // orders items
 
-  const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+  let orderItemsv;
+
+  if (typeof window !== "undefined") {
+    orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+  }
 
   // console.log(orderItemsv);
 
