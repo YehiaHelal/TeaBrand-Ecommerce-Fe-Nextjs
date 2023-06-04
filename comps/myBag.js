@@ -24,10 +24,14 @@ const MyBag = () => {
   // setting the purchase button so if there is an item it always update the state and redirect to order page
   let checkLocalStorage;
   useEffect(() => {
-    checkLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
+    if (typeof window !== "undefined") {
+      checkLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
 
-    if (Object.keys(JSON.parse(localStorage.getItem("cartItems")).length > 0)) {
-      // setlocalStorageItemsCheck(true);
+      if (
+        Object.keys(JSON.parse(localStorage.getItem("cartItems")).length > 0)
+      ) {
+        // setlocalStorageItemsCheck(true);
+      }
     }
   }, []);
 
@@ -35,7 +39,9 @@ const MyBag = () => {
   let filtersteptwo;
   let getLocalCartItems;
 
-  getLocalCartItems = JSON.parse(localStorage.getItem("cartItems"));
+  if (typeof window !== "undefined") {
+    getLocalCartItems = JSON.parse(localStorage.getItem("cartItems"));
+  }
 
   // calculating the total value
 

@@ -148,8 +148,10 @@ const Home = ({ params }) => {
   // so it can be used like a webhook to check
   useEffect(() => {
     // pending state to check if the user is clicking on stripe and paying or joking the system
-    let pendingstate = false;
-    localStorage.setItem("pendingstatev", JSON.stringify(pendingstate));
+    if (typeof window !== "undefined") {
+      let pendingstate = false;
+      localStorage.setItem("pendingstatev", JSON.stringify(pendingstate));
+    }
   }, []);
 
   return (

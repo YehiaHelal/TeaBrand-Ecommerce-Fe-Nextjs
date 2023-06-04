@@ -19,10 +19,11 @@ export const AuthContextProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user) {
-      dispatchUser({ type: "LOGIN", payload: user });
+    if (typeof window !== "undefined") {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        dispatchUser({ type: "LOGIN", payload: user });
+      }
     }
   }, []);
 

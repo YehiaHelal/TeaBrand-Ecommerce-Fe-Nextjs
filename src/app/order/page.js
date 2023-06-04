@@ -14,9 +14,11 @@ const OrderPage = () => {
   const { push } = useRouter();
   const { items, dispatch } = useItemsCartContext();
 
-  let emptyarray = [];
-  if (!localStorage.getItem("cartItems")) {
-    localStorage.setItem("cartItems", JSON.stringify(emptyarray));
+  if (typeof window !== "undefined") {
+    let emptyarray = [];
+    if (!localStorage.getItem("cartItems")) {
+      localStorage.setItem("cartItems", JSON.stringify(emptyarray));
+    }
   }
 
   // to refresh state
@@ -45,14 +47,16 @@ const OrderPage = () => {
   const [loggedinset, setLoggedinset] = useState();
 
   useEffect(() => {
-    const localStorageUser = JSON.parse(localStorage.getItem("user"));
-    if (localStorageUser) {
-      setLoggedinset(localStorageUser);
-      setErrorToPlaceOrder("");
-      // console.log("logged in");
-    }
-    if (!localStorageUser) {
-      // console.log("not logged in");
+    if (typeof window !== "undefined") {
+      const localStorageUser = JSON.parse(localStorage.getItem("user"));
+      if (localStorageUser) {
+        setLoggedinset(localStorageUser);
+        setErrorToPlaceOrder("");
+        // console.log("logged in");
+      }
+      if (!localStorageUser) {
+        // console.log("not logged in");
+      }
     }
   }, [user]);
 
@@ -124,16 +128,24 @@ const OrderPage = () => {
   // so the stripe request won't happen won't that encrypted state is present otherwise the code won't follow
   // so it can be used like a webhook to check
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Perform localStorage action
+      // const item = localStorage.getItem("key");
+
+      let pendingstate = false;
+      localStorage.setItem("pendingstatev", JSON.stringify(pendingstate));
+    }
+
     // pending state to check if the user is clicking on stripe and paying or joking the system
-    let pendingstate = false;
-    localStorage.setItem("pendingstatev", JSON.stringify(pendingstate));
   }, []);
 
   // the order items array
 
   // ///////////////////////////////////////////
   // orders items
+
   const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+
   // console.log(orderItemsv);
 
   // orders price total

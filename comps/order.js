@@ -15,24 +15,30 @@ const OrderItems = () => {
   // setting the purchase button so if there is an item it always update the state and redirect to order page
   let checkLocalStorage;
   useEffect(() => {
-    checkLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
+    if (typeof window !== "undefined") {
+      checkLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
 
-    console.log("redirect won't happens");
+      console.log("redirect won't happens");
 
-    if (Object.keys(JSON.parse(localStorage.getItem("cartItems")).length > 0)) {
-      console.log("here");
-      // setlocalStorageItemsCheck(true);
-      console.log("redirect will happen");
+      if (
+        Object.keys(JSON.parse(localStorage.getItem("cartItems")).length > 0)
+      ) {
+        console.log("here");
+        // setlocalStorageItemsCheck(true);
+        console.log("redirect will happen");
+      }
+
+      console.log(JSON.parse(localStorage.getItem("cartItems")).length > 0);
     }
-
-    console.log(JSON.parse(localStorage.getItem("cartItems")).length > 0);
   }, []);
 
   let filterstepone;
   let filtersteptwo;
   let getLocalCartItems;
 
-  getLocalCartItems = JSON.parse(localStorage.getItem("cartItems"));
+  if (typeof window !== "undefined") {
+    getLocalCartItems = JSON.parse(localStorage.getItem("cartItems"));
+  }
 
   // calculating the total value
 
@@ -50,7 +56,9 @@ const OrderItems = () => {
 
   // for exporting the value to order page and managing stripe
   useEffect(() => {
-    localStorage.setItem("itemsvalue", JSON.stringify(totalValue));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("itemsvalue", JSON.stringify(totalValue));
+    }
   }, [totalValue]);
 
   // increasing number of items + and decreasing - number of items
@@ -301,9 +309,10 @@ export const CartItemAlertNumberOfitemsOrder = () => {
   // Cart alert and number of item if there is one added
   const [CartAlertNumofitems, setCartAlertNumofitems] = useState(0);
 
-  let CartAlertNumofitemsOutside = JSON.parse(
-    localStorage.getItem("cartItems")
-  );
+  let CartAlertNumofitemsOutside;
+  if (typeof window !== "undefined") {
+    CartAlertNumofitemsOutside = JSON.parse(localStorage.getItem("cartItems"));
+  }
 
   useEffect(() => {
     setCartAlertNumofitems(CartAlertNumofitemsOutside.length);
