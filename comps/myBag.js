@@ -305,12 +305,22 @@ export const CartItemAlertNumberOfitems = () => {
   // Cart alert and number of item if there is one added
   const [CartAlertNumofitems, setCartAlertNumofitems] = useState(0);
 
-  let CartAlertNumofitemsOutside = JSON.parse(
-    localStorage.getItem("cartItems")
-  );
+  let CartAlertNumofitemsOutside;
+
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+
+    CartAlertNumofitemsOutside = JSON.parse(localStorage.getItem("cartItems"));
+  }
 
   useEffect(() => {
-    setCartAlertNumofitems(CartAlertNumofitemsOutside.length);
+    if (typeof window !== "undefined") {
+      // Perform localStorage action
+      // const item = localStorage.getItem("key");
+
+      setCartAlertNumofitems(CartAlertNumofitemsOutside.length);
+    }
   }, [CartAlertNumofitemsOutside]);
 
   return (
