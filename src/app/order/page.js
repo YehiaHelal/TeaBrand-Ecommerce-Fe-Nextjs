@@ -46,6 +46,9 @@ const OrderPage = () => {
   // reading the data from the local storage if it's there and  logged in check status and updating
   const [loggedinset, setLoggedinset] = useState();
 
+  // order detail value
+  const [OrderDetailsValue, setOrderDetailsValue] = useState();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const localStorageUser = JSON.parse(localStorage.getItem("user"));
@@ -144,6 +147,22 @@ const OrderPage = () => {
   // ///////////////////////////////////////////
   // orders items
 
+  // const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+
+  // let orderTotalvalueArray = orderItemsv.map(
+  //   (item) => item.price * item.numberofitem
+  // );
+  // let orderPriceTotalvalue = orderTotalvalueArray.reduce((a, b) => a + b, 0);
+  // // console.log(orderPriceTotalvalue); // priceTotal
+
+  // // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
+  // // total price down there and we got it too.
+
+  // const OrderDetails = {
+  //   orderProducts: [...orderItemsv],
+  //   orderTotalValue: orderPriceTotalvalue,
+  // };
+
   if (typeof window !== "undefined") {
     const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
 
@@ -161,7 +180,7 @@ const OrderPage = () => {
       orderTotalValue: orderPriceTotalvalue,
     };
 
-    return OrderDetails;
+    setOrderDetailsValue(OrderDetails);
   }
 
   // console.log(orderItemsv);
@@ -186,7 +205,7 @@ const OrderPage = () => {
     try {
       const datas = await axios.post(
         "http://localhost:4000/api/orders/cartorder",
-        { OrderDetails },
+        { OrderDetailsValue },
         {
           withCredentials: true,
           headers: {
