@@ -54,10 +54,15 @@ function RootLayout({ children }) {
     fetchItems();
   }, []);
 
-  const localStoragechecking = JSON.parse(localStorage.getItem("cartItems"));
-  let emptyarray = [];
-  if (!localStorage.getItem("cartItems")) {
-    localStorage.setItem("cartItems", JSON.stringify(emptyarray));
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+
+    const localStoragechecking = JSON.parse(localStorage.getItem("cartItems"));
+    let emptyarray = [];
+    if (!localStorage.getItem("cartItems")) {
+      localStorage.setItem("cartItems", JSON.stringify(emptyarray));
+    }
   }
 
   return (

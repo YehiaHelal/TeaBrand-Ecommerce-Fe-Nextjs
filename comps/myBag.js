@@ -5,9 +5,14 @@ import styles from "./myBag.module.css";
 import { useEffect, useState } from "react";
 
 const MyBag = () => {
-  let emptyarray = [];
-  if (!localStorage.getItem("cartItems")) {
-    localStorage.setItem("cartItems", JSON.stringify(emptyarray));
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+
+    let emptyarray = [];
+    if (!localStorage.getItem("cartItems")) {
+      localStorage.setItem("cartItems", JSON.stringify(emptyarray));
+    }
   }
 
   // importing Cart Context items if needed
@@ -48,7 +53,12 @@ const MyBag = () => {
 
   // for exporting the value to order page and managing stripe
   useEffect(() => {
-    localStorage.setItem("itemsvalue", JSON.stringify(totalValue));
+    if (typeof window !== "undefined") {
+      // Perform localStorage action
+      // const item = localStorage.getItem("key");
+
+      localStorage.setItem("itemsvalue", JSON.stringify(totalValue));
+    }
   }, [totalValue]);
 
   // increasing number of items + and decreasing - number of items
