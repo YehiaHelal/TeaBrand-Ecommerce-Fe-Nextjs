@@ -1,0 +1,70 @@
+.component {
+  width: 350px;
+  height: 400px;
+  /* background-color: #d3d3d3; */
+  /* background-color: #b0c4de; */
+  background-color: #eaecee;
+
+  border-radius: 3px;
+
+  /* overflow: auto; */
+  /* position: fixed; */
+  /* left: 400px; */
+  /* top: 80px; */
+
+  /* z-index: 2; */
+}
+
+.loginButtons > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px;
+
+  gap: 10px;
+}
+
+.loginButtons * button {
+  padding: 10px 20px;
+}
+
+.SignupLoginForm {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+
+.SignupLoginForm > button {
+  padding: 5px 30px;
+}
+
+.FormEmail {
+  display: flex;
+}
+
+.FormEmail > label {
+  width: 100px;
+}
+
+.error {
+  padding: 5px;
+  background-color: rgb(255, 0, 0, 0.5);
+}
+
+.successRequest {
+  padding: 5px;
+  background-color: rgba(94, 175, 111, 0.5);
+}
+
+.ProfileComponent {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ProfileComponent > button {
+  padding: 5px;
+  width: 70%;
+}
