@@ -144,28 +144,29 @@ const OrderPage = () => {
   // ///////////////////////////////////////////
   // orders items
 
-  let orderItemsv;
-
   if (typeof window !== "undefined") {
-    orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+    const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+
+    let orderTotalvalueArray = orderItemsv.map(
+      (item) => item.price * item.numberofitem
+    );
+    let orderPriceTotalvalue = orderTotalvalueArray.reduce((a, b) => a + b, 0);
+    // console.log(orderPriceTotalvalue); // priceTotal
+
+    // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
+    // total price down there and we got it too.
+
+    const OrderDetails = {
+      orderProducts: [...orderItemsv],
+      orderTotalValue: orderPriceTotalvalue,
+    };
+
+    return OrderDetails;
   }
 
   // console.log(orderItemsv);
 
   // orders price total
-  let orderTotalvalueArray = orderItemsv.map(
-    (item) => item.price * item.numberofitem
-  );
-  let orderPriceTotalvalue = orderTotalvalueArray.reduce((a, b) => a + b, 0);
-  // console.log(orderPriceTotalvalue); // priceTotal
-
-  // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
-  // total price down there and we got it too.
-
-  const OrderDetails = {
-    orderProducts: [...orderItemsv],
-    orderTotalValue: orderPriceTotalvalue,
-  };
 
   // console.log(OrderDetails);
 
