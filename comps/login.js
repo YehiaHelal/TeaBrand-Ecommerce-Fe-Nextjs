@@ -4,7 +4,6 @@ import styles from "./login.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useCookies } from "react-cookie";
 
 const Login = () => {
   // dispatchUser to the authContext
