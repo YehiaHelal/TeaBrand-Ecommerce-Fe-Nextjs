@@ -26,7 +26,7 @@ const MangeUsers = () => {
   // getting all orders to show for each user his order made
   const [AllOrders, setAllOrders] = useState();
 
-  // console.log(AllOrders);
+  console.log(AllOrders);
 
   // Show Products Details of the User
   const [ShowSpecficUserExtraData, setShowSpecficUserExtraData] =
@@ -1034,8 +1034,8 @@ const MangeUsers = () => {
                         setShowSpecficUserExtraDataHideShow(false);
                       }
                       if (!ShowSpecficUserExtraData) {
-                        // setShowSpecficUserExtraData(true);
-                        // setShowSpecficUserExtraDataHideShow(true);
+                        setShowSpecficUserExtraData(true);
+                        setShowSpecficUserExtraDataHideShow(true);
                       }
                     }}
                   >
@@ -1072,25 +1072,34 @@ const MangeUsers = () => {
                       Add Note
                     </button>
                   </div>
-                  {ShowSpecficUserExtraData &&
-                    User.UsersProducts.map((item, i) => {
-                      return (
-                        <div key={i} className={styles.UsersFullDetails}>
-                          <Image
-                            alt="n"
-                            className={styles.productItemImage}
-                            // src={require(`./../../../public/Items/${item.name}.png`)}
-                            src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
-                            // className="iconImage"
-                            width={300}
-                            height={300}
-                          ></Image>
-                          <div>Name: {item.name}</div>
-                          <div>Price: {item.price}$</div>
-                          <div>Quantity: {item.price}</div>
-                        </div>
-                      );
-                    })}
+                  {
+                    ShowSpecficUserExtraData &&
+                      // <div>All his orders number</div>
+
+                      AllOrders.filter(function (order) {
+                        return order.user === User.email;
+                      }).map((order, i) => {
+                        return <div>Order Number: {order.ordernumber}</div>;
+                      })
+                    // User.UsersProducts.map((item, i) => {
+                    //   return (
+                    //     <div key={i} className={styles.UsersFullDetails}>
+                    //       <Image
+                    //         alt="n"
+                    //         className={styles.productItemImage}
+                    //         // src={require(`./../../../public/Items/${item.name}.png`)}
+                    //         src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                    //         // className="iconImage"
+                    //         width={300}
+                    //         height={300}
+                    //       ></Image>
+                    //       <div>Name: {item.name}</div>
+                    //       <div>Price: {item.price}$</div>
+                    //       <div>Quantity: {item.price}</div>
+                    //     </div>
+                    //   );
+                    // })
+                  }
                 </div>
               );
             })}

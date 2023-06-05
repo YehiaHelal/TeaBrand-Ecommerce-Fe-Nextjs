@@ -13,6 +13,11 @@ const Admin = ({ params }) => {
   // Show Dashboard
   const [showDashboard, setShowDashboard] = useState(false);
 
+  // Set Dashboard Total Data
+  const [dashboardTotalData, setDashboardTotalData] = useState();
+
+  console.log(dashboardTotalData);
+
   // Show ITEMS
   const [showProducts, setShowProducts] = useState(false);
 
@@ -103,6 +108,73 @@ const Admin = ({ params }) => {
 
   // get the url showen and direction
   console.log(params.id);
+
+  // Handle get Dashboard general Data
+  const handleGetDashboardData = async () => {
+    // e.preventDefault();
+
+    // const name = e.target.name.value;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+
+    // fetch request
+    try {
+      const datas = await axios.get(
+        "http://localhost:4000/api/users/dashboarddata",
+
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // if (submission.message.length < 10) {
+      //   return { error: "Message must be over 10 chars long." };
+      // }
+
+      console.log(datas);
+
+      // check response if ok
+      // console.log(datas.status === 200);
+
+      if (datas.status === 200) {
+        // console.log(datas.data);
+
+        setDashboardTotalData(datas.data);
+
+        // setTimeout(() => {
+        //   setShowAllItems(true);
+        // }, 500);
+
+        // console.log("data");
+        // SetUserdataNameAddress(datas.data);
+      }
+    } catch (error) {
+      console.log("error");
+
+      // if there is an error response
+      console.log(error);
+
+      // if there is an error response
+      // console.log(error.response.data);
+
+      // setErrorSignup(error.response.data.error);
+    }
+  };
 
   // Handle Get All Items
 
@@ -524,6 +596,10 @@ const Admin = ({ params }) => {
               setShowUsers(false);
               setShowLiveChat(false);
               setShowProducts(false);
+
+              setTimeout(() => {
+                handleGetDashboardData();
+              }, 100);
             }
           }}
         >
@@ -697,12 +773,19 @@ const Admin = ({ params }) => {
       </div>
 
       <div className={styles.ManagingExpandingComponent}>
-        {showDashboard && (
+        {showDashboard && dashboardTotalData && (
           <div>
-            <h3>Welcome to Dashboard</h3>
-            <div>Orders Made</div>
-            <div>Live Chat Status</div>
-            <div>Total products</div>
+            <h3 className={styles.DashboardNotifcationDefault}>
+              By Default any user created is Admin, you can change user role if
+              you want from users panel
+            </h3>
+            <div className={styles.DashboardData}>
+              <h3>Welcome to Dashboard</h3>
+              <div>Number of Products: {dashboardTotalData.products} </div>
+              <div>Number of Orders: {dashboardTotalData.orders}</div>
+              <div>Number of Users: {dashboardTotalData.users}</div>
+              <div>Number of Chats initiated: {dashboardTotalData.chats}</div>
+            </div>
           </div>
         )}
         {showProducts && (

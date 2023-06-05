@@ -12,6 +12,9 @@ const OrderItems = () => {
   // checking if there is items in the carts in the local storage
   const [localStorageItemsCheck, setlocalStorageItemsCheck] = useState(false);
 
+  // putting the total value of
+  const [totalValue, setTotalValue] = useState();
+
   // setting the purchase button so if there is an item it always update the state and redirect to order page
   let checkLocalStorage;
   useEffect(() => {
@@ -36,14 +39,11 @@ const OrderItems = () => {
   let filtersteptwo;
   let getLocalCartItems;
 
+  // calculating the total value
+
   if (typeof window !== "undefined") {
     getLocalCartItems = JSON.parse(localStorage.getItem("cartItems"));
   }
-
-  // calculating the total value
-
-  // putting the total value of
-  const [totalValue, setTotalValue] = useState();
 
   useEffect(() => {
     let orderTotalvalueArray = getLocalCartItems.map(
@@ -75,200 +75,205 @@ const OrderItems = () => {
       </div>
 
       <div className={styles.overflow}>
-        {getLocalCartItems.map((item) => {
-          return (
-            <div key={item._id} className={styles.ItemStylesComponent}>
-              <Link href={"/collections/" + item._id}>
-                <Image
-                  alt="n"
-                  // src={require(`./../../frontend/public/Items/${item.name}.png`)}
-                  src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
-                  width={300}
-                  height={300}
-                  // className="iconImage"
-                ></Image>
-              </Link>
+        {getLocalCartItems &&
+          getLocalCartItems.map((item) => {
+            return (
+              <div key={item._id} className={styles.ItemStylesComponent}>
+                <Link href={"/collections/" + item._id}>
+                  <Image
+                    alt="n"
+                    // src={require(`./../../frontend/public/Items/${item.name}.png`)}
+                    src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                    width={300}
+                    height={300}
+                    // className="iconImage"
+                  ></Image>
+                </Link>
 
-              <div className={styles.ItemStylesComponentNameandButton}>
-                <div> {item.name} /50 gram</div>
-                <button
-                  key={item}
-                  onClick={() => {
-                    filterstepone = JSON.parse(
-                      localStorage.getItem("cartItems")
-                    );
-                    filtersteptwo = filterstepone.filter(
-                      (newCart) => newCart._id !== item._id
-                    );
-                    localStorage.setItem(
-                      "cartItems",
-                      JSON.stringify(filtersteptwo)
-                    );
-                    // setMyCategorya([...filtersteptwo]);
-
-                    dispatch({ type: "SET_ITEM", payload: filtersteptwo });
-                    // console.log(items);
-                  }}
-                >
-                  Remove
-                </button>
-              </div>
-
-              <div className={styles.ItemStylesComponentPriceandQuantity}>
-                <div className={styles.ItemStylesComponentQuantity}>
+                <div className={styles.ItemStylesComponentNameandButton}>
+                  <div> {item.name} /50 gram</div>
                   <button
+                    key={item}
                     onClick={() => {
-                      addingFilterstepone = JSON.parse(
+                      filterstepone = JSON.parse(
                         localStorage.getItem("cartItems")
                       );
-                      addingFiltersteptwo = addingFilterstepone.filter(
+                      filtersteptwo = filterstepone.filter(
                         (newCart) => newCart._id !== item._id
                       );
-
-                      filteredTargetItem = addingFilterstepone.filter(
-                        (newCart) => newCart._id === item._id
+                      localStorage.setItem(
+                        "cartItems",
+                        JSON.stringify(filtersteptwo)
                       );
+                      // setMyCategorya([...filtersteptwo]);
 
-                      newFilteredTargetItem = filteredTargetItem.map((item) => {
-                        item.numberofitem = item.numberofitem - 1;
-                        return item;
-                      });
+                      dispatch({ type: "SET_ITEM", payload: filtersteptwo });
+                      // console.log(items);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
 
-                      [itemQuantityOneChecking] = [...newFilteredTargetItem];
+                <div className={styles.ItemStylesComponentPriceandQuantity}>
+                  <div className={styles.ItemStylesComponentQuantity}>
+                    <button
+                      onClick={() => {
+                        addingFilterstepone = JSON.parse(
+                          localStorage.getItem("cartItems")
+                        );
+                        addingFiltersteptwo = addingFilterstepone.filter(
+                          (newCart) => newCart._id !== item._id
+                        );
 
-                      //    console.log(itemQuantityOneChecking.numberofitem);
+                        filteredTargetItem = addingFilterstepone.filter(
+                          (newCart) => newCart._id === item._id
+                        );
 
-                      if (itemQuantityOneChecking.numberofitem >= 1) {
+                        newFilteredTargetItem = filteredTargetItem.map(
+                          (item) => {
+                            item.numberofitem = item.numberofitem - 1;
+                            return item;
+                          }
+                        );
+
+                        [itemQuantityOneChecking] = [...newFilteredTargetItem];
+
+                        //    console.log(itemQuantityOneChecking.numberofitem);
+
+                        if (itemQuantityOneChecking.numberofitem >= 1) {
+                          const mergedArray2 = [
+                            ...addingFiltersteptwo,
+                            ...newFilteredTargetItem,
+                          ];
+                          //         console.log(mergedArray2);
+
+                          localStorage.setItem(
+                            "cartItems",
+                            JSON.stringify(mergedArray2)
+                          );
+
+                          dispatch({
+                            type: "SET_ITEM",
+                            payload: mergedArray2,
+                          });
+                        }
+
+                        if (itemQuantityOneChecking.numberofitem < 1) {
+                          //     console.log("we can't subtract more");
+
+                          filterstepone = JSON.parse(
+                            localStorage.getItem("cartItems")
+                          );
+
+                          //     console.log(filterstepone);
+                          filtersteptwo = filterstepone.filter(
+                            (newCart) => newCart._id !== item._id
+                          );
+                          localStorage.setItem(
+                            "cartItems",
+                            JSON.stringify(filtersteptwo)
+                          );
+                          // setMyCategorya([...filtersteptwo]);
+
+                          dispatch({
+                            type: "SET_ITEM",
+                            payload: filtersteptwo,
+                          });
+                          // console.log(items);
+                        }
+                        // localStorage.setItem(
+                        //   "cartItems",
+                        //   JSON.stringify(filtersteptwo)
+                        // );
+                        // setMyCategorya([...filtersteptwo]);
+
+                        // console.log(items);
+                        //   localStorage.setItem(
+                        //     "cartItems",
+                        //     JSON.stringify(addingFiltersteptwo)
+                        //   );
+                        //   // setMyCategorya([...filtersteptwo]);
+
+                        //   dispatch({ type: "SET_ITEM", payload: addingFiltersteptwo });
+                        //   // console.log(items);
+                      }}
+                    >
+                      -
+                    </button>
+                    <div>{item.numberofitem}</div>
+                    <button
+                      onClick={() => {
+                        addingFilterstepone = JSON.parse(
+                          localStorage.getItem("cartItems")
+                        );
+                        addingFiltersteptwo = addingFilterstepone.filter(
+                          (newCart) => newCart._id !== item._id
+                        );
+
+                        filteredTargetItem = addingFilterstepone.filter(
+                          (newCart) => newCart._id === item._id
+                        );
+
+                        newFilteredTargetItem = filteredTargetItem.map(
+                          (item) => {
+                            item.numberofitem = item.numberofitem + 1;
+                            return item;
+                          }
+                        );
+
+                        // localStorage.setItem(
+                        //   "cartItems",
+                        //   JSON.stringify(filtersteptwo)
+                        // );
+                        // setMyCategorya([...filtersteptwo]);
+
                         const mergedArray2 = [
                           ...addingFiltersteptwo,
                           ...newFilteredTargetItem,
                         ];
-                        //         console.log(mergedArray2);
+                        //    console.log(mergedArray2);
 
                         localStorage.setItem(
                           "cartItems",
                           JSON.stringify(mergedArray2)
                         );
 
-                        dispatch({
-                          type: "SET_ITEM",
-                          payload: mergedArray2,
-                        });
-                      }
-
-                      if (itemQuantityOneChecking.numberofitem < 1) {
-                        //     console.log("we can't subtract more");
-
-                        filterstepone = JSON.parse(
-                          localStorage.getItem("cartItems")
-                        );
-
-                        //     console.log(filterstepone);
-                        filtersteptwo = filterstepone.filter(
-                          (newCart) => newCart._id !== item._id
-                        );
-                        localStorage.setItem(
-                          "cartItems",
-                          JSON.stringify(filtersteptwo)
-                        );
-                        // setMyCategorya([...filtersteptwo]);
-
-                        dispatch({
-                          type: "SET_ITEM",
-                          payload: filtersteptwo,
-                        });
+                        dispatch({ type: "SET_ITEM", payload: mergedArray2 });
                         // console.log(items);
-                      }
-                      // localStorage.setItem(
-                      //   "cartItems",
-                      //   JSON.stringify(filtersteptwo)
-                      // );
-                      // setMyCategorya([...filtersteptwo]);
+                        //   localStorage.setItem(
+                        //     "cartItems",
+                        //     JSON.stringify(addingFiltersteptwo)
+                        //   );
+                        //   // setMyCategorya([...filtersteptwo]);
 
-                      // console.log(items);
-                      //   localStorage.setItem(
-                      //     "cartItems",
-                      //     JSON.stringify(addingFiltersteptwo)
+                        //   dispatch({ type: "SET_ITEM", payload: addingFiltersteptwo });
+                        //   // console.log(items);
+                      }}
+
+                      //   const numberofitemforvalue = JSON.parse(
+                      //     localStorage.getItem("cartItems")
                       //   );
-                      //   // setMyCategorya([...filtersteptwo]);
 
-                      //   dispatch({ type: "SET_ITEM", payload: addingFiltersteptwo });
-                      //   // console.log(items);
-                    }}
-                  >
-                    -
-                  </button>
-                  <div>{item.numberofitem}</div>
-                  <button
-                    onClick={() => {
-                      addingFilterstepone = JSON.parse(
-                        localStorage.getItem("cartItems")
-                      );
-                      addingFiltersteptwo = addingFilterstepone.filter(
-                        (newCart) => newCart._id !== item._id
-                      );
-
-                      filteredTargetItem = addingFilterstepone.filter(
-                        (newCart) => newCart._id === item._id
-                      );
-
-                      newFilteredTargetItem = filteredTargetItem.map((item) => {
-                        item.numberofitem = item.numberofitem + 1;
-                        return item;
-                      });
-
-                      // localStorage.setItem(
-                      //   "cartItems",
-                      //   JSON.stringify(filtersteptwo)
-                      // );
-                      // setMyCategorya([...filtersteptwo]);
-
-                      const mergedArray2 = [
-                        ...addingFiltersteptwo,
-                        ...newFilteredTargetItem,
-                      ];
-                      //    console.log(mergedArray2);
-
-                      localStorage.setItem(
-                        "cartItems",
-                        JSON.stringify(mergedArray2)
-                      );
-
-                      dispatch({ type: "SET_ITEM", payload: mergedArray2 });
-                      // console.log(items);
-                      //   localStorage.setItem(
-                      //     "cartItems",
-                      //     JSON.stringify(addingFiltersteptwo)
-                      //   );
-                      //   // setMyCategorya([...filtersteptwo]);
-
-                      //   dispatch({ type: "SET_ITEM", payload: addingFiltersteptwo });
-                      //   // console.log(items);
-                    }}
-
-                    //   const numberofitemforvalue = JSON.parse(
-                    //     localStorage.getItem("cartItems")
-                    //   );
-
-                    //   setaddItemToCart(item);
-                    //   setChangeValue(numberofitemforvalue.length + 1);
-                    // }}
-                  >
-                    +
-                  </button>
-                </div>
-                <div className={styles.ItemStylesComponentPrice}>
-                  ${item.price}
+                      //   setaddItemToCart(item);
+                      //   setChangeValue(numberofitemforvalue.length + 1);
+                      // }}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div className={styles.ItemStylesComponentPrice}>
+                    ${item.price}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
 
       <div className={styles.TotalPriceComponent}>
         <div>Total Price</div>
-        <div>${totalValue}</div>
+        {totalValue && <div>${totalValue}</div>}
       </div>
 
       {/* redirect to order page if clicked and there is items inside cart */}

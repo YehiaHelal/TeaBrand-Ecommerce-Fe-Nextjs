@@ -186,11 +186,11 @@
 
 .error {
   padding: 10px 20px;
-  background-color: rgb(255, 0, 0, 0.5);
+  background-color: rgb(255, 0, 0, 0.5) !important;
 }
 .successRequest {
   padding: 10px 20px;
-  background-color: rgb(0, 128, 0, 0.5);
+  background-color: rgb(0, 128, 0, 0.5) !important;
 }
 .DeleteProductComponent {
   display: flex;
@@ -283,4 +283,18 @@
   .resetPasswordComponent {
     width: 400px;
   }
+}
+
+.DashboardNotifcationDefault {
+  margin-bottom: 20px;
+}
+
+.DashboardData {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+.DashboardData > h3 {
+  text-decoration: underline;
 }

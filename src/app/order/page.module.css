@@ -153,13 +153,13 @@
 
 .successfulordernotifcation {
   padding: 15px;
-  background-color: rgb(135, 189, 135);
+  background-color: rgb(135, 189, 135) !important;
   font-size: 20px;
 }
 
 .Errornotification {
   padding: 15px;
-  background-color: rgb(255, 0, 0, 0.3);
+  background-color: rgb(255, 0, 0, 0.3) !important;
   font-size: 20px;
 }
 

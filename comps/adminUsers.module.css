@@ -191,11 +191,11 @@
 
 .successRequest {
   padding: 10px 20px;
-  background-color: rgb(0, 128, 0, 0.5);
+  background-color: rgb(0, 128, 0, 0.5) !important;
 }
 .error {
   padding: 10px 20px;
-  background-color: rgb(255, 0, 0, 0.5);
+  background-color: rgb(255, 0, 0, 0.5) !important;
 }
 
 .addNoteComponent {

@@ -37,7 +37,7 @@
 }
 
 .successMessage {
-  background-color: rgb(99, 160, 99);
+  background-color: rgb(99, 160, 99) !important;
   margin-top: 15px;
   padding: 15px 50px;
   display: flex;
@@ -45,7 +45,7 @@
 }
 
 .ErrorMessage {
-  background-color: rgb(255, 0, 0, 0.5);
+  background-color: rgb(255, 0, 0, 0.5) !important;
   margin-top: 15px;
   padding: 15px 50px;
   display: flex;

@@ -173,12 +173,12 @@
 
 .error {
   padding: 5px;
-  background-color: rgb(255, 0, 0, 0.5);
+  background-color: rgb(255, 0, 0, 0.5) !important;
 }
 
 .successRequest {
   padding: 5px;
-  background-color: rgba(94, 175, 111, 0.5);
+  background-color: rgba(94, 175, 111, 0.5) !important;
 }
 
 .ProfileComponent {

@@ -278,7 +278,7 @@ const MyBag = () => {
         <div className={styles.ButtonElements}>
           <div className={styles.TotalPrice}>
             <div>Total</div>
-            <div>${totalValue}</div>
+            {totalValue && <div>${totalValue}</div>}
           </div>
 
           <Link className={styles.PurchaseButtonLink} href={"/order"}>
@@ -292,7 +292,7 @@ const MyBag = () => {
         <div className={styles.ButtonElements}>
           <div className={styles.TotalPrice}>
             <div>Total</div>
-            <div>${totalValue}</div>
+            {totalValue && <div>${totalValue}</div>}
           </div>
 
           <button className={styles.PurchaseButton}>Purchase</button>
