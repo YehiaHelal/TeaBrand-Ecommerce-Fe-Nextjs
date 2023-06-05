@@ -941,9 +941,8 @@ const Login = () => {
 
   // to check if there is a token to log in user automatically
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
     if (user) {
+      const user = JSON.parse(localStorage.getItem("user"));
       dispatchUser({ type: "LOGIN", payload: user });
       setshowProfileAndLogout(true);
       handleGetUserData();
@@ -959,42 +958,42 @@ const Login = () => {
   }, []);
 
   // to check if the token is still valid and if not log out the user ..
-  useEffect(() => {
-    if (user) {
-      const checkToken = async () => {
-        try {
-          const datas = await axios.post(
-            "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/checktoken",
-            {
-              message: "checkme",
-            },
-            {
-              withCredentials: true,
-              headers: {
-                "Access-Control-Allow-Credentials": "true",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods":
-                  "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-                "Access-Control-Allow-Headers":
-                  "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-              },
-            }
-          );
-          console.log("checked");
-          return;
-        } catch (error) {
-          // then remove user from local storage and   which will set the context to null automatically
-          localStorage.removeItem("user");
+  // useEffect(() => {
+  //   if (user) {
+  //     const checkToken = async () => {
+  //       try {
+  //         const datas = await axios.post(
+  //           "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/checktoken",
+  //           {
+  //             message: "checkme",
+  //           },
+  //           {
+  //             withCredentials: true,
+  //             headers: {
+  //               "Access-Control-Allow-Credentials": "true",
+  //               "Access-Control-Allow-Origin": "*",
+  //               "Access-Control-Allow-Methods":
+  //                 "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+  //               "Access-Control-Allow-Headers":
+  //                 "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+  //             },
+  //           }
+  //         );
+  //         console.log("checked");
+  //         return;
+  //       } catch (error) {
+  //         // then remove user from local storage and   which will set the context to null automatically
+  //         localStorage.removeItem("user");
 
-          // dispatch to context just to re-renders
-          dispatchUser({ type: "LOGOUT" });
+  //         // dispatch to context just to re-renders
+  //         dispatchUser({ type: "LOGOUT" });
 
-          return;
-        }
-      };
-      checkToken();
-    }
-  }, [user]);
+  //         return;
+  //       }
+  //     };
+  //     checkToken();
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     if (user) {
