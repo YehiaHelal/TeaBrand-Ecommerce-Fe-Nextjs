@@ -83,7 +83,7 @@ const BlogPage = () => {
           </div>
 
           <Link
-            href="https://tea-brand-ecommerce-fe-nextjs.vercel.app/order"
+            href="https://zippy-horse-78b7b7.netlify.app/order"
             className={styles.Linkredirect}
           >
             Redirect to Order Page

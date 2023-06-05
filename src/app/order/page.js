@@ -457,8 +457,8 @@ const OrderPage = () => {
                   //       quantity: 1,
                   //     },
                   //   ],
-                  // successUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder`,
-                  // cancelUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/failedpaymentorder`,
+                  // successUrl: `https://zippy-horse-78b7b7.netlify.app/successorder`,
+                  // cancelUrl: `https://zippy-horse-78b7b7.netlify.app/failedpaymentorder`,
                   // lineItems: [
                   //   // {
                   //   //   price_data: {

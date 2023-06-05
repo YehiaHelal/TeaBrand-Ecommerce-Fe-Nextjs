@@ -54,8 +54,8 @@ export default async function handler(req, res) {
         mode: "payment",
         success_url: `${req.headers.origin}/successorder`,
         cancel_url: `${req.headers.origin}/failure`,
-        // success_url: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorders`,
-        // cancel_url: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/order`,
+        // success_url: `https://zippy-horse-78b7b7.netlify.app/successorders`,
+        // cancel_url: `https://zippy-horse-78b7b7.netlify.app/order`,
       });
       res.json({ sessionURL: session.url });
     } catch (err) {
