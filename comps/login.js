@@ -309,6 +309,10 @@ const Login = () => {
     // console.log(email);
     // console.log(password);
 
+    if (user) {
+      console.log(user.token);
+    }
+
     // fetch request
     try {
       const datas = await axios.post(
