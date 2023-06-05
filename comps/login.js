@@ -886,9 +886,9 @@ const Login = () => {
       if (datas.status === 200) {
         console.log(datas);
 
-        const cookie = datas.headers["set-cookie"];
+        // const cookie = datas.headers["set-cookie"];
 
-        setCookie("jwt", datas.data.token);
+        setCookie("jwt", datas.data.token, { httpOnly: true });
 
         console.log(cookie);
 
