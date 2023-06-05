@@ -890,7 +890,7 @@ const Login = () => {
 
         setCookie("jwt", datas.data.token, { httpOnly: true });
 
-        console.log(cookie);
+        // console.log(cookie);
 
         setSuccessfulLogin(true);
         setErrorSignup("");
