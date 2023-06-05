@@ -885,6 +885,10 @@ const Login = () => {
       if (datas.status === 200) {
         console.log(datas);
 
+        const cookie = datas.headers["set-cookie"];
+
+        console.log(cookie);
+
         setSuccessfulLogin(true);
         setErrorSignup("");
         setErrorLogin("");
