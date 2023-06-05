@@ -4,8 +4,6 @@ import styles from "./login.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
-// import { setCookie } from "cookies-next";
-import Cookies from "cookies";
 
 const Login = () => {
   // dispatchUser to the authContext
@@ -887,13 +885,9 @@ const Login = () => {
       if (datas.status === 200) {
         console.log(datas);
 
-        // const cookie = datas.headers["set-cookie"];
-
-        Cookies.set("jwt", datas.data.token, {
-          httpOnly: true, // true by default
-        });
-
-        // console.log(cookie);
+        // Cookies.set("jwt", datas.data.token, {
+        //   httpOnly: true, // true by default
+        // });
 
         setSuccessfulLogin(true);
         setErrorSignup("");
