@@ -4,6 +4,7 @@ import styles from "./login.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   // dispatchUser to the authContext
@@ -323,8 +324,6 @@ const Login = () => {
             "Access-Control-Allow-Headers":
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
             // "Content-Type": "application/json",
-
-            "Content-Type": "application/json",
           },
           // headers: {
           //   "Access-Control-Allow-Origin": "*",
@@ -714,8 +713,6 @@ const Login = () => {
             "Access-Control-Allow-Headers":
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
             // "Content-Type": "application/json",
-
-            "Content-Type": "application/json",
           },
           // headers: {
           //   "Access-Control-Allow-Origin": "*",
@@ -796,8 +793,6 @@ const Login = () => {
             "Access-Control-Allow-Headers":
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
             // "Content-Type": "application/json",
-
-            "Content-Type": "application/json",
           },
           // headers: {
           //   "Access-Control-Allow-Origin": "*",
@@ -871,8 +866,6 @@ const Login = () => {
             "Access-Control-Allow-Headers":
               "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
             // "Content-Type": "application/json",
-
-            "Content-Type": "application/json",
           },
           // headers: {
           //   "Access-Control-Allow-Origin": "*",
@@ -891,6 +884,8 @@ const Login = () => {
       // console.log(datas.status === 200);
 
       if (datas.status === 200) {
+        console.log(datas);
+
         setSuccessfulLogin(true);
         setErrorSignup("");
         setErrorLogin("");
