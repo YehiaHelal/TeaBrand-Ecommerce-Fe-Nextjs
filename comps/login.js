@@ -888,7 +888,7 @@ const Login = () => {
 
         const cookie = datas.headers["set-cookie"];
 
-        setCookie("key", "value");
+        setCookie("jwt", datas.data.token);
 
         console.log(cookie);
 
