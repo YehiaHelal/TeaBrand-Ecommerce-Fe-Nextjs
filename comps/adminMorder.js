@@ -133,7 +133,7 @@ const MangeOrders = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/orders/getallorders",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getallorders",
 
         {
           withCredentials: true,
@@ -213,7 +213,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/orderaddnote/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/orderaddnote/",
 
         submission,
 
@@ -280,7 +280,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/deleteorder",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/deleteorder",
 
         { submission },
 
@@ -386,7 +386,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/markordercompleted",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/markordercompleted",
 
         submission,
 
@@ -497,7 +497,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/updateOrder",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/updateOrder",
 
         formData,
 

@@ -239,7 +239,9 @@ function Collections() {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch("http://localhost:4000/api/items");
+      const response = await fetch(
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items"
+      );
 
       const item = await response.json();
 
@@ -687,7 +689,9 @@ function Collections() {
                     alt="n"
                     className={styles.productItemImage}
                     // src={require(`./../../../public/Items/${item.name}.png`)}
-                    src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png?${Date.now()}`}
+                    src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${
+                      item.name
+                    }.png?${Date.now()}`}
                     // className="iconImage"
                     width={300}
                     height={300}

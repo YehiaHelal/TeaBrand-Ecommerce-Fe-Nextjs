@@ -124,7 +124,7 @@ const Admin = ({ params }) => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/users/dashboarddata",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/dashboarddata",
 
         {
           withCredentials: true,
@@ -192,7 +192,7 @@ const Admin = ({ params }) => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items",
 
         {
           withCredentials: true,
@@ -265,7 +265,7 @@ const Admin = ({ params }) => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/items/addproduct/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items/addproduct/",
 
         formData,
 
@@ -361,7 +361,7 @@ const Admin = ({ params }) => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/items/deleteproduct",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items/deleteproduct",
 
         { submission },
 
@@ -471,7 +471,7 @@ const Admin = ({ params }) => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/items/editproduct",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items/editproduct",
 
         formData,
 

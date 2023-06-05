@@ -52,7 +52,7 @@
 //     // fetch request
 //     try {
 //       const datas = await axios.post(
-//         "http://localhost:4000/api/users/signup/",
+//         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/signup/",
 //         {
 //           submission,
 //         },
@@ -123,7 +123,7 @@
 //     // fetch request
 //     try {
 //       const datas = await axios.post(
-//         "http://localhost:4000/api/users/login/",
+//         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/login/",
 //         {
 //           submission,
 //         },
@@ -189,7 +189,7 @@
 //   const LogoutFunctionHandler = async () => {
 //     // fetch request and if ok the cookie will be removed
 //     const datas = await axios.post(
-//       "http://localhost:4000/api/users/logout",
+//       "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/logout",
 //       {},
 //       {
 //         withCredentials: true,
@@ -230,7 +230,7 @@
 //       const checkToken = async () => {
 //         try {
 //           const datas = await axios.post(
-//             "http://localhost:4000/api/users/checktoken",
+//             "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/checktoken",
 //             {
 //               message: "checkme",
 //             },

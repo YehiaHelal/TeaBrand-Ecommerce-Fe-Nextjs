@@ -101,7 +101,7 @@ const OrderPage = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:4000/api/users/profile",
+          "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/profile",
           { message: "hello" },
           {
             withCredentials: true,
@@ -227,7 +227,7 @@ const OrderPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/cartorder",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/cartorder",
         { OrderDetails },
         {
           withCredentials: true,
@@ -457,8 +457,8 @@ const OrderPage = () => {
                   //       quantity: 1,
                   //     },
                   //   ],
-                  // successUrl: `http://localhost:3000/successorder`,
-                  // cancelUrl: `http://localhost:3000/failedpaymentorder`,
+                  // successUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder`,
+                  // cancelUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/failedpaymentorder`,
                   // lineItems: [
                   //   // {
                   //   //   price_data: {

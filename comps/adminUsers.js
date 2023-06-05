@@ -152,7 +152,7 @@ const MangeUsers = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/users/getallusers",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/getallusers",
 
         {
           withCredentials: true,
@@ -217,7 +217,7 @@ const MangeUsers = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/orders/getallorders",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getallorders",
 
         {
           withCredentials: true,
@@ -294,7 +294,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/addnotetouser",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/addnotetouser",
 
         submission,
 
@@ -361,7 +361,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/Users/deleteuser",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/Users/deleteuser",
 
         { submission },
 
@@ -467,7 +467,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/deactivateuser",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/deactivateuser",
 
         submission,
 
@@ -580,7 +580,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/updateuserinfo",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/updateuserinfo",
 
         formData,
 
@@ -672,7 +672,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adduseradmin",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adduseradmin",
 
         { submission },
 

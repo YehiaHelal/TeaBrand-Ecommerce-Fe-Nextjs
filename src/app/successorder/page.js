@@ -44,7 +44,7 @@ const BlogPage = () => {
     const fetchOrderNumber = async (e) => {
       try {
         const datas = await axios.post(
-          "http://localhost:4000/api/orders/getuserorders",
+          "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
           { message: "hello" },
           {
             withCredentials: true,
@@ -115,7 +115,7 @@ const BlogPage = () => {
       // fetch request
       try {
         const datas = await axios.post(
-          "http://localhost:4000/api/orders/cartorder",
+          "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/cartorder",
           { OrderDetails },
           {
             withCredentials: true,
@@ -205,7 +205,7 @@ const BlogPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/mail/emailorderplaced",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/emailorderplaced",
         {
           submission,
         },

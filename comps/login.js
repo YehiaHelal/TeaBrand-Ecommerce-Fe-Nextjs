@@ -163,7 +163,7 @@ const Login = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/imageupdate/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/imageupdate/",
 
         formData,
 
@@ -240,7 +240,7 @@ const Login = () => {
     // uploadprofileimgtos3
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/imageupdate/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/imageupdate/",
 
         formData,
 
@@ -312,7 +312,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/getndata/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/getndata/",
         { message: "hello" },
         {
           withCredentials: true,
@@ -381,7 +381,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/getuserorders",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
         { message: "hello" },
         {
           withCredentials: true,
@@ -457,7 +457,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/mail/resetpasswordemail",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/resetpasswordemail",
         {
           submission,
         },
@@ -540,12 +540,12 @@ const Login = () => {
       newpassword: e.target.newpassword.value,
     };
 
-    // "http://localhost:4000/api/mail/",
+    // "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/",
 
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/changepassword/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/changepassword/",
         {
           submission,
         },
@@ -624,7 +624,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/signup/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/signup/",
         {
           submission,
         },
@@ -698,7 +698,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/updateinfo/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/updateinfo/",
         {
           submission,
         },
@@ -777,7 +777,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/contactsend/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/contactsend/",
         {
           submission,
         },
@@ -849,7 +849,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/login/",
+        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/login/",
         {
           submission,
         },
@@ -916,7 +916,7 @@ const Login = () => {
   const LogoutFunctionHandler = async () => {
     // fetch request and if ok the cookie will be removed
     const datas = await axios.post(
-      "http://localhost:4000/api/users/logout",
+      "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/logout",
       {},
       {
         withCredentials: true,
@@ -964,7 +964,7 @@ const Login = () => {
       const checkToken = async () => {
         try {
           const datas = await axios.post(
-            "http://localhost:4000/api/users/checktoken",
+            "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/checktoken",
             {
               message: "checkme",
             },
