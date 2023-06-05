@@ -4,7 +4,8 @@ import styles from "./login.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { setCookie } from "cookies-next";
+// import { setCookie } from "cookies-next";
+import Cookies from "cookies";
 
 const Login = () => {
   // dispatchUser to the authContext
@@ -888,7 +889,9 @@ const Login = () => {
 
         // const cookie = datas.headers["set-cookie"];
 
-        setCookie("jwt", datas.data.token, { httpOnly: true });
+        Cookies.set("jwt", datas.data.token, {
+          httpOnly: true, // true by default
+        });
 
         // console.log(cookie);
 
