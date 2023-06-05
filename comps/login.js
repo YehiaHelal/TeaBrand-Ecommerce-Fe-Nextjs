@@ -4,6 +4,7 @@ import styles from "./login.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { setCookie } from "cookies-next";
 
 const Login = () => {
   // dispatchUser to the authContext
@@ -886,6 +887,8 @@ const Login = () => {
         console.log(datas);
 
         const cookie = datas.headers["set-cookie"];
+
+        setCookie("key", "value");
 
         console.log(cookie);
 
