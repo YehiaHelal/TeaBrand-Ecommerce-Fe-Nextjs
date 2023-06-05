@@ -885,6 +885,10 @@ const Login = () => {
       if (datas.status === 200) {
         console.log(datas);
 
+        // after the login will set the cookie , and on every restrict request will get the cookie and add it to the request
+        // so it's still secured http secure with cookie.
+        // will read the cookie normally and send it as a normal file
+
         // Cookies.set("jwt", datas.data.token, {
         //   httpOnly: true, // true by default
         // });
