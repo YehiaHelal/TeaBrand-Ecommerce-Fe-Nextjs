@@ -787,10 +787,10 @@ const Admin = () => {
       <div className={styles.ManagingExpandingComponent}>
         {showDashboard && dashboardTotalData && (
           <div>
-            <h3 className={styles.DashboardNotifcationDefault}>
+            {/* <h3 className={styles.DashboardNotifcationDefault}>
               By Default any user created is Admin, you can change user role if
               you want from users panel
-            </h3>
+            </h3> */}
             <div className={styles.DashboardData}>
               <h3>Welcome to Dashboard</h3>
               <div>Number of Products: {dashboardTotalData.products} </div>
