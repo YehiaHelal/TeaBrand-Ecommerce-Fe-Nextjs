@@ -5,12 +5,16 @@ import Link from "next/link";
 import styles from "./adminMorder.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const MangeOrders = () => {
   // All Items Fetch
   const [AllOrders, setAllOrders] = useState();
 
   // console.log(AllOrders);
+
+  // dispatchUser to the authContext
+  const { user, dispatchUser } = useAuthContext();
 
   // console.log(AllOrders);
 
@@ -130,11 +134,14 @@ const MangeOrders = () => {
     // console.log(email);
     // console.log(password);
 
+    const formData = new FormData();
+    formData.append("jwt", user.token);
+
     // fetch request
     try {
-      const datas = await axios.get(
+      const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getallorders",
-
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -204,6 +211,7 @@ const MangeOrders = () => {
     const submission = {
       note: ItemAddNoteValue,
       ordernumber: AddNoteSelectedItem.ordernumber,
+      token: user.token,
     };
 
     // const formData = new FormData();
@@ -215,7 +223,7 @@ const MangeOrders = () => {
       const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/orderaddnote/",
 
-        submission,
+        { submission },
 
         // {
         //   headers: {
@@ -271,6 +279,7 @@ const MangeOrders = () => {
 
     const submission = {
       ordernumber: OrderSelectedToDelete.ordernumber,
+      token: user.token,
     };
 
     // const formData = new FormData();
@@ -382,13 +391,14 @@ const MangeOrders = () => {
 
     const submission = {
       order: order,
+      token: user.token,
     };
 
     try {
       const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/markordercompleted",
 
-        submission,
+        { submission },
 
         // {
         //   headers: {
@@ -494,6 +504,8 @@ const MangeOrders = () => {
     if (e.target.mobile.value) {
       formData.append("mobile", e.target.mobile.value);
     }
+
+    formData.append("jwt", user.token);
 
     try {
       const datas = await axios.post(

@@ -9,6 +9,8 @@ const Login = () => {
   // dispatchUser to the authContext
   const { user, dispatchUser } = useAuthContext();
 
+  console.log(user);
+
   // show profile / logout , or show login / signup
   const [showProfileAndLogout, setshowProfileAndLogout] = useState(false);
 
@@ -111,6 +113,8 @@ const Login = () => {
 
   const [userdataNameAddress, SetUserdataNameAddress] = useState();
 
+  console.log(userdataNameAddress);
+
   // console.log(userdataNameAddress);
 
   // show user past orders
@@ -125,7 +129,111 @@ const Login = () => {
   // set to either show the default profile image or the user uploaded image if there is one
   const [ErrorFetchingImage, SetErrorFetchingImage] = useState(false);
 
-  // console.log(ErrorFetchingImage);
+  // set token and user value
+  const [tokenValue, SetTokenValue] = useState();
+
+  console.log(tokenValue);
+
+  // to check if there is a token to log in user automatically
+  useEffect(() => {
+    // checking if there is token in the local storage
+
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+
+    const localStoragechecking = JSON.parse(localStorage.getItem("user"));
+    let emptyarray = [];
+    if (!localStoragechecking) {
+      localStorage.setItem("user", JSON.stringify(emptyarray));
+    }
+
+    if (localStoragechecking) {
+      SetTokenValue(JSON.parse(localStorage.getItem("user")));
+
+      dispatchUser({
+        type: "LOGIN",
+        payload: JSON.parse(localStorage.getItem("user")),
+      });
+
+      console.log(user);
+
+      // handleGetUserData();
+
+      setTimeout(() => {
+        setshowProfileAndLogout(true);
+        setShowLogin(false);
+        setShowSignup(false);
+      }, 500);
+
+      setTimeout(() => {
+        handleGetUserData();
+      }, 2000);
+    }
+    // if there is, will compare it with the authcontext email and if same will fetch user data if not will change authcontext user data
+
+    // if (localStoragechecking) {
+    //   console.log(localStoragechecking);
+    // }
+
+    // if (user) {
+    //   console.log(user);
+    // }
+
+    // if (!user) {
+    //   dispatchUser({ type: "LOGIN", payload: localStoragechecking });
+
+    //   console.log(user);
+    // }
+
+    // // if (typeof localStoragechecking) {
+    // //   console.log("there");
+    // // }
+
+    // if (Object.keys(localStoragechecking).length !== 0) {
+    //   console.log("not zero");
+    // }
+  }, []);
+
+  useEffect(() => {
+    if (showProfileAndLogout) {
+      handleGetUserData();
+    }
+  }, [showProfileAndLogout]);
+
+  // if (
+  //   localStoragechecking.length > 0 &&
+  //   localStoragechecking.user === user.user
+  // ) {
+  //   console.log("same");
+
+  // setshowProfileAndLogout(true);
+  // setShowLogin(false);
+  // setShowSignup(false);
+
+  // setTimeout(() => {
+  //   handleGetUserData();
+  // }, 1500);
+  // }
+
+  // if (user) {
+  //   // const user = JSON.parse(localStorage.getItem("user"));
+  //   // dispatchUser({ type: "LOGIN", payload: user });
+  //   setshowProfileAndLogout(true);
+  //   setShowLogin(false);
+  //   setShowSignup(false);
+
+  //   setTimeout(() => {
+  //     handleGetUserData();
+  //   }, 1500);
+  // }
+
+  // refreshing the image
+
+  // useEffect(() => {
+  //   handleGetUserData();
+
+  //   // refreshing the image
+  // }, []);
 
   // useEffect(() => {
   //   if (user) {
@@ -144,79 +252,81 @@ const Login = () => {
   // }, [defaultImageShow]);
 
   // sending image function
-  const handleSendingImage = async (e) => {
-    // e.prevent Default();
+  // const handleSendingImage = async (e) => {
+  //   // e.prevent Default();
 
-    console.log("inside");
+  //   console.log("inside");
 
-    // console.log(user.user);
+  //   // console.log(user.user);
 
-    // const submission = {
-    //   email: e.target.email.value,
-    //   password: e.target.password.value,
-    //   name: e.target.name.value,
-    //   address: e.target.address.value,
-    // };
+  //   // const submission = {
+  //   //   email: e.target.email.value,
+  //   //   password: e.target.password.value,
+  //   //   name: e.target.name.value,
+  //   //   address: e.target.address.value,
+  //   // };
 
-    const formData = new FormData();
-    formData.append("photo", selectedImage);
+  //   const formData = new FormData();
+  //   formData.append("photo", selectedImage);
 
-    try {
-      const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/imageupdate/",
+  //   formData.append("jwt", user.token);
 
-        formData,
+  //   try {
+  //     const datas = await axios.post(
+  //       "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/imageupdate/",
 
-        // {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        // }
-        {
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Credentials": "true",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-            "Access-Control-Allow-Headers":
-              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-          },
-          // headers: {
-          //   "Access-Control-Allow-Origin": "*",
-          //   "Content-Type": "application/json",
-          // },
-        }
-      );
+  //       formData,
 
-      console.log(datas);
+  //       // {
+  //       //   headers: {
+  //       //     "Content-Type": "multipart/form-data",
+  //       //   },
+  //       // }
+  //       {
+  //         withCredentials: true,
+  //         headers: {
+  //           "Access-Control-Allow-Credentials": "true",
+  //           "Access-Control-Allow-Origin": "*",
+  //           "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+  //           "Access-Control-Allow-Headers":
+  //             "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+  //         },
+  //         // headers: {
+  //         //   "Access-Control-Allow-Origin": "*",
+  //         //   "Content-Type": "application/json",
+  //         // },
+  //       }
+  //     );
 
-      if (datas.status === 200) {
-        setAddedImageSuccessfully(true);
+  //     console.log(datas);
 
-        console.log(datas);
+  //     if (datas.status === 200) {
+  //       setAddedImageSuccessfully(true);
 
-        setTimeout(() => {
-          setSelectedImage(null);
-          setFullNameImage("");
-        }, 500);
+  //       console.log(datas);
 
-        setTimeout(() => {
-          setAddedImageSuccessfully(false);
-        }, 3000);
-      }
-    } catch (error) {
-      // console.log("error");
-      console.log(error);
+  //       setTimeout(() => {
+  //         setSelectedImage(null);
+  //         setFullNameImage("");
+  //       }, 500);
 
-      // setErrorAddingImage(error.response.data.error);
+  //       setTimeout(() => {
+  //         setAddedImageSuccessfully(false);
+  //       }, 3000);
+  //     }
+  //   } catch (error) {
+  //     // console.log("error");
+  //     console.log(error);
 
-      setErrorAddingImage("error");
+  //     // setErrorAddingImage(error.response.data.error);
 
-      setTimeout(() => {
-        setErrorAddingImage("");
-      }, 3000);
-    }
-  };
+  //     setErrorAddingImage("error");
+
+  //     setTimeout(() => {
+  //       setErrorAddingImage("");
+  //     }, 3000);
+  //   }
+  // };
 
   // sending image function v2 route
 
@@ -236,6 +346,8 @@ const Login = () => {
 
     const formData = new FormData();
     formData.append("photo", selectedImage);
+
+    formData.append("jwt", user.token);
 
     // uploadprofileimgtos3
     try {
@@ -309,15 +421,22 @@ const Login = () => {
     // console.log(email);
     // console.log(password);
 
+    const formData = new FormData();
+
     if (user) {
-      console.log(user.token);
+      formData.append("jwt", user.token);
     }
+
+    // if (tokenValue) {
+    //   // formData.append("jwt", user.token);
+    //   formData.append("jwt", tokenValue.token);
+    // }
 
     // fetch request
     try {
       const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/getndata/",
-        { message: "hello" },
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -352,11 +471,11 @@ const Login = () => {
         // setErrorSignup("");
         // setErrorLogin("");
 
-        setTimeout(() => {
-          // setShowLogin(true);
-          // setShowSignup(false);
-          // setSuccessfulSignup(false);
-        }, 2000);
+        // setTimeout(() => {
+        //   // setShowLogin(true);
+        //   // setShowSignup(false);
+        //   // setSuccessfulSignup(false);
+        // }, 2000);
       }
     } catch (error) {
       console.log("error");
@@ -365,7 +484,7 @@ const Login = () => {
       console.log(error);
 
       // if there is an error response
-      console.log(error.response.data);
+      // console.log(error.response.data);
 
       // setErrorSignup(error.response.data.error);
     }
@@ -383,11 +502,21 @@ const Login = () => {
     // console.log(email);
     // console.log(password);
 
+    // console.log(user.token);
+
+    const formData = new FormData();
+    formData.append("jwt", user.token);
+
+    // if (tokenValue) {
+    //   // formData.append("jwt", user.token);
+    //   formData.append("jwt", tokenValue.token);
+    // }
+
     // fetch request
     try {
       const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
-        { message: "hello" },
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -540,9 +669,15 @@ const Login = () => {
     // console.log(email);
     // console.log(password);
 
+    // if (tokenValue) {
+    //   // formData.append("jwt", user.token);
+    //   formData.append("jwt", tokenValue.token);
+    // }
+
     const submission = {
       password: e.target.password.value,
       newpassword: e.target.newpassword.value,
+      token: user.token,
     };
 
     // "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/",
@@ -698,6 +833,7 @@ const Login = () => {
     const submission = {
       name: e.target.name.value,
       address: e.target.address.value,
+      token: user.token,
     };
 
     // fetch request
@@ -778,6 +914,7 @@ const Login = () => {
     const submission = {
       email: user.user,
       contact: e.target.contact.value,
+      token: user.token,
     };
 
     // fetch request
@@ -906,9 +1043,15 @@ const Login = () => {
 
         console.log(datas.data);
 
-        dispatchUser({ type: "LOGIN", payload: datas.data });
+        // localStorage.removeItem("user");
 
         localStorage.setItem("user", JSON.stringify(datas.data));
+
+        dispatchUser({ type: "LOGIN", payload: datas.data });
+
+        // setTimeout(() => {
+        //   handleGetUserData();
+        // }, 1000);
 
         setTimeout(() => {
           setshowProfileAndLogout(true);
@@ -949,31 +1092,20 @@ const Login = () => {
     );
 
     // then remove user from local storage and redirect , which will set the context to null automatically
+    dispatchUser({ type: "LOGOUT" });
+
     localStorage.removeItem("user");
 
+    SetUserdataNameAddress();
+    // let emptyarray = [];
+    // if (!localStorage.getItem("user")) {
+    //   localStorage.setItem("user", JSON.stringify(emptyarray));
+    // }
+
     // dispatch to context just to re-renders
-    dispatchUser({ type: "LOGOUT" });
 
     console.log("logged out");
   };
-
-  // to check if there is a token to log in user automatically
-  useEffect(() => {
-    if (user) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      dispatchUser({ type: "LOGIN", payload: user });
-      setshowProfileAndLogout(true);
-      handleGetUserData();
-      setShowLogin(false);
-      setShowSignup(false);
-
-      setTimeout(() => {
-        handleGetUserData();
-      }, 1000);
-    }
-
-    // refreshing the image
-  }, []);
 
   // to check if the token is still valid and if not log out the user ..
   // useEffect(() => {
@@ -1012,12 +1144,6 @@ const Login = () => {
   //     checkToken();
   //   }
   // }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      handleGetUserData();
-    }
-  }, [user]);
 
   return (
     <div className={styles.component}>

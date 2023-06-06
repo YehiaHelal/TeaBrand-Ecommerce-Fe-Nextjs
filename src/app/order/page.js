@@ -49,6 +49,10 @@ const OrderPage = () => {
   // order detail value
   const [OrderDetailsValue, setOrderDetailsValue] = useState();
 
+  console.log(OrderDetailsValue);
+
+  const [showLoading, setShowLoading] = useState(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const localStorageUser = JSON.parse(localStorage.getItem("user"));
@@ -83,48 +87,52 @@ const OrderPage = () => {
   // https://pharma-online-api-production.up.railway.app/api/users/profile
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      // const res = await axios.post(
-      //   "https://pharma-online-api-production.up.railway.app/api/users/profile",
-      //   { message: "hello" },
-      //   {
-      //     withCredentials: true,
-      //     headers: {
-      //       "Access-Control-Allow-Credentials": "true",
-      //       "Access-Control-Allow-Origin": "*",
-      //       "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-      //       "Access-Control-Allow-Headers":
-      //         "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-      //     },
-      //   }
-      // );
+    if (user) {
+      const fetchUserData = async () => {
+        // const res = await axios.post(
+        //   "https://pharma-online-api-production.up.railway.app/api/users/profile",
+        //   { message: "hello" },
+        //   {
+        //     withCredentials: true,
+        //     headers: {
+        //       "Access-Control-Allow-Credentials": "true",
+        //       "Access-Control-Allow-Origin": "*",
+        //       "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        //       "Access-Control-Allow-Headers":
+        //         "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+        //     },
+        //   }
+        // );
 
-      try {
-        const response = await axios.post(
-          "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/profile",
-          { message: "hello" },
-          {
-            withCredentials: true,
-            headers: {
-              "Access-Control-Allow-Credentials": "true",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods":
-                "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-              "Access-Control-Allow-Headers":
-                "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-            },
-          }
-        );
+        const formData = new FormData();
+        formData.append("jwt", user.token);
 
-        // console.log(response);
+        try {
+          const response = await axios.post(
+            "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/profile",
+            formData,
+            {
+              withCredentials: true,
+              headers: {
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods":
+                  "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+                "Access-Control-Allow-Headers":
+                  "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+              },
+            }
+          );
 
-        setUserData(response.data.user);
-      } catch (error) {
-        // console.log(error);
-      }
-    };
+          // console.log(response);
 
-    fetchUserData();
+          setUserData(response.data.user);
+        } catch (error) {
+          // console.log(error);
+        }
+      };
+      fetchUserData();
+    }
   }, [user]);
 
   // useEffect to control pending status or not pending, can be it more complicated and encrypted
@@ -137,6 +145,31 @@ const OrderPage = () => {
 
       let pendingstate = false;
       localStorage.setItem("pendingstatev", JSON.stringify(pendingstate));
+    }
+
+    if (typeof window !== "undefined") {
+      const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
+
+      let orderTotalvalueArray = orderItemsv.map(
+        (item) => item.price * item.numberofitem
+      );
+      let orderPriceTotalvalue = orderTotalvalueArray.reduce(
+        (a, b) => a + b,
+        0
+      );
+      // console.log(orderPriceTotalvalue); // priceTotal
+
+      // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
+      // total price down there and we got it too.
+
+      const OrderDetails = {
+        orderProducts: [...orderItemsv],
+        orderTotalValue: orderPriceTotalvalue,
+      };
+
+      console.log(OrderDetails);
+
+      setOrderDetailsValue(OrderDetails);
     }
 
     // pending state to check if the user is clicking on stripe and paying or joking the system
@@ -164,31 +197,6 @@ const OrderPage = () => {
   // };
 
   // let OrderDetails;
-
-  // if (typeof window !== "undefined") {
-  //   const orderItemsv = JSON.parse(localStorage.getItem("cartItems"));
-
-  //   if (orderItemsv) {
-  //     let orderTotalvalueArray = orderItemsv.map(
-  //       (item) => item.price * item.numberofitem
-  //     );
-  //     let orderPriceTotalvalue = orderTotalvalueArray.reduce(
-  //       (a, b) => a + b,
-  //       0
-  //     );
-  //     // console.log(orderPriceTotalvalue); // priceTotal
-
-  //     // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
-  //     // total price down there and we got it too.
-
-  //     const OrderDetails = {
-  //       orderProducts: [...orderItemsv],
-  //       orderTotalValue: orderPriceTotalvalue,
-  //     };
-
-  //     setOrderDetailsValue(OrderDetails);
-  //   }
-  // }
 
   // console.log(orderItemsv);
 
@@ -219,16 +227,20 @@ const OrderPage = () => {
     // items as they are , that will be the order and when fetching it, will display it as it is with number of items.
     // total price down there and we got it too.
 
-    const OrderDetails = {
-      orderProducts: [...orderItemsv],
-      orderTotalValue: orderPriceTotalvalue,
+    const submission = {
+      OrderDetails: {
+        orderProducts: [...orderItemsv],
+        orderTotalValue: orderPriceTotalvalue,
+      },
+
+      token: user.token,
     };
 
     // fetch request
     try {
       const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/cartorder",
-        { OrderDetails },
+        { submission },
         {
           withCredentials: true,
           headers: {
@@ -250,13 +262,13 @@ const OrderPage = () => {
       if ((datas.data.status = 200)) {
         setSuccessfulOrder(true);
 
-        localStorage.removeItem("cartItems");
+        // localStorage.removeItem("cartItems");
 
-        // let emptyarray = [];
+        let emptyarray = [];
 
-        if (!localStorage.getItem("cartItems")) {
-          localStorage.setItem("cartItems", JSON.stringify(emptyarray));
-        }
+        // if (!localStorage.getItem("cartItems")) {
+        localStorage.setItem("cartItems", JSON.stringify(emptyarray));
+        // }
 
         dispatch({ type: "SET_ITEM", payload: emptyarray });
 
@@ -270,13 +282,15 @@ const OrderPage = () => {
         //   // redirect to homepage option.
         // }, 500);
 
+        // console.log("redirecting");
+
         setTimeout(() => {
           // navTo("/");
-          push("/successorder");
+          push("https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder");
 
           // redirecting to order was succesfully placed thank you
           // redirect to homepage option.
-        }, 2000);
+        }, 1500);
       }
     } catch (error) {
       console.log("error");
@@ -312,7 +326,9 @@ const OrderPage = () => {
     try {
       const datas = await axios.post(
         "api/checkout_sessions",
-        { OrderDetails },
+        // { OrderDetails },
+        { OrderDetailsValue },
+
         {
           withCredentials: true,
           headers: {
@@ -337,7 +353,8 @@ const OrderPage = () => {
         let pendingstate = true;
         localStorage.setItem(
           "pendingstatev",
-          JSON.stringify({ OrderDetails, pendingstate })
+          // JSON.stringify({ OrderDetails, pendingstate })
+          JSON.stringify({ OrderDetailsValue, pendingstate })
         );
 
         console.log(datas.data.sessionURL);
@@ -457,8 +474,8 @@ const OrderPage = () => {
                   //       quantity: 1,
                   //     },
                   //   ],
-                  // successUrl: `https://zippy-horse-78b7b7.netlify.app/successorder`,
-                  // cancelUrl: `https://zippy-horse-78b7b7.netlify.app/failedpaymentorder`,
+                  // successUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder`,
+                  // cancelUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/failedpaymentorder`,
                   // lineItems: [
                   //   // {
                   //   //   price_data: {
@@ -495,6 +512,12 @@ const OrderPage = () => {
               </div>
             </button>
 
+            {showLoading && (
+              <div className={styles.PaymentComponentPartonev2}>
+                Loading, redirecting now
+              </div>
+            )}
+
             <div className={styles.PaymentComponentPartone}>
               <div>Powered By Stripe Payments</div>
             </div>
@@ -523,7 +546,7 @@ const OrderPage = () => {
 
           {successfulOrder && (
             <div className={styles.successfulordernotifcation}>
-              Order was placed successfully
+              Order was placed successfully, redirecting now
             </div>
           )}
 

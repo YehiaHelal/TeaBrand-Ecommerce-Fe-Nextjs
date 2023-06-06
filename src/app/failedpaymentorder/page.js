@@ -11,8 +11,12 @@ import { useEffect, useState } from "react";
 import MyBag, { CartItemAlertNumberOfitems } from "../../../comps/myBag";
 import { useItemsCartContext } from "../../../hooks/useItemsCartContext";
 import axios from "axios";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 const BlogPage = () => {
+  // importing user data from authContext
+  const { user, dispatchUser } = useAuthContext();
+
   // the items context
   const { items, dispatch } = useItemsCartContext();
 
@@ -22,54 +26,59 @@ const BlogPage = () => {
   // the function of fetching the order number
 
   useEffect(() => {
-    const fetchOrderNumber = async (e) => {
-      try {
-        const datas = await axios.post(
-          "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
-          { message: "hello" },
-          {
-            withCredentials: true,
-            headers: {
-              "Access-Control-Allow-Credentials": "true",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods":
-                "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-              "Access-Control-Allow-Headers":
-                "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-            },
-            // headers: {
-            //   "Access-Control-Allow-Origin": "*",
-            //   "Content-Type": "application/json",
-            // },
+    if (user) {
+      const fetchOrderNumber = async (e) => {
+        const formData = new FormData();
+        formData.append("jwt", user.token);
+
+        try {
+          const datas = await axios.post(
+            "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
+            formData,
+            {
+              withCredentials: true,
+              headers: {
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods":
+                  "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+                "Access-Control-Allow-Headers":
+                  "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+              },
+              // headers: {
+              //   "Access-Control-Allow-Origin": "*",
+              //   "Content-Type": "application/json",
+              // },
+            }
+          );
+
+          if (datas.status === 200) {
+            // console.log(datas.data);
+
+            let n = datas.data.orders;
+
+            let p = n.slice(n.length - 1);
+            console.log(p);
+
+            // console.log(p[0].ordernumber);
+
+            setOrderNumber(p[0].ordernumber);
           }
-        );
+        } catch (error) {
+          console.log("error");
 
-        if (datas.status === 200) {
-          // console.log(datas.data);
+          // if there is an error response
+          console.log(error);
 
-          let n = datas.data.orders;
+          // if there is an error response
+          // console.log(error.response.data);
 
-          let p = n.slice(n.length - 1);
-          console.log(p);
-
-          // console.log(p[0].ordernumber);
-
-          setOrderNumber(p[0].ordernumber);
+          // setErrorSignup(error.response.data.error);
         }
-      } catch (error) {
-        console.log("error");
+      };
 
-        // if there is an error response
-        console.log(error);
-
-        // if there is an error response
-        // console.log(error.response.data);
-
-        // setErrorSignup(error.response.data.error);
-      }
-    };
-
-    fetchOrderNumber();
+      fetchOrderNumber();
+    }
   }, [items]);
 
   return (
@@ -83,7 +92,7 @@ const BlogPage = () => {
           </div>
 
           <Link
-            href="https://zippy-horse-78b7b7.netlify.app/order"
+            href="https://tea-brand-ecommerce-fe-nextjs.vercel.app/order"
             className={styles.Linkredirect}
           >
             Redirect to Order Page

@@ -23,6 +23,8 @@ const BlogPage = () => {
   // check if user is logged in
   const { user, dispatchUser } = useAuthContext();
 
+  console.log(user);
+
   // showing successful after stripe payment is done error check
   const [errorToPlaceOrder, setErrorToPlaceOrder] = useState();
 
@@ -40,12 +42,23 @@ const BlogPage = () => {
 
   // the function of fetching the order number
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   // if (user) {
+
+  //   // }
+
+  //   console.log(user);
+
+  if (user) {
     const fetchOrderNumber = async (e) => {
+      const submission = {
+        token: user.token,
+      };
+
       try {
         const datas = await axios.post(
           "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
-          { message: "hello" },
+          { submission },
           {
             withCredentials: true,
             headers: {
@@ -96,7 +109,8 @@ const BlogPage = () => {
     };
 
     fetchOrderNumber();
-  }, [items]);
+  }
+  // }, []);
 
   useEffect(() => {
     const localStoragependingstate = JSON.parse(

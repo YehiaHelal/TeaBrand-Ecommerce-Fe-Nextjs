@@ -8,8 +8,12 @@ import axios from "axios";
 import MangeOrders from "../../../comps/adminMorder";
 import MangeUsers from "../../../comps/adminUsers";
 import LiveChat from "../../../comps/adminLiveChat";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
-const Admin = ({ params }) => {
+const Admin = () => {
+  // dispatchUser to the authContext
+  const { user, dispatchUser } = useAuthContext();
+
   // Show Dashboard
   const [showDashboard, setShowDashboard] = useState(false);
 
@@ -106,9 +110,6 @@ const Admin = ({ params }) => {
   // // Show Contacts
   // const [showContacts, setShowContacts] = useState(false);
 
-  // get the url showen and direction
-  console.log(params.id);
-
   // Handle get Dashboard general Data
   const handleGetDashboardData = async () => {
     // e.preventDefault();
@@ -121,11 +122,16 @@ const Admin = ({ params }) => {
     // console.log(email);
     // console.log(password);
 
+    const formData = new FormData();
+    formData.append("jwt", user.token);
+
+    // token: user.token,
+
     // fetch request
     try {
-      const datas = await axios.get(
+      const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/dashboarddata",
-
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -262,6 +268,9 @@ const Admin = ({ params }) => {
     formData.append("photo", selectedImage);
     formData.append("name", e.target.name.value);
     formData.append("price", e.target.price.value);
+    formData.append("jwt", user.token);
+
+    // token: user.token,
 
     try {
       const datas = await axios.post(
@@ -352,6 +361,7 @@ const Admin = ({ params }) => {
 
     const submission = {
       name: itemSelectedInDeleteCom.name,
+      token: user.token,
     };
 
     // const formData = new FormData();
@@ -464,6 +474,8 @@ const Admin = ({ params }) => {
     if (e.target.price.value) {
       formData.append("price", e.target.price.value);
     }
+
+    formData.append("jwt", user.token);
 
     // const submission = {
     //   name: itemSelectedInDeleteCom.name,

@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const OrderItems = () => {
+  // dispatchUser to the authContext
+  const { user, dispatchUser } = useAuthContext();
+
   // importing Cart Context items if needed
   const { items, dispatch } = useItemsCartContext();
 
@@ -14,6 +17,8 @@ const OrderItems = () => {
 
   // putting the total value of
   const [totalValue, setTotalValue] = useState();
+
+  console.log(totalValue);
 
   // setting the purchase button so if there is an item it always update the state and redirect to order page
   let checkLocalStorage;
@@ -52,7 +57,9 @@ const OrderItems = () => {
     let orderTotalvalue = orderTotalvalueArray.reduce((a, b) => a + b, 0);
 
     setTotalValue(orderTotalvalue);
-  }, [items]);
+  }, []);
+
+  console.log(getLocalCartItems);
 
   // for exporting the value to order page and managing stripe
   useEffect(() => {
@@ -272,8 +279,11 @@ const OrderItems = () => {
       </div>
 
       <div className={styles.TotalPriceComponent}>
-        <div>Total Price</div>
-        {totalValue && <div>${totalValue}</div>}
+        <div>Total Price</div>$
+        {getLocalCartItems &&
+          getLocalCartItems
+            .map((item) => item.price * item.numberofitem)
+            .reduce((a, b) => a + b, 0)}
       </div>
 
       {/* redirect to order page if clicked and there is items inside cart */}

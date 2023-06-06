@@ -140,6 +140,16 @@
   padding-bottom: 20px;
 }
 
+.PaymentComponentPartonev2 {
+  background-color: rgb(0, 128, 0, 0.5) !important;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* padding-bottom: 20px; */
+}
+
 .componentSignup {
   display: flex;
   flex-direction: column;

@@ -7,10 +7,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { notFound } from "next/navigation";
 import moment from "moment";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const MangeUsers = () => {
   // All Items Fetch
   const [AllUsers, setAllUsers] = useState();
+
+  // dispatchUser to the authContext
+  const { user, dispatchUser } = useAuthContext();
 
   // console.log(AllUsers);
 
@@ -109,31 +113,35 @@ const MangeUsers = () => {
   // show add User component
   const [successfulUserCreated, setSuccessfulUserCreated] = useState(false);
 
+  // value change to cause re render
+  const [value, setValue] = useState(1);
+
   // useeffect to control show either the archived Users or opened Users
-  useEffect(() => {
-    if (ShowActiveUsers && AllUsers) {
-      const openedUserssStill = AllUsers.filter((Users) => {
-        //     console.log(item._id, addItemToCart._id);
-        return Users.active === true;
-      });
+  // useEffect(() => {
+  //   if (ShowActiveUsers && AllUsers) {
+  //     const openedUserssStill = AllUsers.filter((Users) => {
+  //       //     console.log(item._id, addItemToCart._id);
+  //       return Users.active === true;
+  //     });
 
-      // console.log(openedUserssStill);
-      // console.log("will show opened");
-      // console.log(AllUsers);
-      setAllUsers(openedUserssStill);
-    }
-    if (ShowDeactivitedUsers && AllUsers) {
-      const archivedUserssStill = AllUsers.filter((Users) => {
-        //     console.log(item._id, addItemToCart._id);
-        return Users.active === false;
-      });
+  //     // console.log(openedUserssStill);
+  //     // console.log("will show opened");
+  //     // console.log(AllUsers);
+  //     setAllUsers(openedUserssStill);
+  //   }
+  //   if (ShowDeactivitedUsers && AllUsers) {
+  //     const archivedUserssStill = AllUsers.filter((Users) => {
+  //       //     console.log(item._id, addItemToCart._id);
+  //       return Users.active === false;
 
-      // console.log(archivedUserssStill);
-      // console.log("will show archived");
-      // console.log(AllUsers);
-      setAllUsers(archivedUserssStill);
-    }
-  }, [ShowActiveUsers, ShowDeactivitedUsers]);
+  //     });
+
+  //     // console.log(archivedUserssStill);
+  //     // console.log("will show archived");
+  //     // console.log(AllUsers);
+  //     setAllUsers(archivedUserssStill);
+  //   }
+  // }, [ShowActiveUsers, ShowDeactivitedUsers, value]);
 
   // Handle Get All users
 
@@ -149,11 +157,14 @@ const MangeUsers = () => {
     // console.log(email);
     // console.log(password);
 
+    const formData = new FormData();
+    formData.append("jwt", user.token);
+
     // fetch request
     try {
-      const datas = await axios.get(
+      const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/getallusers",
-
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -184,6 +195,8 @@ const MangeUsers = () => {
 
         // console.log(datas.data);
         setAllUsers(datas.data);
+
+        // setValue(value + 1);
         // setTimeout(() => {
         //   setShowAllItems(true);
         // }, 500);
@@ -214,11 +227,14 @@ const MangeUsers = () => {
     // console.log(email);
     // console.log(password);
 
+    const formData = new FormData();
+    formData.append("jwt", user.token);
+
     // fetch request
     try {
-      const datas = await axios.get(
+      const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getallorders",
-
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -285,6 +301,7 @@ const MangeUsers = () => {
     const submission = {
       note: UserAddNoteValue,
       email: AddNoteSelectedItem.email,
+      token: user.token,
     };
 
     // const formData = new FormData();
@@ -352,6 +369,7 @@ const MangeUsers = () => {
 
     const submission = {
       userSelected: UsersSelectedToDelete.email,
+      token: user.token,
     };
 
     // const formData = new FormData();
@@ -463,13 +481,14 @@ const MangeUsers = () => {
 
     const submission = {
       Users: User,
+      token: user.token,
     };
 
     try {
       const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/deactivateuser",
 
-        submission,
+        { submission },
 
         // {
         //   headers: {
@@ -498,13 +517,14 @@ const MangeUsers = () => {
         // console.log(datas);
 
         setSuccessfulMarkedDeactivited(true);
+
         // setErrorEditUser();
 
         // console.log(datas);
 
         setTimeout(() => {
           HandleGetAllUsers();
-        }, 500);
+        }, 100);
 
         setTimeout(() => {
           // Fetching the NEW PRODUCTS DATA AFTER UPDATE
@@ -577,6 +597,8 @@ const MangeUsers = () => {
     if (e.target.role.value) {
       formData.append("role", e.target.role.value);
     }
+
+    formData.append("jwt", user.token);
 
     try {
       const datas = await axios.post(
@@ -663,6 +685,7 @@ const MangeUsers = () => {
       mobile: e.target.mobile.value,
       role: e.target.role.value,
       password: e.target.password.value,
+      token: user.token,
     };
 
     // const formData = new FormData();
@@ -848,7 +871,7 @@ const MangeUsers = () => {
               }
             }}
           >
-            Show Only Active Users
+            Click - Show Only Active Users
           </button>
 
           <button
@@ -880,7 +903,7 @@ const MangeUsers = () => {
               }
             }}
           >
-            Show Only Deactivated Users
+            Click - Show Only Deactivated Users
           </button>
         </div>
       )}
@@ -949,7 +972,14 @@ const MangeUsers = () => {
       {AllUsers && ShowAllUsersTab && (
         <div className={styles.AllUsers}>
           {AllUsers &&
-            AllUsers.map((User, i) => {
+            AllUsers.filter(function (User) {
+              if (ShowActiveUsers) {
+                return User.active === true;
+              }
+              if (ShowDeactivitedUsers) {
+                return User.active === false;
+              }
+            }).map((User, i) => {
               return (
                 <div key={User._id} className={styles.AllUserstyle}>
                   <h4 className={styles.AllUserstyleTitle}>User:</h4>
@@ -1055,7 +1085,9 @@ const MangeUsers = () => {
                         handleDeactiviteUser(User);
                       }}
                     >
-                      Deactivate User
+                      {ShowDeactivitedUsers === true
+                        ? "Reactivate User"
+                        : "Deactivate User"}
                     </button>
                     <button
                       onClick={() => {
@@ -1310,20 +1342,18 @@ const MangeUsers = () => {
               </div>
 
               <button
-                onClick={() => {
-                  if (ShowSpecficUserExtraData) {
-                    setShowSpecficUserExtraDatainEdit(false);
-                  }
-                  if (!ShowSpecficUserExtraData) {
-                    setShowSpecficUserExtraDatainEdit(true);
-                  }
-                }}
-              >
-                Deactivate User
-              </button>
+              // onClick={() => {
+              //   if (ShowSpecficUserExtraData) {
+              //     setShowSpecficUserExtraDatainEdit(false);
+              //   }
+              //   if (!ShowSpecficUserExtraData) {
+              //     setShowSpecficUserExtraDatainEdit(true);
+              //   }
+              // }}
+              ></button>
               <div className={styles.AllUserstyleExtrabtn}>
                 {/* <button>Archive Users</button> */}
-                <button>Add Note</button>
+                {/* <button>Add Note</button> */}
               </div>
             </div>
           </div>

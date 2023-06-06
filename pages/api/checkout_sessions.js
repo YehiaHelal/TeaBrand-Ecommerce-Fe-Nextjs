@@ -9,10 +9,10 @@ const stripePromise = loadStripe(
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  console.log(req.body.OrderDetails.orderTotalValue);
+  console.log(req.body.OrderDetailsValue.orderTotalValue);
   // console.log(req.body.ordernumber);
 
-  // const OrderDetails = {
+  // const OrderDetailsValue = {
   //   orderProducts: [...orderItemsv],
   //   orderTotalValue: orderPriceTotalvalue,
   // };
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
             name: "Total Price",
             // images: [req.headers.origin + item.image],
           },
-          unit_amount: req.body.OrderDetails.orderTotalValue * 100,
+          unit_amount: req.body.OrderDetailsValue.orderTotalValue * 100,
         },
         quantity: 1,
       },
@@ -54,8 +54,8 @@ export default async function handler(req, res) {
         mode: "payment",
         success_url: `${req.headers.origin}/successorder`,
         cancel_url: `${req.headers.origin}/failure`,
-        // success_url: `https://zippy-horse-78b7b7.netlify.app/successorders`,
-        // cancel_url: `https://zippy-horse-78b7b7.netlify.app/order`,
+        // success_url: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorders`,
+        // cancel_url: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/order`,
       });
       res.json({ sessionURL: session.url });
     } catch (err) {

@@ -184,13 +184,14 @@ const LiveChat = () => {
     // console.log(email);
     // console.log(password);
 
+    const formData = new FormData();
+    formData.append("jwt", user.token);
+
     // fetch request
     try {
       const datas = await axios.post(
         "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/activechatpanel/",
-        {
-          message: "start",
-        },
+        formData,
         {
           withCredentials: true,
           headers: {
@@ -292,6 +293,7 @@ const LiveChat = () => {
     const submission = {
       message: messageArray,
       chatid: chat.chatid,
+      token: user.token,
     };
 
     // console.log(submission);
@@ -400,6 +402,7 @@ const LiveChat = () => {
     // sending chat id to mark the chat as joined
     const submission = {
       chatid: chat.chatid,
+      token: user.token,
     };
 
     // fetch request
@@ -473,6 +476,7 @@ const LiveChat = () => {
     const submission = {
       chatid: chat.chatid,
       state: state,
+      token: user.token,
     };
 
     // fetch request
@@ -542,6 +546,7 @@ const LiveChat = () => {
     const submission = {
       note: ItemAddNoteValue,
       chatid: AddNoteSelectedItem.chatid,
+      token: user.token,
     };
 
     // fetch request
@@ -604,6 +609,7 @@ const LiveChat = () => {
     // sending chat id to mark the chat as joined
     const submission = {
       chatid: chat.chatid,
+      token: user.token,
     };
 
     // fetch request
@@ -676,6 +682,7 @@ const LiveChat = () => {
     const submission = {
       chatid: chat.chatid,
       state: state,
+      token: user.token,
     };
 
     // fetch request
@@ -734,6 +741,9 @@ const LiveChat = () => {
 
       <div className={styles.ButtonTopNavigation}>
         <button
+          style={{
+            background: showActiveChat === true ? "white" : "",
+          }}
           onClick={() => {
             HandleGetMessagesActiveChatPanel();
             setShowActiveChat(true);
@@ -746,6 +756,9 @@ const LiveChat = () => {
           Show Active chat Panel
         </button>
         <button
+          style={{
+            background: showArchivedChat === true ? "white" : "",
+          }}
           onClick={() => {
             setShowArchivedChat(true);
             setShowActiveChat(false);
@@ -773,7 +786,7 @@ const LiveChat = () => {
             </select>
 
             <div>
-              Number of chats:{" "}
+              Number of all chats:{" "}
               {allActiveChatMessages && allActiveChatMessages.length}
             </div>
 
@@ -923,7 +936,7 @@ const LiveChat = () => {
                                           //     message.role === "user" ? "none" : "flex-end",
                                           // }}
                                         >
-                                          {message.message} admin
+                                          {message.message}
                                         </div>
                                       </div>
                                     )}
@@ -953,7 +966,7 @@ const LiveChat = () => {
                                           //     message.role === "user" ? "none" : "flex-end",
                                           // }}
                                         >
-                                          {message.message} user
+                                          {message.message}
                                         </div>
                                       </div>
                                     )}

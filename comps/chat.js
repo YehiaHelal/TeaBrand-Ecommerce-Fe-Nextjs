@@ -44,6 +44,9 @@ const Chat = (props) => {
   // the current chat object
   const [chatObject, setChatObject] = useState();
 
+  // set admin joined chat or not
+  const [adminJoinedChat, setAdminJoinedChat] = useState();
+
   // console.log(chatObject);
 
   // const [setEmail, setSetEmail] = useState();
@@ -453,6 +456,8 @@ const Chat = (props) => {
 
         setAllchatMessages(adminClientMessages);
 
+        setAdminJoinedChat(datas.data.joined);
+
         // console.log(datas);
 
         // setSuccessfulSendContact(true);
@@ -714,7 +719,15 @@ const Chat = (props) => {
           </div>
           <div className={styles.livechatcomponents}>
             <div className={styles.livechatcomponentsHasJoined}>
-              Lim from Customer Support has joined Chat
+              {!adminJoinedChat && (
+                <div>
+                  <div>Hey, Admin will join chat soon..</div>
+                </div>
+              )}
+
+              {adminJoinedChat && adminJoinedChat === true
+                ? "Admin has joined chat"
+                : ""}
             </div>
             {/* <div>Messages between Admin and client here:</div> */}
             {sortedAllChatMessagesUserAdmin &&
@@ -765,7 +778,7 @@ const Chat = (props) => {
                             //     message.role === "user" ? "none" : "flex-end",
                             // }}
                           >
-                            {message.message} admin
+                            {message.message}
                           </div>
                         </div>
                       )}
@@ -791,7 +804,7 @@ const Chat = (props) => {
                             //     message.role === "user" ? "none" : "flex-end",
                             // }}
                           >
-                            {message.message} user
+                            {message.message}
                           </div>
                         </div>
                       )}
