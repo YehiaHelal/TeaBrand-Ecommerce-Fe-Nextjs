@@ -862,6 +862,7 @@ const LiveChat = () => {
                           Started at:{" "}
                           {moment(chat.createdAt).format("HH:mm  (DD/MM/YYYY)")}
                         </div>
+                        <div>Note: {chat.note}</div>
                         {/* <div>Orders: 0/10</div> */}
                       </div>
 
