@@ -709,7 +709,7 @@ const Chat = (props) => {
             <Image
               width={100}
               height={100}
-              alt="not found"
+              alt="image"
               src={require(`./../public/Images/gold.png`)}
             ></Image>
             <div className={styles.livechatTitleSecondPart}>
@@ -749,7 +749,7 @@ const Chat = (props) => {
                           <Image
                             width={50}
                             height={50}
-                            alt="not found"
+                            alt="image"
                             src={require(`./../public/users/images/default.jpeg`)}
 
                             // style={{

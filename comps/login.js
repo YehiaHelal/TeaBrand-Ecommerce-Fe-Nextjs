@@ -1348,7 +1348,7 @@ const Login = () => {
               <Image
                 width={100}
                 height={100}
-                alt="not found"
+                alt="image"
                 // loader={imageLoader}
                 id="image-true"
                 // onerror={() => {
@@ -1414,7 +1414,7 @@ const Login = () => {
                 <Image
                   width={100}
                   height={100}
-                  alt="not found"
+                  alt="image"
                   src={URL.createObjectURL(selectedImage)}
                 ></Image>
               )}
@@ -1701,7 +1701,7 @@ const Login = () => {
                   >
                     <Link href={"/collections/" + item._id}>
                       <Image
-                        alt="n"
+                        alt="image"
                         // src={require(`./../../frontend/public/Items/${item.name}.png`)}
                         src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
                         width={300}

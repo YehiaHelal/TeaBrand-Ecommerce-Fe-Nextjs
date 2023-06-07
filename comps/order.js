@@ -88,7 +88,7 @@ const OrderItems = () => {
               <div key={item._id} className={styles.ItemStylesComponent}>
                 <Link href={"/collections/" + item._id}>
                   <Image
-                    alt="n"
+                    alt="image"
                     // src={require(`./../../frontend/public/Items/${item.name}.png`)}
                     src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
                     width={300}

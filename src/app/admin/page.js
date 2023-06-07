@@ -911,7 +911,7 @@ const Admin = () => {
                     return (
                       <div key={item._id} className={styles.ALLITEMS}>
                         <Image
-                          alt="n"
+                          alt="image"
                           className={styles.productItemImage}
                           // src={require(`./../../../public/Items/${item.name}.png`)}
                           src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${
@@ -993,7 +993,7 @@ const Admin = () => {
                         width={100}
                         height={100}
                         className={styles.imageuploadLabelInputSelectedImage}
-                        alt="not found"
+                        alt="image"
                         src={URL.createObjectURL(selectedImage)}
                       ></Image>
                     )}
@@ -1055,7 +1055,7 @@ const Admin = () => {
               <div className={styles.DeleteProductItemComponent}>
                 <div className={styles.ALLITEMS}>
                   <Image
-                    alt="n"
+                    alt="image"
                     className={styles.productItemImage}
                     // src={require(`./../../../public/Items/${item.name}.png`)}
                     src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${
@@ -1191,7 +1191,7 @@ const Admin = () => {
                         width={100}
                         height={100}
                         className={styles.imageuploadLabelInputSelectedImage}
-                        alt="not found"
+                        alt="image"
                         src={URL.createObjectURL(selectedImageToEdit)}
                       ></Image>
                     )}
@@ -1209,7 +1209,7 @@ const Admin = () => {
                   <div className={styles.DeleteProductItemComponent}>
                     <div className={styles.ALLITEMS}>
                       <Image
-                        alt="n"
+                       alt="image"
                         className={styles.productItemImage}
                         // src={require(`./../../../public/Items/${item.name}.png`)}
                         src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${

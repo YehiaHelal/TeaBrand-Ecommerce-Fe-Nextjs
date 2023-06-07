@@ -987,7 +987,7 @@ const MangeUsers = () => {
                   <Image
                     width={100}
                     height={100}
-                    alt="profile-picture"
+                    alt="image"
                     // loader={imageLoader}
                     id="image-true"
                     // onerror={() => {
@@ -1320,7 +1320,7 @@ const MangeUsers = () => {
               <Image
                 width={100}
                 height={100}
-                alt="profile-picture"
+                alt="image"
                 id="image-true"
                 src={require(`./../public/users/images/default.jpeg`)}
               ></Image>
@@ -1551,7 +1551,7 @@ const MangeUsers = () => {
               <Image
                 width={100}
                 height={100}
-                alt="profile-picture"
+                alt="image"
                 id="image-true"
                 src={require(`./../public/users/images/default.jpeg`)}
               ></Image>

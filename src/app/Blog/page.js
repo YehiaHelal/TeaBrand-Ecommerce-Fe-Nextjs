@@ -18,7 +18,7 @@ const BlogPage = () => {
         </div>
         <div className={styles.sectionfourComponent}>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../../public/Homepage/Landing Main Image3.png`)}
             // className="iconImage"
@@ -79,7 +79,7 @@ const BlogPage = () => {
             {/* <Link href="/Blog">READ MORE</Link> */}
           </div>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../../public/Homepage/Landing Main Image4.png`)}
             // className="iconImage"
@@ -140,7 +140,7 @@ const BlogPage = () => {
             {/* <Link href="/Blog">READ MORE</Link> */}
           </div>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../../public/Homepage/Landing Main Image2.png`)}
             // className="iconImage"
@@ -201,7 +201,7 @@ const BlogPage = () => {
             {/* <Link href="/Blog">READ MORE</Link> */}
           </div>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../../public/Homepage/home-page-image-1.png`)}
             // className="iconImage"
@@ -262,7 +262,7 @@ const BlogPage = () => {
             {/* <Link href="/Blog">READ MORE</Link> */}
           </div>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../../public/Categories/Black tea.png`)}
             // className="iconImage"
@@ -323,7 +323,7 @@ const BlogPage = () => {
             {/* <Link href="/Blog">READ MORE</Link> */}
           </div>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../../public/Categories/Chai.png`)}
             // className="iconImage"

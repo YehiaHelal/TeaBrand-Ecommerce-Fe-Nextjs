@@ -262,7 +262,7 @@ function Collections() {
   return (
     <div className={styles.pageComponent}>
       <Image
-        alt="n"
+        alt="image"
         className={styles.pageImage}
         src={require(`./../../../public/TeaCollections/Main.png`)}
 
@@ -304,14 +304,14 @@ function Collections() {
               {!showCollections && (
                 <Image
                   Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/+.png`)}
                 ></Image>
               )}
 
               {showCollections && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/-.png`)}
                 ></Image>
               )}
@@ -381,14 +381,14 @@ function Collections() {
             >
               {!showOrigin && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/+.png`)}
                 ></Image>
               )}
 
               {showOrigin && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/-.png`)}
                 ></Image>
               )}
@@ -445,14 +445,14 @@ function Collections() {
             >
               {!showFlavour && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/+.png`)}
                 ></Image>
               )}
 
               {showFlavour && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/-.png`)}
                 ></Image>
               )}
@@ -514,14 +514,14 @@ function Collections() {
             >
               {!showQualities && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/+.png`)}
                 ></Image>
               )}
 
               {showQualities && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/-.png`)}
                 ></Image>
               )}
@@ -583,14 +583,14 @@ function Collections() {
             >
               {!showCafeine && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/+.png`)}
                 ></Image>
               )}
 
               {showCafeine && (
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../public/TeaCollections/-.png`)}
                 ></Image>
               )}
@@ -686,7 +686,7 @@ function Collections() {
                   className={styles.productEachItemFlex}
                 >
                   <Image
-                    alt="n"
+                    alt="image"
                     className={styles.productItemImage}
                     // src={require(`./../../../public/Items/${item.name}.png`)}
                     src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${

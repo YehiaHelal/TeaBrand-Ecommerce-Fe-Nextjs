@@ -42,7 +42,7 @@ function Home() {
     <div className={styles.homepageComponent}>
       <div className={styles.homepageFirstPart}>
         <Image
-          alt="homepageImage"
+          alt="image"
           className={styles.homepageImage}
           src={require(`./../../public/Homepage/home-page-image-1.png`)}
         ></Image>
@@ -68,7 +68,7 @@ function Home() {
         <div className={styles.homepageSecondPartFirst}>
           <div className={styles.homepageSecondPartFirstEach}>
             <Image
-              alt="alt"
+              alt="image"
               className={styles.homepageImage}
               src={require(`./../../public/Homepage/Icons/1.png`)}
               // className="iconImage"
@@ -77,7 +77,7 @@ function Home() {
           </div>
           <div className={styles.homepageSecondPartFirstEach}>
             <Image
-              alt="alt"
+              alt="image"
               className={styles.homepageImage}
               src={require(`./../../public/Homepage/Icons/3.png`)}
               // className="iconImage"
@@ -86,7 +86,7 @@ function Home() {
           </div>
           <div className={styles.homepageSecondPartFirstEach}>
             <Image
-              alt="alt"
+              alt="image"
               className={styles.homepageImage}
               src={require(`./../../public/Homepage/Icons/4.png`)}
               // className="iconImage"
@@ -95,7 +95,7 @@ function Home() {
           </div>
           <div className={styles.homepageSecondPartFirstEach}>
             <Image
-              alt="alt"
+              alt="image"
               className={styles.homepageImage}
               src={require(`./../../public/Homepage/Icons/2.png`)}
               // className="iconImage"
@@ -127,7 +127,7 @@ function Home() {
                     className={styles.sectionthreeEachProductLink}
                   >
                     <Image
-                      alt="n"
+                      alt="image"
                       // src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
                       // width={300}
                       // height={300}
@@ -148,7 +148,7 @@ function Home() {
         </div>
         <div className={styles.sectionfourComponent}>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../public/Homepage/Landing Main Image3.png`)}
             // className="iconImage"
@@ -164,7 +164,7 @@ function Home() {
             <Link href="/Blog">READ MORE</Link>
           </div>
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../public/Homepage/Landing Main Image4.png`)}
             // className="iconImage"
@@ -197,7 +197,7 @@ function Home() {
           </div>
 
           <Image
-            alt="alt"
+            alt="image"
             // className={styles.homepageImage}
             src={require(`./../../public/Homepage/Landing Main Image2.png`)}
             // className="iconImage"

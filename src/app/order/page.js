@@ -506,7 +506,7 @@ const OrderPage = () => {
                   <h2>Now</h2>
                 </div>
                 <Image
-                  alt="not found"
+                  alt="image"
                   src={require(`./../../../public/Homepage/paymentoptions3.jpg`)}
                 ></Image>
               </div>

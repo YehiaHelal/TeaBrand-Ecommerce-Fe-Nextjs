@@ -164,7 +164,7 @@ const Home = ({ params }) => {
         <div key={itemsFetched._id} className={styles.Product}>
           <Image
             // className={styles.ProductImage}
-            alt="n"
+            alt="image"
             // src={require(`./../../../../public/Items/${itemsFetched.name}.png`)}
             src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${
               itemsFetched.name
@@ -183,21 +183,21 @@ const Home = ({ params }) => {
             <div className={styles.ProductRightsideThird}>
               <div>
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../../public/search/Icons/2.png`)}
                 ></Image>
                 <div>Origin: Egypt</div>
               </div>
               <div>
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../../public/search/Icons/3.png`)}
                 ></Image>
                 <div>Organic</div>
               </div>
               <div>
                 <Image
-                  alt="n"
+                  alt="image"
                   src={require(`./../../../../public/search/Icons/4.png`)}
                 ></Image>
                 <div>Vegan</div>
@@ -212,7 +212,7 @@ const Home = ({ params }) => {
             <Image
               // className={styles.ProductImage}
               className={styles.ProductRightsideVariantsImage}
-              alt="n"
+              alt="image"
               src={require(`./../../../../public/Variants/1.png`)}
               // className="iconImage"
             ></Image>
@@ -237,6 +237,7 @@ const Home = ({ params }) => {
                 >
                   <Image
                     className="search-icon"
+                    alt="image"
                     src={require(`./../../../../public/Images/shopping-cart.svg`)}
                     // className="iconImage"
                   ></Image>
@@ -290,7 +291,7 @@ const Home = ({ params }) => {
                   className={styles.productEachItemFlex}
                 >
                   <Image
-                    alt="n"
+                    alt="image"
                     className={styles.productItemImage}
                     // src={require(`./../../../../public/Items/${item.name}.png`)}
                     src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${

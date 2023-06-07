@@ -831,7 +831,7 @@ const MangeOrders = () => {
                       return (
                         <div key={i} className={styles.OrderFullDetails}>
                           <Image
-                            alt="n"
+                            alt="image"
                             className={styles.productItemImage}
                             // src={require(`./../../../public/Items/${item.name}.png`)}
                             src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
@@ -949,7 +949,7 @@ const MangeOrders = () => {
                   return (
                     <div key={i} className={styles.OrderFullDetails}>
                       <Image
-                        alt="n"
+                        alt="image"
                         className={styles.productItemImage}
                         // src={require(`./../../../public/Items/${item.name}.png`)}
                         src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
@@ -1124,7 +1124,7 @@ const MangeOrders = () => {
                   return (
                     <div key={i} className={styles.OrderFullDetails}>
                       <Image
-                        alt="n"
+                        alt="image"
                         className={styles.productItemImage}
                         // src={require(`./../../../public/Items/${item.name}.png`)}
                         src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}

@@ -76,7 +76,7 @@ function RootLayout({ children }) {
               <Link href="/">
                 <div className="nav-each-part-one">
                   <Image
-                    alt="alt"
+                    alt="image"
                     src={require(`./../../public/Images/icon.jpg`)}
                     className="iconImageTransparent"
                   ></Image>
@@ -111,6 +111,7 @@ function RootLayout({ children }) {
                 >
                   <Image
                     className="search-icon"
+                    alt="image"
                     src={require(`./../../public/Images/search.svg`)}
                     // className="iconImage"
                   ></Image>
@@ -131,6 +132,7 @@ function RootLayout({ children }) {
                 >
                   <Image
                     className="search-icon"
+                    alt="image"
                     src={require(`./../../public/Images/user.svg`)}
                     // className="iconImage"
                   ></Image>
@@ -152,6 +154,7 @@ function RootLayout({ children }) {
                   <div className="search-icon-image-and-number">
                     <Image
                       className="search-icon"
+                      alt="image"
                       src={require(`./../../public/Images/shopping-cart.svg`)}
                     ></Image>
 
@@ -225,6 +228,7 @@ function RootLayout({ children }) {
                       }}
                     >
                       <Image
+                        alt="image"
                         className="search-icon"
                         src={require(`./../../public/Images/search.svg`)}
                         // className="iconImage"
@@ -246,6 +250,7 @@ function RootLayout({ children }) {
                       }}
                     >
                       <Image
+                        alt="image"
                         className="search-icon"
                         src={require(`./../../public/Images/user.svg`)}
                         // className="iconImage"
@@ -268,6 +273,7 @@ function RootLayout({ children }) {
                     >
                       <div className="search-icon-image-and-number">
                         <Image
+                          alt="image"
                           className="search-icon"
                           src={require(`./../../public/Images/shopping-cart.svg`)}
                         ></Image>

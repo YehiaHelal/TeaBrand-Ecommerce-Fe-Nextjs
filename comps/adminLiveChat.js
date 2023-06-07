@@ -872,7 +872,7 @@ const LiveChat = () => {
                             <Image
                               width={100}
                               height={100}
-                              alt="not found"
+                              alt="image"
                               src={require(`./../public/Images/gold.png`)}
                             ></Image>
                             <div>
@@ -908,7 +908,7 @@ const LiveChat = () => {
                                         {/* <Image
                                         width={50}
                                         height={50}
-                                        alt="not found"
+                                        alt="image"
                                         src={require(`./../public/users/images/default.jpeg`)}
 
                                         // style={{
@@ -998,7 +998,7 @@ const LiveChat = () => {
                                         <Image
                                           width={50}
                                           height={50}
-                                          alt="not found"
+                                          alt="image"
                                           src={require(`./../public/users/images/default.jpeg`)}
 
                                           // style={{
@@ -1104,7 +1104,7 @@ const LiveChat = () => {
                   <Image
                     width={50}
                     height={50}
-                    alt="not found"
+                    alt="image"
                     src={require(`./../public/Images/send1.jpg`)}
                   ></Image>{" "} */}
                                 </button>
