@@ -9,7 +9,7 @@ const Login = () => {
   // dispatchUser to the authContext
   const { user, dispatchUser } = useAuthContext();
 
-  console.log(user);
+  // console.log(user);
 
   // show profile / logout , or show login / signup
   const [showProfileAndLogout, setshowProfileAndLogout] = useState(false);
@@ -138,16 +138,45 @@ const Login = () => {
   useEffect(() => {
     // checking if there is token in the local storage
 
-    // Perform localStorage action
-    // const item = localStorage.getItem("key");
+    // const localStoragechecking = JSON.parse(localStorage.getItem("user"));
 
-    const localStoragechecking = JSON.parse(localStorage.getItem("user"));
-    let emptyarray = [];
-    if (!localStoragechecking) {
-      localStorage.setItem("user", JSON.stringify(emptyarray));
-    }
+    // console.log(localStoragechecking);
 
-    if (localStoragechecking) {
+    // if (!localStoragechecking) {
+    //   console.log("outside and  empty  !");
+
+    //   let emptyarray = [];
+
+    //   localStorage.setItem("user", JSON.stringify(emptyarray));
+    //   dispatchUser({ type: "LOGIN", payload: emptyarray });
+    // }
+
+    // if (localStorage.getItem("user") !== null) {
+    //   setLogin(true);
+    // } else {
+    //   setLogin(false);
+    // }
+
+    // console.log(typeof localStoragechecking === {});
+    // console.log(Object.keys(localStoragechecking).length !== 0);
+
+    // console.log(JSON.parse(localStorage.getItem("user")) === undefined);
+    // console.log(
+    //   Object.keys(JSON.parse(localStorage.getItem("user"))).length === 0
+    // );
+
+    // localStorage.getItem("user")
+
+    // if (localStoragechecking.length > 1) {
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      Object.keys(JSON.parse(localStorage.getItem("user"))).length !== 0
+
+      // localStoragechecking !== undefined
+      //  &&
+      // Object.keys(localStoragechecking).length > 1
+    ) {
+      console.log("there is user and local storage data");
       SetTokenValue(JSON.parse(localStorage.getItem("user")));
 
       dispatchUser({
@@ -167,7 +196,17 @@ const Login = () => {
 
       setTimeout(() => {
         handleGetUserData();
-      }, 2000);
+      }, 1000);
+    } else {
+      // setLogin(false);
+
+      console.log("there is empty local storage or none");
+
+      let emptyarray = [];
+
+      localStorage.setItem("user", JSON.stringify(emptyarray));
+      dispatchUser({ type: "LOGIN", payload: emptyarray });
+      SetTokenValue();
     }
     // if there is, will compare it with the authcontext email and if same will fetch user data if not will change authcontext user data
 
@@ -1097,10 +1136,10 @@ const Login = () => {
     localStorage.removeItem("user");
 
     SetUserdataNameAddress();
+
     // let emptyarray = [];
-    // if (!localStorage.getItem("user")) {
-    //   localStorage.setItem("user", JSON.stringify(emptyarray));
-    // }
+
+    localStorage.setItem("user", JSON.stringify([]));
 
     // dispatch to context just to re-renders
 
