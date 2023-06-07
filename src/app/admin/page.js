@@ -454,9 +454,7 @@ const Admin = () => {
     }
 
     // for item name change and not changing item, will have to change s3 bucket name because we are dependent on name to fetch image so..
-    const ItemSelectedUrl = `https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${
-      itemSelectedInEditCom.name
-    }.png?${Date.now()}`;
+    const ItemSelectedUrl = `https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${itemSelectedInEditCom.name}.png`;
 
     const formData = new FormData();
 
@@ -1058,9 +1056,7 @@ const Admin = () => {
                     alt="image"
                     className={styles.productItemImage}
                     // src={require(`./../../../public/Items/${item.name}.png`)}
-                    src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${
-                      itemSelectedInDeleteCom.name
-                    }.png?${Date.now()}`}
+                    src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${itemSelectedInDeleteCom.name}.png`}
                     // className="iconImage"
                     width={300}
                     height={300}
@@ -1209,12 +1205,10 @@ const Admin = () => {
                   <div className={styles.DeleteProductItemComponent}>
                     <div className={styles.ALLITEMS}>
                       <Image
-                       alt="image"
+                        alt="image"
                         className={styles.productItemImage}
                         // src={require(`./../../../public/Items/${item.name}.png`)}
-                        src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${
-                          itemSelectedInEditCom.name
-                        }.png?${Date.now()}`}
+                        src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${itemSelectedInEditCom.name}.png`}
                         // className="iconImage"
                         width={300}
                         height={300}
