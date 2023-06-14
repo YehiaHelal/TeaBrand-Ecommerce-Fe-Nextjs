@@ -14,7 +14,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "yehia-bucket-v1.s3.eu-north-1.amazonaws.com",
+        hostname: "next-ecommerce-s3.s3.eu-north-1.amazonaws.com",
       },
     ],
   },

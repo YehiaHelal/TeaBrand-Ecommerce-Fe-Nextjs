@@ -88,7 +88,7 @@ const MyBag = () => {
                 <Image
                   alt="image"
                   // src={require(`./../../frontend/public/Items/${item.name}.png`)}
-                  src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                  src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
                   // className="iconImage"
                   width={300}
                   height={300}

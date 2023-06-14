@@ -166,7 +166,7 @@ const Home = ({ params }) => {
             // className={styles.ProductImage}
             alt="image"
             // src={require(`./../../../../public/Items/${itemsFetched.name}.png`)}
-            src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${itemsFetched.name}.png`}
+            src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemsFetched.name}.png`}
             width={400}
             height={400}
             // className="iconImage"
@@ -292,7 +292,7 @@ const Home = ({ params }) => {
                     alt="image"
                     className={styles.productItemImage}
                     // src={require(`./../../../../public/Items/${item.name}.png`)}
-                    src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                    src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
                     width={400}
                     height={400}
                     // className="iconImage"

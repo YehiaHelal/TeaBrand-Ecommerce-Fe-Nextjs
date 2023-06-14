@@ -756,13 +756,13 @@ const MangeUsers = () => {
   };
 
   // const imageLoader = ({ src, width, quality }, e) => {
-  //   // return `https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/${
+  //   // return `https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/${
   //   //   User.email.split("@")[0]
   //   // }.png?${Date.now()}`;
 
   //   console.log(e);
 
-  //   return `https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/devyehia.png`;
+  //   return `https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/devyehia.png`;
   // };
 
   return (
@@ -1003,14 +1003,14 @@ const MangeUsers = () => {
                     // onLoad={() => {
                     //   SetImageProfileLoadedState(true);
                     // }}
-                    // src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/${
+                    // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/${
                     //   user.user.split("@")[0]
                     // }.png?${Date.now()}`}
                     // src={!ImageProfileLoadedState ? defaultImage : trueUserImage}
 
                     // src={
                     //   !ErrorFetchingImage
-                    //     ? `https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/${
+                    //     ? `https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/${
                     //         User.email.split("@")[0]
                     //       }.png?${Date.now()}`
                     //     : require(`./../public/users/images/default.jpeg`)
@@ -1018,15 +1018,15 @@ const MangeUsers = () => {
 
                     // loader={imageLoader}
                     // src={`${User.email.split("@")[0]}`}
-                    // loader={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/${
+                    // loader={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/${
                     //   User.email.split("@")[0]
                     // }.png?${Date.now()}`}
                     // src={
-                    //   `https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/${
+                    //   `https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/${
                     //     User.email.split("@")[0]
                     //   }.png?${Date.now()}` === notFound
                     //     ? require(`./../public/users/images/default.jpeg`)
-                    //     : `https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/${
+                    //     : `https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/${
                     //         User.email.split("@")[0]
                     //       }.png?${Date.now()}`
                     // }
@@ -1120,7 +1120,7 @@ const MangeUsers = () => {
                     //         alt="n"
                     //         className={styles.productItemImage}
                     //         // src={require(`./../../../public/Items/${item.name}.png`)}
-                    //         src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                    //         src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
                     //         // className="iconImage"
                     //         width={300}
                     //         height={300}
@@ -1597,7 +1597,7 @@ const MangeUsers = () => {
                         alt="n"
                         className={styles.productItemImage}
                         // src={require(`./../../../public/Items/${item.name}.png`)}
-                        src={`https://yehia-bucket-v1.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                        src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
                         // className="iconImage"
                         width={300}
                         height={300}
