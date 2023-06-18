@@ -14,13 +14,16 @@ const Admin = () => {
   // dispatchUser to the authContext
   const { user, dispatchUser } = useAuthContext();
 
+  // Set All Items Images Fetch
+  const [AllItemsImages, setAllItemsImages] = useState();
+
   // Show Dashboard
   const [showDashboard, setShowDashboard] = useState(false);
 
   // Set Dashboard Total Data
   const [dashboardTotalData, setDashboardTotalData] = useState();
 
-  console.log(dashboardTotalData);
+  // console.log(dashboardTotalData);
 
   // Show ITEMS
   const [showProducts, setShowProducts] = useState(false);
@@ -110,6 +113,73 @@ const Admin = () => {
   // // Show Contacts
   // const [showContacts, setShowContacts] = useState(false);
 
+  // Handle Get All Items Images
+  const handleGetAllImages = async () => {
+    // e.preventDefault();
+
+    // const name = e.target.name.value;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+
+    // fetch request
+    try {
+      const datas = await axios.get(
+        "http://localhost:4000/api/items/itemsImages",
+
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // if (submission.message.length < 10) {
+      //   return { error: "Message must be over 10 chars long." };
+      // }
+
+      // console.log(datas);
+
+      // check response if ok
+      // console.log(datas.status === 200);
+
+      if (datas.status === 200) {
+        // console.log(datas.data);
+
+        // console.log(datas);
+        // setAllItems(datas.data);
+
+        setAllItemsImages(datas.data.images);
+
+        // setTimeout(() => {
+        //   setShowAllItems(true);
+        // }, 500);
+
+        // console.log("data");
+        // SetUserdataNameAddress(datas.data);
+      }
+    } catch (error) {
+      // console.log("error");
+      // if there is an error response
+      // console.log(error);
+      // if there is an error response
+      // console.log(error.response.data);
+      // setErrorSignup(error.response.data.error);
+    }
+  };
+
   // Handle get Dashboard general Data
   const handleGetDashboardData = async () => {
     // e.preventDefault();
@@ -130,7 +200,7 @@ const Admin = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/dashboarddata",
+        "http://localhost:4000/api/users/dashboarddata",
         formData,
         {
           withCredentials: true,
@@ -152,7 +222,7 @@ const Admin = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -170,14 +240,11 @@ const Admin = () => {
         // SetUserdataNameAddress(datas.data);
       }
     } catch (error) {
-      console.log("error");
-
+      // console.log("error");
       // if there is an error response
-      console.log(error);
-
+      // console.log(error);
       // if there is an error response
       // console.log(error.response.data);
-
       // setErrorSignup(error.response.data.error);
     }
   };
@@ -198,7 +265,7 @@ const Admin = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items",
+        "http://localhost:4000/api/items",
 
         {
           withCredentials: true,
@@ -220,7 +287,7 @@ const Admin = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -238,14 +305,11 @@ const Admin = () => {
         // SetUserdataNameAddress(datas.data);
       }
     } catch (error) {
-      console.log("error");
-
+      // console.log("error");
       // if there is an error response
-      console.log(error);
-
+      // console.log(error);
       // if there is an error response
       // console.log(error.response.data);
-
       // setErrorSignup(error.response.data.error);
     }
   };
@@ -255,7 +319,7 @@ const Admin = () => {
   const HandleAddNewProduct = async (e) => {
     e.preventDefault();
 
-    console.log("inside");
+    // console.log("inside");
 
     // console.log(user.user);
 
@@ -274,7 +338,7 @@ const Admin = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items/addproduct/",
+        "http://localhost:4000/api/items/addproduct/",
 
         formData,
 
@@ -299,14 +363,14 @@ const Admin = () => {
         }
       );
 
-      console.log(datas);
+      // console.log(datas);
 
       if (datas.status === 200) {
         // setAddedImageSuccessfully(true);
         setSuccessfulProductCreated(true);
         setErrorCreatingNewProduct();
 
-        console.log(datas);
+        // console.log(datas);
 
         setTimeout(() => {
           setSelectedImage(null);
@@ -321,12 +385,12 @@ const Admin = () => {
         // }, 3000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
-      console.log(error);
+      // console.log(error);
 
       if (error.message) {
-        console.log("inside");
+        // console.log("inside");
         setErrorCreatingNewProduct(error.message);
       }
 
@@ -347,17 +411,17 @@ const Admin = () => {
   const HandleDeleteAProduct = async (e) => {
     // e.preventDefault();
 
-    console.log("inside");
+    // console.log("inside");
 
     // console.log(user.user);
 
     if (!itemSelectedInDeleteCom) {
-      console.log("no selected ");
+      // console.log("no selected ");
 
       return;
     }
 
-    console.log(itemSelectedInDeleteCom.name);
+    // console.log(itemSelectedInDeleteCom.name);
 
     const submission = {
       name: itemSelectedInDeleteCom.name,
@@ -371,7 +435,7 @@ const Admin = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items/deleteproduct",
+        "http://localhost:4000/api/items/deleteproduct",
 
         { submission },
 
@@ -396,18 +460,19 @@ const Admin = () => {
         }
       );
 
-      console.log(datas);
+      // console.log(datas);
 
       if (datas.status === 200) {
         // setAddedImageSuccessfully(true);
         setSuccessfulInDeleteProduct(true);
         setErrorDeleteProduct();
 
-        console.log(datas);
+        // console.log(datas);
 
         setTimeout(() => {
           // Fetching the NEW PRODUCTS DATA AFTER UPDATE
           handleGetAllItems();
+
           setCheckBeforeDelete(false);
           setItemSelectedInDeleteCom();
           setSuccessfulInDeleteProduct(false);
@@ -418,12 +483,12 @@ const Admin = () => {
         // }, 3000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
-      console.log(error);
+      // console.log(error);
 
       if (error.message) {
-        console.log("inside");
+        // console.log("inside");
         setErrorDeleteProduct(error.message);
       }
 
@@ -444,22 +509,22 @@ const Admin = () => {
   const HandleEditProduct = async (e) => {
     e.preventDefault();
 
-    console.log("inside");
+    // console.log("inside");
 
     // console.log(user.user);
 
     if (!selectedImageToEdit && !e.target.name.value && !e.target.price.value) {
-      console.log("nothing was selected ");
+      // console.log("nothing was selected ");
       return setErrorEditProduct("you need to add a field value to Edit");
     }
 
     // for item name change and not changing item, will have to change s3 bucket name because we are dependent on name to fetch image so..
-    const ItemSelectedUrl = `https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemSelectedInEditCom.name}.png`;
+    // const ItemSelectedUrl = `https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemSelectedInEditCom.name}.png`;
 
     const formData = new FormData();
 
     formData.append("selectedItem", itemSelectedInEditCom.name);
-    formData.append("selectedItemUrl", ItemSelectedUrl);
+    // formData.append("selectedItemUrl", ItemSelectedUrl);
 
     if (selectedImageToEdit) {
       formData.append("photo", selectedImageToEdit);
@@ -481,7 +546,7 @@ const Admin = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items/editproduct",
+        "http://localhost:4000/api/items/editproduct",
 
         formData,
 
@@ -506,14 +571,14 @@ const Admin = () => {
         }
       );
 
-      console.log(datas);
+      // console.log(datas);
 
       if (datas.status === 200) {
         // setAddedImageSuccessfully(true);
         setSuccessfulEditProduct(true);
         setErrorEditProduct();
 
-        console.log(datas);
+        // console.log(datas);
 
         setTimeout(() => {
           // Fetching the NEW PRODUCTS DATA AFTER UPDATE
@@ -533,12 +598,12 @@ const Admin = () => {
         // }, 3000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
-      console.log(error);
+      // console.log(error);
 
       if (error.message) {
-        console.log("inside");
+        // console.log("inside");
         setErrorEditProduct(error.message);
       }
 
@@ -810,6 +875,7 @@ const Admin = () => {
                 }}
                 onClick={() => {
                   handleGetAllItems();
+                  handleGetAllImages();
                   setShowAllItems(true);
                   setShowAddProductCom(false);
                   setShowDeleteProductCom(false);
@@ -844,6 +910,8 @@ const Admin = () => {
                 }}
                 onClick={() => {
                   handleGetAllItems();
+                  handleGetAllImages();
+
                   setShowEditProductCom(true);
                   setShowAddProductCom(false);
                   setShowAllItems(false);
@@ -861,6 +929,8 @@ const Admin = () => {
                 }}
                 onClick={() => {
                   handleGetAllItems();
+                  handleGetAllImages();
+
                   setShowDeleteProductCom(true);
                   setShowEditProductCom(false);
                   setShowAddProductCom(false);
@@ -905,6 +975,7 @@ const Admin = () => {
             {ShowAllItems && (
               <div className={styles.ALLITEMSComponent}>
                 {AllItems &&
+                  AllItemsImages &&
                   AllItems.map((item) => {
                     return (
                       <div key={item._id} className={styles.ALLITEMS}>
@@ -912,9 +983,10 @@ const Admin = () => {
                           alt="image"
                           className={styles.productItemImage}
                           // src={require(`./../../../public/Items/${item.name}.png`)}
-                          src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${
-                            item.name
-                          }.png?${Date.now()}`}
+                          // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${
+                          //   item.name
+                          // }.png?${Date.now()}`}
+                          src={AllItemsImages[item.name]}
                           // className="iconImage"
                           width={300}
                           height={300}
@@ -979,7 +1051,7 @@ const Admin = () => {
                       className={styles.imageuploadInput}
                       value={fullNameImage}
                       onChange={(event) => {
-                        console.log(event.target.files[0]);
+                        // console.log(event.target.files[0]);
                         setSelectedImage(event.target.files[0]);
                       }}
                     ></input>
@@ -1025,7 +1097,7 @@ const Admin = () => {
                   type="item"
                   name="item"
                   onChange={(e) => {
-                    console.log(e.target.value);
+                    // console.log(e.target.value);
                     setItemSelectedInDeleteCom(
                       AllItems.find((o) => o.name === e.target.value)
                     );
@@ -1049,56 +1121,60 @@ const Admin = () => {
               </div>
             )}
 
-            {showDeleteProductCom && AllItems && itemSelectedInDeleteCom && (
-              <div className={styles.DeleteProductItemComponent}>
-                <div className={styles.ALLITEMS}>
-                  <Image
-                    alt="image"
-                    className={styles.productItemImage}
-                    // src={require(`./../../../public/Items/${item.name}.png`)}
-                    src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemSelectedInDeleteCom.name}.png`}
-                    // className="iconImage"
-                    width={300}
-                    height={300}
-                  ></Image>
-                  <div>Name: {itemSelectedInDeleteCom.name}</div>
-                  <div>Price {itemSelectedInDeleteCom.price}$</div>
-                </div>
+            {showDeleteProductCom &&
+              AllItems &&
+              itemSelectedInDeleteCom &&
+              AllItemsImages && (
+                <div className={styles.DeleteProductItemComponent}>
+                  <div className={styles.ALLITEMS}>
+                    <Image
+                      alt="image"
+                      className={styles.productItemImage}
+                      // src={require(`./../../../public/Items/${item.name}.png`)}
+                      // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemSelectedInDeleteCom.name}.png`}
+                      src={AllItemsImages[itemSelectedInDeleteCom.name]}
+                      // className="iconImage"
+                      width={300}
+                      height={300}
+                    ></Image>
+                    <div>Name: {itemSelectedInDeleteCom.name}</div>
+                    <div>Price {itemSelectedInDeleteCom.price}$</div>
+                  </div>
 
-                <button
-                  onClick={() => {
-                    setCheckBeforeDelete(true);
-                  }}
-                >
-                  Delete Product
-                </button>
+                  <button
+                    onClick={() => {
+                      setCheckBeforeDelete(true);
+                    }}
+                  >
+                    Delete Product
+                  </button>
 
-                {checkBeforeDelete && (
-                  <div className={styles.checkingBeforeDelete}>
-                    <div>Are you sure you want to delete Product ?</div>
-                    <div>
-                      <button onClick={HandleDeleteAProduct}>Yes</button>
-                      <button
-                        onClick={() => {
-                          if (checkBeforeDelete) setCheckBeforeDelete(false);
-                        }}
-                      >
-                        No
-                      </button>
+                  {checkBeforeDelete && (
+                    <div className={styles.checkingBeforeDelete}>
+                      <div>Are you sure you want to delete Product ?</div>
+                      <div>
+                        <button onClick={HandleDeleteAProduct}>Yes</button>
+                        <button
+                          onClick={() => {
+                            if (checkBeforeDelete) setCheckBeforeDelete(false);
+                          }}
+                        >
+                          No
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {successfulInDeleteProduct && (
-                  <div className={styles.successRequest}>
-                    Product was Deleted successfully
-                  </div>
-                )}
-                {errorDeleteProduct && (
-                  <div className={styles.error}>{errorDeleteProduct}</div>
-                )}
-              </div>
-            )}
+                  {successfulInDeleteProduct && (
+                    <div className={styles.successRequest}>
+                      Product was Deleted successfully
+                    </div>
+                  )}
+                  {errorDeleteProduct && (
+                    <div className={styles.error}>{errorDeleteProduct}</div>
+                  )}
+                </div>
+              )}
 
             {showEditProductCom && AllItems && (
               <div className={styles.DeleteProductComponent}>
@@ -1107,7 +1183,7 @@ const Admin = () => {
                   type="item"
                   name="item"
                   onChange={(e) => {
-                    console.log(e.target.value);
+                    // console.log(e.target.value);
                     setItemSelectedInEditCom(
                       AllItems.find((o) => o.name === e.target.value)
                     );
@@ -1175,7 +1251,7 @@ const Admin = () => {
                       className={styles.imageuploadInput}
                       value={fullNameImageToEdit}
                       onChange={(event) => {
-                        console.log(event.target.files[0]);
+                        // console.log(event.target.files[0]);
                         setSelectedImageToEdit(event.target.files[0]);
                       }}
                     ></input>
@@ -1201,32 +1277,36 @@ const Admin = () => {
                   </div>
                 </form>
 
-                {showEditProductCom && AllItems && itemSelectedInEditCom && (
-                  <div className={styles.DeleteProductItemComponent}>
-                    <div className={styles.ALLITEMS}>
-                      <Image
-                        alt="image"
-                        className={styles.productItemImage}
-                        // src={require(`./../../../public/Items/${item.name}.png`)}
-                        src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemSelectedInEditCom.name}.png`}
-                        // className="iconImage"
-                        width={300}
-                        height={300}
-                      ></Image>
-                      <div>Name: {itemSelectedInEditCom.name}</div>
-                      <div>Price {itemSelectedInEditCom.price}$</div>
-                    </div>
-
-                    {successfulEditProduct && (
-                      <div className={styles.successRequest}>
-                        Product was Edited successfully
+                {showEditProductCom &&
+                  AllItems &&
+                  itemSelectedInEditCom &&
+                  AllItemsImages && (
+                    <div className={styles.DeleteProductItemComponent}>
+                      <div className={styles.ALLITEMS}>
+                        <Image
+                          alt="image"
+                          className={styles.productItemImage}
+                          // src={require(`./../../../public/Items/${item.name}.png`)}
+                          // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemSelectedInEditCom.name}.png`}
+                          src={AllItemsImages[itemSelectedInEditCom.name]}
+                          // className="iconImage"
+                          width={300}
+                          height={300}
+                        ></Image>
+                        <div>Name: {itemSelectedInEditCom.name}</div>
+                        <div>Price {itemSelectedInEditCom.price}$</div>
                       </div>
-                    )}
-                    {errorEditProduct && (
-                      <div className={styles.error}>{errorEditProduct}</div>
-                    )}
-                  </div>
-                )}
+
+                      {successfulEditProduct && (
+                        <div className={styles.successRequest}>
+                          Product was Edited successfully
+                        </div>
+                      )}
+                      {errorEditProduct && (
+                        <div className={styles.error}>{errorEditProduct}</div>
+                      )}
+                    </div>
+                  )}
               </div>
             )}
           </div>

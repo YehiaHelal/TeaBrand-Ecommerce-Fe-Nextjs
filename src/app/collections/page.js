@@ -8,12 +8,20 @@ import Link from "next/link";
 import Footer from "../../../comps/footer";
 import { useEffect, useState } from "react";
 import { useItemsCartContext } from "../../../hooks/useItemsCartContext";
+import axios from "axios";
 
 function Collections() {
   // Cart Context fetch items
   const { items, dispatch } = useItemsCartContext();
 
-  console.log(items);
+  // console.log(items);
+
+  // Set All Items Images Fetch
+  const [AllItemsImages, setAllItemsImages] = useState();
+
+  // console.log(AllItemsImages);
+
+  const [fetchedImages, setfetchedImages] = useState(false);
 
   // useState fetch items
   const [itemCollection, setItemCollection] = useState([]);
@@ -239,9 +247,7 @@ function Collections() {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items"
-      );
+      const response = await fetch("http://localhost:4000/api/items");
 
       const item = await response.json();
 
@@ -257,7 +263,88 @@ function Collections() {
     fetchItems();
   }, []);
 
+  useEffect(() => {
+    handleGetAllImages();
+  }, [fetchedImages]);
+
   let filtered = [];
+
+  // Handle Get All Items Images
+  const handleGetAllImages = async () => {
+    // e.preventDefault();
+
+    // const name = e.target.name.value;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+
+    // console.log("trying");
+
+    if (AllItemsImages) {
+      // console.log("item already exists");
+      return;
+    }
+
+    // console.log("fetching now");
+
+    // fetch request
+    try {
+      const datas = await axios.get(
+        "http://localhost:4000/api/items/itemsImages",
+
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // if (submission.message.length < 10) {
+      //   return { error: "Message must be over 10 chars long." };
+      // }
+
+      // console.log(datas);
+
+      // check response if ok
+      // console.log(datas.status === 200);
+
+      if (datas.status === 200) {
+        // console.log(datas.data);
+
+        // console.log(datas);
+        // setAllItems(datas.data);
+
+        setAllItemsImages(datas.data.images);
+        setfetchedImages(true);
+
+        // setTimeout(() => {
+        //   setShowAllItems(true);
+        // }, 500);
+
+        // console.log("data");
+        // SetUserdataNameAddress(datas.data);
+      }
+    } catch (error) {
+      // console.log("error");
+      // if there is an error response
+      // console.log(error);
+      // if there is an error response
+      // console.log(error.response.data);
+      // setErrorSignup(error.response.data.error);
+    }
+  };
 
   return (
     <div className={styles.pageComponent}>
@@ -295,6 +382,7 @@ function Collections() {
               onClick={() => {
                 if (!showCollections) {
                   setShowCollections(true);
+                  handleGetAllImages();
                 }
                 if (showCollections) {
                   setShowCollections(false);
@@ -678,31 +766,35 @@ function Collections() {
         </div>
 
         <div className={styles.ProductEachItem}>
-          {itemCollectionShowing.map((item) => {
-            return (
-              <div key={item._id}>
-                <Link
-                  href={"/collections/" + item._id}
-                  className={styles.productEachItemFlex}
-                >
-                  <Image
-                    alt="image"
-                    className={styles.productItemImage}
-                    // src={require(`./../../../public/Items/${item.name}.png`)}
-                    src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
-                    // className="iconImage"
-                    width={300}
-                    height={300}
-                  ></Image>
-                  <div className={styles.productItemName}> {item.name}</div>
-                  <div className={styles.productItemPriceAndGram}>
-                    <div className={styles.productItemPrice}>${item.price}</div>
-                    <div>/50 gram</div>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
+          {AllItemsImages &&
+            itemCollectionShowing.map((item) => {
+              return (
+                <div key={item._id}>
+                  <Link
+                    href={"/collections/" + item._id}
+                    className={styles.productEachItemFlex}
+                  >
+                    <Image
+                      alt="image"
+                      className={styles.productItemImage}
+                      // src={require(`./../../../public/Items/${item.name}.png`)}
+                      // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                      src={AllItemsImages[item.name]}
+                      // className="iconImage"
+                      width={300}
+                      height={300}
+                    ></Image>
+                    <div className={styles.productItemName}> {item.name}</div>
+                    <div className={styles.productItemPriceAndGram}>
+                      <div className={styles.productItemPrice}>
+                        ${item.price}
+                      </div>
+                      <div>/50 gram</div>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
         </div>
       </div>
       <Footer />

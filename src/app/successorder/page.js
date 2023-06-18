@@ -23,7 +23,7 @@ const BlogPage = () => {
   // check if user is logged in
   const { user, dispatchUser } = useAuthContext();
 
-  console.log(user);
+  // console.log(user);
 
   // showing successful after stripe payment is done error check
   const [errorToPlaceOrder, setErrorToPlaceOrder] = useState();
@@ -57,7 +57,7 @@ const BlogPage = () => {
 
       try {
         const datas = await axios.post(
-          "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
+          "http://localhost:4000/api/orders/getuserorders",
           { submission },
           {
             withCredentials: true,
@@ -83,7 +83,7 @@ const BlogPage = () => {
             let n = datas.data.orders;
 
             let p = n.slice(n.length - 1);
-            console.log(p);
+            // console.log(p);
 
             // console.log(p[0].ordernumber);
 
@@ -99,7 +99,7 @@ const BlogPage = () => {
         setshowError(true);
 
         // if there is an error response
-        console.log(error);
+        // console.log(error);
 
         // if there is an error response
         // console.log(error.response.data);
@@ -116,7 +116,7 @@ const BlogPage = () => {
     const localStoragependingstate = JSON.parse(
       localStorage.getItem("pendingstatev")
     );
-    console.log(localStoragependingstate);
+    // console.log(localStoragependingstate);
 
     let OrderDetailss;
 
@@ -129,7 +129,7 @@ const BlogPage = () => {
       // fetch request
       try {
         const datas = await axios.post(
-          "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/cartorder",
+          "http://localhost:4000/api/orders/cartorder",
           { OrderDetails },
           {
             withCredentials: true,
@@ -149,7 +149,7 @@ const BlogPage = () => {
         );
 
         if ((datas.data.status = 200)) {
-          console.log(datas);
+          // console.log(datas);
 
           // setSuccessfulOrder(true);
 
@@ -219,7 +219,7 @@ const BlogPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/emailorderplaced",
+        "http://localhost:4000/api/mail/emailorderplaced",
         {
           submission,
         },
@@ -243,14 +243,13 @@ const BlogPage = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
 
       if (datas.status === 200) {
-        console.log(datas);
-
+        // console.log(datas);
         // setSuccessfulResetEmail(true);
         // setErrorSignup("");
         // setErrorLogin("");
@@ -264,23 +263,17 @@ const BlogPage = () => {
       }
     } catch (error) {
       // if there is an error response
-
-      console.log("error");
-
+      // console.log("error");
       // console.log(error.message);
-
       // if (error.message) {
       //   setErrorResetEmailSend(error.message);
       // }
-
       // if (error.response.data) {
       //   {
       //     setErrorResetEmailSend(error.response.data.error);
       //   }
       // }
-
       // if there is an error response
-
       // setErrorResetEmailSend(error.response.data.error);
     }
   };

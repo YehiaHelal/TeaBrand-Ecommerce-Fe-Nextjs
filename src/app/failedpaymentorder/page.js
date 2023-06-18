@@ -33,7 +33,7 @@ const BlogPage = () => {
 
         try {
           const datas = await axios.post(
-            "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
+            "http://localhost:4000/api/orders/getuserorders",
             formData,
             {
               withCredentials: true,
@@ -58,21 +58,18 @@ const BlogPage = () => {
             let n = datas.data.orders;
 
             let p = n.slice(n.length - 1);
-            console.log(p);
+            // console.log(p);
 
             // console.log(p[0].ordernumber);
 
             setOrderNumber(p[0].ordernumber);
           }
         } catch (error) {
-          console.log("error");
-
+          // console.log("error");
           // if there is an error response
-          console.log(error);
-
+          // console.log(error);
           // if there is an error response
           // console.log(error.response.data);
-
           // setErrorSignup(error.response.data.error);
         }
       };
@@ -92,7 +89,7 @@ const BlogPage = () => {
           </div>
 
           <Link
-            href="https://tea-brand-ecommerce-fe-nextjs.vercel.app/order"
+            href="http://localhost:3000/order"
             className={styles.Linkredirect}
           >
             Redirect to Order Page

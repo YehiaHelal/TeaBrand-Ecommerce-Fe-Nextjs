@@ -11,6 +11,12 @@ const Login = () => {
 
   // console.log(user);
 
+  // Set All Items Images Fetch
+  const [AllItemsImages, setAllItemsImages] = useState();
+
+  // Handle user image base 64 image recieve
+  const [Base64Image, setBase64Image] = useState();
+
   // show profile / logout , or show login / signup
   const [showProfileAndLogout, setshowProfileAndLogout] = useState(false);
 
@@ -113,7 +119,7 @@ const Login = () => {
 
   const [userdataNameAddress, SetUserdataNameAddress] = useState();
 
-  console.log(userdataNameAddress);
+  // console.log(userdataNameAddress);
 
   // console.log(userdataNameAddress);
 
@@ -176,7 +182,7 @@ const Login = () => {
       //  &&
       // Object.keys(localStoragechecking).length > 1
     ) {
-      console.log("there is user and local storage data");
+      // console.log("there is user and local storage data");
       SetTokenValue(JSON.parse(localStorage.getItem("user")));
 
       dispatchUser({
@@ -184,7 +190,7 @@ const Login = () => {
         payload: JSON.parse(localStorage.getItem("user")),
       });
 
-      console.log(user);
+      // console.log(user);
 
       // handleGetUserData();
 
@@ -196,11 +202,12 @@ const Login = () => {
 
       setTimeout(() => {
         handleGetUserData();
+        handleFetchingImagesFromBackend();
       }, 1000);
     } else {
       // setLogin(false);
 
-      console.log("there is empty local storage or none");
+      // console.log("there is empty local storage or none");
 
       let emptyarray = [];
 
@@ -236,6 +243,7 @@ const Login = () => {
   useEffect(() => {
     if (showProfileAndLogout) {
       handleGetUserData();
+      handleFetchingImagesFromBackend();
     }
   }, [showProfileAndLogout]);
 
@@ -312,7 +320,7 @@ const Login = () => {
 
   //   try {
   //     const datas = await axios.post(
-  //       "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/imageupdate/",
+  //       "http://localhost:4000/api/users/imageupdate/",
 
   //       formData,
 
@@ -367,12 +375,195 @@ const Login = () => {
   //   }
   // };
 
+  // fetching user image from backend
+  // sending image function v2 route
+  const handleFetchingImagesFromBackend = async (e) => {
+    // e.prevent Default();
+
+    // console.log("here");
+
+    // console.log("inside");
+
+    // console.log(user.user);
+
+    // const submission = {
+    //   email: e.target.email.value,
+    //   password: e.target.password.value,
+    //   name: e.target.name.value,
+    //   address: e.target.address.value,
+    // };
+
+    const formData = new FormData();
+    // formData.append("photo", selectedImage);
+
+    if (
+      !JSON.parse(localStorage.getItem("user"))
+
+      // localStoragechecking !== undefined
+      //  &&
+      // Object.keys(localStoragechecking).length > 1
+    ) {
+      return;
+    }
+    if (
+      Object.keys(JSON.parse(localStorage.getItem("user"))).length === 0
+
+      // localStoragechecking !== undefined
+      //  &&
+      // Object.keys(localStoragechecking).length > 1
+    ) {
+      return;
+    }
+
+    // console.log("passed");
+
+    const tokenUser = JSON.parse(localStorage.getItem("user"));
+
+    formData.append("jwt", tokenUser.token);
+
+    // uploadprofileimgtos3
+    try {
+      const datas = await axios.post(
+        "http://localhost:4000/api/users/imagesendingtofe/",
+
+        formData,
+
+        // {
+        //   headers: {
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        // }
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+            // "Content-Type": "application/json",
+            // "Content-Type": "multipart/form-data",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          // "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // console.log(datas);
+
+      // console.log("hey");
+
+      if (datas.status === 200) {
+        // setAddedImageSuccessfully(true);
+
+        // console.log(datas);
+
+        setBase64Image(datas.data.images);
+
+        // setTimeout(() => {
+        //   setSelectedImage(null);
+        //   setFullNameImage("");
+        // }, 500);
+
+        // setTimeout(() => {
+        //   SetErrorFetchingImage(false);
+        // }, 1000);
+
+        // setTimeout(() => {
+        //   setAddedImageSuccessfully(false);
+        //   SetErrorFetchingImage(false);
+        // }, 2000);
+      }
+    } catch (error) {
+      // console.log(error);
+
+      // setErrorAddingImage("error");
+
+      // setTimeout(() => {
+      //   setErrorAddingImage("");
+      // }, 3000);
+    }
+  };
+
+  // Handle Get All Items Images
+  const handleGetAllImages = async () => {
+    // e.preventDefault();
+
+    // const name = e.target.name.value;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    if (AllItemsImages) {
+      return;
+    }
+
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+
+    // fetch request
+    try {
+      const datas = await axios.get(
+        "http://localhost:4000/api/items/itemsImages",
+
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // if (submission.message.length < 10) {
+      //   return { error: "Message must be over 10 chars long." };
+      // }
+
+      // console.log(datas);
+
+      // check response if ok
+      // console.log(datas.status === 200);
+
+      if (datas.status === 200) {
+        // console.log(datas.data);
+
+        // console.log(datas);
+        // setAllItems(datas.data);
+
+        setAllItemsImages(datas.data.images);
+
+        // setTimeout(() => {
+        //   setShowAllItems(true);
+        // }, 500);
+
+        // console.log("data");
+        // SetUserdataNameAddress(datas.data);
+      }
+    } catch (error) {
+      // console.log("error");
+      // if there is an error response
+      // console.log(error);
+      // if there is an error response
+      // console.log(error.response.data);
+      // setErrorSignup(error.response.data.error);
+    }
+  };
+
   // sending image function v2 route
 
   const handleSendingImageToS3Bucket = async (e) => {
     // e.prevent Default();
 
-    console.log("inside");
+    // console.log("inside");
 
     // console.log(user.user);
 
@@ -391,7 +582,7 @@ const Login = () => {
     // uploadprofileimgtos3
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/imageupdate/",
+        "http://localhost:4000/api/users/imageupdate/",
 
         formData,
 
@@ -416,12 +607,13 @@ const Login = () => {
         }
       );
 
-      console.log(datas);
+      // console.log(datas);
 
       if (datas.status === 200) {
         setAddedImageSuccessfully(true);
+        handleFetchingImagesFromBackend();
 
-        console.log(datas);
+        // console.log(datas);
 
         setTimeout(() => {
           setSelectedImage(null);
@@ -438,7 +630,7 @@ const Login = () => {
         }, 2000);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       setErrorAddingImage("error");
 
@@ -474,7 +666,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/getndata/",
+        "http://localhost:4000/api/users/getndata/",
         formData,
         {
           withCredentials: true,
@@ -497,13 +689,13 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas.data);
+      // console.log(datas.data);
 
       // check response if ok
       // console.log(datas.status === 200);
 
       if (datas.status === 200) {
-        console.log("data");
+        // console.log("data");
         SetUserdataNameAddress(datas.data);
 
         // setSuccessfulSignup(true);
@@ -517,10 +709,10 @@ const Login = () => {
         // }, 2000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
       // if there is an error response
-      console.log(error);
+      // console.log(error);
 
       // if there is an error response
       // console.log(error.response.data);
@@ -554,7 +746,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getuserorders",
+        "http://localhost:4000/api/orders/getuserorders",
         formData,
         {
           withCredentials: true,
@@ -576,13 +768,13 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas.data);
+      // console.log(datas.data);
 
       // check response if ok
       // console.log(datas.status === 200);
 
       if (datas.status === 200) {
-        console.log("data");
+        // console.log("data");
         SetUserPastOrders(datas.data.orders);
 
         // setSuccessfulSignup(true);
@@ -596,13 +788,13 @@ const Login = () => {
         }, 2000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
       // if there is an error response
-      console.log(error);
+      // console.log(error);
 
       // if there is an error response
-      console.log(error.response.data);
+      // console.log(error.response.data);
 
       // setErrorSignup(error.response.data.error);
     }
@@ -630,7 +822,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/resetpasswordemail",
+        "http://localhost:4000/api/mail/resetpasswordemail",
         {
           submission,
         },
@@ -654,7 +846,7 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -676,9 +868,9 @@ const Login = () => {
     } catch (error) {
       // if there is an error response
 
-      console.log("error");
+      // console.log("error");
 
-      console.log(error.message);
+      // console.log(error.message);
 
       if (error.message) {
         setErrorResetEmailSend(error.message);
@@ -719,12 +911,12 @@ const Login = () => {
       token: user.token,
     };
 
-    // "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/",
+    // "http://localhost:4000/api/mail/",
 
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/changepassword/",
+        "http://localhost:4000/api/users/changepassword/",
         {
           submission,
         },
@@ -748,7 +940,7 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -803,7 +995,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/signup/",
+        "http://localhost:4000/api/users/signup/",
         {
           submission,
         },
@@ -827,7 +1019,7 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -845,13 +1037,13 @@ const Login = () => {
         }, 2000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
       // if there is an error response
-      console.log(error);
+      // console.log(error);
 
       // if there is an error response
-      console.log(error.response.data);
+      // console.log(error.response.data);
 
       setErrorSignup(error.response.data.error);
     }
@@ -878,7 +1070,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/updateinfo/",
+        "http://localhost:4000/api/users/updateinfo/",
         {
           submission,
         },
@@ -903,7 +1095,7 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -922,13 +1114,13 @@ const Login = () => {
         }, 2000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
       // if there is an error response
-      console.log(error);
+      // console.log(error);
 
       // if there is an error response
-      console.log(error.response.data);
+      // console.log(error.response.data);
 
       setErrorInfoChange(error.response.data.error);
     }
@@ -947,8 +1139,8 @@ const Login = () => {
     // console.log(email);
     // console.log(password);
 
-    console.log(user.user);
-    console.log(e.target.contact.value);
+    // console.log(user.user);
+    // console.log(e.target.contact.value);
 
     const submission = {
       email: user.user,
@@ -959,7 +1151,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/contactsend/",
+        "http://localhost:4000/api/users/contactsend/",
         {
           submission,
         },
@@ -984,7 +1176,7 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -1002,13 +1194,13 @@ const Login = () => {
         }, 2000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
       // if there is an error response
-      console.log(error);
+      // console.log(error);
 
       // if there is an error response
-      console.log(error.response.data);
+      // console.log(error.response.data);
 
       setErrorContactSend(error.response.data.error);
     }
@@ -1021,8 +1213,8 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(email);
-    console.log(password);
+    // console.log(email);
+    // console.log(password);
 
     const submission = {
       email: e.target.email.value,
@@ -1032,7 +1224,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/login/",
+        "http://localhost:4000/api/users/login/",
         {
           submission,
         },
@@ -1057,13 +1249,13 @@ const Login = () => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
 
       if (datas.status === 200) {
-        console.log(datas);
+        // console.log(datas);
 
         // after the login will set the cookie , and on every restrict request will get the cookie and add it to the request
         // so it's still secured http secure with cookie.
@@ -1080,7 +1272,7 @@ const Login = () => {
 
         // console.log("we are in");
 
-        console.log(datas.data);
+        // console.log(datas.data);
 
         // localStorage.removeItem("user");
 
@@ -1100,13 +1292,13 @@ const Login = () => {
         }, 2000);
       }
     } catch (error) {
-      console.log("error");
+      // console.log("error");
 
       // if there is an error response
-      console.log(error);
+      // console.log(error);
 
       // if there is an error response
-      console.log(error.response.data);
+      // console.log(error.response.data);
 
       setErrorLogin(error.response.data.error);
     }
@@ -1116,7 +1308,7 @@ const Login = () => {
   const LogoutFunctionHandler = async () => {
     // fetch request and if ok the cookie will be removed
     const datas = await axios.post(
-      "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/logout",
+      "http://localhost:4000/api/users/logout",
       {},
       {
         withCredentials: true,
@@ -1143,7 +1335,7 @@ const Login = () => {
 
     // dispatch to context just to re-renders
 
-    console.log("logged out");
+    // console.log("logged out");
   };
 
   // to check if the token is still valid and if not log out the user ..
@@ -1152,7 +1344,7 @@ const Login = () => {
   //     const checkToken = async () => {
   //       try {
   //         const datas = await axios.post(
-  //           "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/checktoken",
+  //           "http://localhost:4000/api/users/checktoken",
   //           {
   //             message: "checkme",
   //           },
@@ -1345,7 +1537,30 @@ const Login = () => {
             {!userdataNameAddress && <div>Welcome </div>}
 
             <div className={styles.profileImage}>
-              <Image
+              {Base64Image && (
+                <Image
+                  width={100}
+                  height={100}
+                  alt="image"
+                  id="image-true"
+                  className={styles.ImageConfirmUploadImage}
+                  src={Base64Image}
+                  // src={URL.createObjectURL(Base64Image)}
+                ></Image>
+              )}
+
+              {!Base64Image && (
+                <Image
+                  width={100}
+                  height={100}
+                  alt="image"
+                  id="image-true"
+                  className={styles.ImageConfirmUploadImage}
+                  src={require(`./../public/users/images/default.jpeg`)}
+                ></Image>
+              )}
+
+              {/* <Image
                 width={100}
                 height={100}
                 alt="image"
@@ -1380,7 +1595,7 @@ const Login = () => {
                   //     }.png?${Date.now()}`
                 }
                 // src={defaultImage}
-              ></Image>
+              ></Image> */}
 
               {/* {true && (
                 <Image
@@ -1403,7 +1618,7 @@ const Login = () => {
                 className={styles.imageuploadInput}
                 value={fullNameImage}
                 onChange={(event) => {
-                  console.log(event.target.files[0]);
+                  // console.log(event.target.files[0]);
                   setSelectedImage(event.target.files[0]);
                 }}
               ></input>
@@ -1445,6 +1660,7 @@ const Login = () => {
               onClick={() => {
                 SetShowGetPastOrders(true);
                 handleGetUserPastOrders();
+                handleGetAllImages();
               }}
             >
               View my past orders
@@ -1541,6 +1757,7 @@ const Login = () => {
                   }
                   if (!showEditInformationwindowPasswordDropdown) {
                     SetShowEditInformationwindowPasswordDropdown(true);
+                    SetShowEditInformationwindowDropdown(false);
                   }
                 }}
               >
@@ -1553,6 +1770,7 @@ const Login = () => {
                   }
                   if (!showEditInformationwindowDropdown) {
                     SetShowEditInformationwindowDropdown(true);
+                    SetShowEditInformationwindowPasswordDropdown(false);
                   }
                 }}
               >
@@ -1691,50 +1909,53 @@ const Login = () => {
                 </div>
               );
             })}
-          {showGetPastOrdersEachOrder && orderSelectedToShow && (
-            <div className={styles.ItemStylesComponentOrdersComponent}>
-              {orderSelectedToShow.orderProducts.map((item) => {
-                return (
-                  <div
-                    key={item._id}
-                    className={styles.ItemStylesComponentOrders}
-                  >
-                    <Link href={"/collections/" + item._id}>
-                      <Image
-                        alt="image"
-                        // src={require(`./../../frontend/public/Items/${item.name}.png`)}
-                        src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
-                        width={300}
-                        height={300}
-                        // className="iconImage"
-                      ></Image>
-                    </Link>
+          {showGetPastOrdersEachOrder &&
+            orderSelectedToShow &&
+            AllItemsImages && (
+              <div className={styles.ItemStylesComponentOrdersComponent}>
+                {orderSelectedToShow.orderProducts.map((item) => {
+                  return (
+                    <div
+                      key={item._id}
+                      className={styles.ItemStylesComponentOrders}
+                    >
+                      <Link href={"/collections/" + item._id}>
+                        <Image
+                          alt="image"
+                          // src={require(`./../../frontend/public/Items/${item.name}.png`)}
+                          // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                          src={AllItemsImages[item.name]}
+                          width={300}
+                          height={300}
+                          // className="iconImage"
+                        ></Image>
+                      </Link>
 
-                    <div>
-                      <div> {item.name} /50 gram</div>
-                    </div>
+                      <div>
+                        <div> {item.name} /50 gram</div>
+                      </div>
 
-                    <div>
-                      <div className={styles.ItemStylesComponentOrdersPrice}>
-                        <div>quantity: </div>
-                        <div>{item.numberofitem}</div>
-                      </div>
-                      <div className={styles.ItemStylesComponentOrdersPrice}>
-                        <div>price: </div>
-                        <div>${item.price}</div>
+                      <div>
+                        <div className={styles.ItemStylesComponentOrdersPrice}>
+                          <div>quantity: </div>
+                          <div>{item.numberofitem}</div>
+                        </div>
+                        <div className={styles.ItemStylesComponentOrdersPrice}>
+                          <div>price: </div>
+                          <div>${item.price}</div>
+                        </div>
                       </div>
                     </div>
+                  );
+                })}
+
+                <div>
+                  <div className={styles.ItemStylesComponentTotalPrice}>
+                    Order total price: {orderSelectedToShow.orderTotalValue}
                   </div>
-                );
-              })}
-
-              <div>
-                <div className={styles.ItemStylesComponentTotalPrice}>
-                  Order total price: {orderSelectedToShow.orderTotalValue}
                 </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       )}
 

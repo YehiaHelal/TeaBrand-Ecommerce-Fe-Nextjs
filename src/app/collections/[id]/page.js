@@ -6,18 +6,25 @@ import styles from "./page.module.css";
 import Footer from "../../../../comps/footer";
 import Link from "next/link";
 import { useItemsCartContext } from "../../../../hooks/useItemsCartContext";
+import axios from "axios";
 
 const Home = ({ params }) => {
   // Cart Context fetch items
   const { items, dispatch } = useItemsCartContext();
 
-  console.log(items);
+  // Set All Items Images Fetch
+  const [AllItemsImages, setAllItemsImages] = useState();
+
+  // console.log(items);
+
+  // if fetched and images reciseved
+  const [fetchedImages, setfetchedImages] = useState(false);
 
   // Add to Cart and dealing with duplicate function
   const [addItemToCart, setaddItemToCart] = useState(); // for adding items to the cart
   const [changeValue, setChangeValue] = useState(0); // for adding items to the cart
 
-  console.log(changeValue);
+  // console.log(changeValue);
 
   useEffect(() => {
     if (addItemToCart !== undefined) {
@@ -96,7 +103,7 @@ const Home = ({ params }) => {
   const [allItems, setAllItem] = useState([]);
   const { id } = params;
 
-  console.log(itemsFetched);
+  // console.log(itemsFetched);
 
   let allItemsAltered = allItems.slice(6, 9);
 
@@ -106,9 +113,7 @@ const Home = ({ params }) => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items/" + id
-      );
+      const response = await fetch("http://localhost:4000/api/items/" + id);
 
       const item = await response.json();
       // console.log("there");
@@ -124,9 +129,7 @@ const Home = ({ params }) => {
     };
 
     const fetchAllItems = async () => {
-      const response = await fetch(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/items"
-      );
+      const response = await fetch("http://localhost:4000/api/items");
 
       const items = await response.json();
       // console.log("there");
@@ -145,6 +148,10 @@ const Home = ({ params }) => {
     fetchAllItems();
   }, []);
 
+  useEffect(() => {
+    handleGetAllImages();
+  }, [fetchedImages]);
+
   // console.log(allItems);
 
   // useEffect to control pending status or not pending, can be it more complicated and encrypted
@@ -158,15 +165,89 @@ const Home = ({ params }) => {
     }
   }, []);
 
+  // Handle Get All Items Images
+  const handleGetAllImages = async () => {
+    // e.preventDefault();
+
+    // const name = e.target.name.value;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+
+    if (AllItemsImages) {
+      // console.log("item already exists");
+      return;
+    }
+
+    // fetch request
+    try {
+      const datas = await axios.get(
+        "http://localhost:4000/api/items/itemsImages",
+
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // if (submission.message.length < 10) {
+      //   return { error: "Message must be over 10 chars long." };
+      // }
+
+      // console.log(datas);
+
+      // check response if ok
+      // console.log(datas.status === 200);
+
+      if (datas.status === 200) {
+        // console.log(datas.data);
+
+        // console.log(datas);
+        // setAllItems(datas.data);
+
+        setAllItemsImages(datas.data.images);
+        setfetchedImages(true);
+
+        // setTimeout(() => {
+        //   setShowAllItems(true);
+        // }, 500);
+
+        // console.log("data");
+        // SetUserdataNameAddress(datas.data);
+      }
+    } catch (error) {
+      // console.log("error");
+      // if there is an error response
+      // console.log(error);
+      // if there is an error response
+      // console.log(error.response.data);
+      // setErrorSignup(error.response.data.error);
+    }
+  };
+
   return (
     <div className={styles.Page}>
-      {Object.keys(itemsFetched).length > 0 && (
+      {Object.keys(itemsFetched).length > 0 && AllItemsImages && (
         <div key={itemsFetched._id} className={styles.Product}>
           <Image
             // className={styles.ProductImage}
             alt="image"
             // src={require(`./../../../../public/Items/${itemsFetched.name}.png`)}
-            src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemsFetched.name}.png`}
+            // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${itemsFetched.name}.png`}
+            src={AllItemsImages[itemsFetched.name]}
             width={400}
             height={400}
             // className="iconImage"
@@ -281,31 +362,35 @@ const Home = ({ params }) => {
         <h1 className="">You may also like</h1>
 
         <div className={styles.ProductEachItem}>
-          {allItemsAltered.map((item) => {
-            return (
-              <div key={item._id}>
-                <Link
-                  href={"/collections/" + item._id}
-                  className={styles.productEachItemFlex}
-                >
-                  <Image
-                    alt="image"
-                    className={styles.productItemImage}
-                    // src={require(`./../../../../public/Items/${item.name}.png`)}
-                    src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
-                    width={400}
-                    height={400}
-                    // className="iconImage"
-                  ></Image>
-                  <div className={styles.productItemName}> {item.name}</div>
-                  <div className={styles.productItemPriceAndGram}>
-                    <div className={styles.productItemPrice}>${item.price}</div>
-                    <div>/50 gram</div>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
+          {AllItemsImages &&
+            allItemsAltered.map((item) => {
+              return (
+                <div key={item._id}>
+                  <Link
+                    href={"/collections/" + item._id}
+                    className={styles.productEachItemFlex}
+                  >
+                    <Image
+                      alt="image"
+                      className={styles.productItemImage}
+                      // src={require(`./../../../../public/Items/${item.name}.png`)}
+                      // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                      src={AllItemsImages[item.name]}
+                      width={400}
+                      height={400}
+                      // className="iconImage"
+                    ></Image>
+                    <div className={styles.productItemName}> {item.name}</div>
+                    <div className={styles.productItemPriceAndGram}>
+                      <div className={styles.productItemPrice}>
+                        ${item.price}
+                      </div>
+                      <div>/50 gram</div>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
         </div>
       </div>
 

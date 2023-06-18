@@ -4,10 +4,14 @@ import { useItemsCartContext } from "../hooks/useItemsCartContext";
 import styles from "./order.module.css";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import axios from "axios";
 
 const OrderItems = () => {
   // dispatchUser to the authContext
   const { user, dispatchUser } = useAuthContext();
+
+  // Set All Items Images Fetch
+  const [AllItemsImages, setAllItemsImages] = useState();
 
   // importing Cart Context items if needed
   const { items, dispatch } = useItemsCartContext();
@@ -18,7 +22,7 @@ const OrderItems = () => {
   // putting the total value of
   const [totalValue, setTotalValue] = useState();
 
-  console.log(totalValue);
+  // console.log(totalValue);
 
   // setting the purchase button so if there is an item it always update the state and redirect to order page
   let checkLocalStorage;
@@ -26,17 +30,17 @@ const OrderItems = () => {
     if (typeof window !== "undefined") {
       checkLocalStorage = JSON.parse(localStorage.getItem("cartItems"));
 
-      console.log("redirect won't happens");
+      // console.log("redirect won't happens");
 
       if (
         Object.keys(JSON.parse(localStorage.getItem("cartItems")).length > 0)
       ) {
-        console.log("here");
+        // console.log("here");
         // setlocalStorageItemsCheck(true);
-        console.log("redirect will happen");
+        // console.log("redirect will happen");
       }
 
-      console.log(JSON.parse(localStorage.getItem("cartItems")).length > 0);
+      // console.log(JSON.parse(localStorage.getItem("cartItems")).length > 0);
     }
   }, []);
 
@@ -59,7 +63,7 @@ const OrderItems = () => {
     setTotalValue(orderTotalvalue);
   }, []);
 
-  console.log(getLocalCartItems);
+  // console.log(getLocalCartItems);
 
   // for exporting the value to order page and managing stripe
   useEffect(() => {
@@ -67,6 +71,81 @@ const OrderItems = () => {
       localStorage.setItem("itemsvalue", JSON.stringify(totalValue));
     }
   }, [totalValue]);
+
+  // Handle Get All Items Images
+  const handleGetAllImages = async () => {
+    // e.preventDefault();
+
+    // const name = e.target.name.value;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    if (AllItemsImages) {
+      return;
+    }
+
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+
+    // fetch request
+    try {
+      const datas = await axios.get(
+        "http://localhost:4000/api/items/itemsImages",
+
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // if (submission.message.length < 10) {
+      //   return { error: "Message must be over 10 chars long." };
+      // }
+
+      // console.log(datas);
+
+      // check response if ok
+      // console.log(datas.status === 200);
+
+      if (datas.status === 200) {
+        // console.log(datas.data);
+
+        // console.log(datas);
+        // setAllItems(datas.data);
+
+        setAllItemsImages(datas.data.images);
+
+        // setTimeout(() => {
+        //   setShowAllItems(true);
+        // }, 500);
+
+        // console.log("data");
+        // SetUserdataNameAddress(datas.data);
+      }
+    } catch (error) {
+      // console.log("error");
+      // if there is an error response
+      // console.log(error);
+      // if there is an error response
+      // console.log(error.response.data);
+      // setErrorSignup(error.response.data.error);
+    }
+  };
+
+  if (typeof window !== "undefined") {
+    handleGetAllImages();
+  }
 
   // increasing number of items + and decreasing - number of items
   let itemQuantityOneChecking;
@@ -83,6 +162,7 @@ const OrderItems = () => {
 
       <div className={styles.overflow}>
         {getLocalCartItems &&
+          AllItemsImages &&
           getLocalCartItems.map((item) => {
             return (
               <div key={item._id} className={styles.ItemStylesComponent}>
@@ -90,7 +170,8 @@ const OrderItems = () => {
                   <Image
                     alt="image"
                     // src={require(`./../../frontend/public/Items/${item.name}.png`)}
-                    src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                    // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                    src={AllItemsImages[item.name]}
                     width={300}
                     height={300}
                     // className="iconImage"

@@ -10,7 +10,7 @@ import Footer from "../../../../comps/footer";
 
 const ResetPassword = ({ params }) => {
   // get the token code from the url
-  console.log(params.id);
+  // console.log(params.id);
 
   // Successful Signup
   const [successfulChangepass, setSuccessfulChangepass] = useState(false);
@@ -50,12 +50,12 @@ const ResetPassword = ({ params }) => {
       token: params.id,
     };
 
-    // "https://tea-brand-ecommerce-be-node-js.vercel.app/api/mail/",
+    // "http://localhost:4000/api/mail/",
 
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/resetpassword/",
+        "http://localhost:4000/api/users/resetpassword/",
         {
           submission,
         },
@@ -79,7 +79,7 @@ const ResetPassword = ({ params }) => {
       //   return { error: "Message must be over 10 chars long." };
       // }
 
-      console.log(datas);
+      // console.log(datas);
 
       // check response if ok
       // console.log(datas.status === 200);
@@ -95,8 +95,8 @@ const ResetPassword = ({ params }) => {
         }, 5000);
       }
     } catch (error) {
-      console.log(error);
-      console.log("error");
+      // console.log(error);
+      // console.log("error");
 
       // if there is an error response
       // console.log(error);

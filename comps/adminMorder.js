@@ -13,6 +13,9 @@ const MangeOrders = () => {
 
   // console.log(AllOrders);
 
+  // Set All Items Images Fetch
+  const [AllItemsImages, setAllItemsImages] = useState();
+
   // dispatchUser to the authContext
   const { user, dispatchUser } = useAuthContext();
 
@@ -140,7 +143,7 @@ const MangeOrders = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getallorders",
+        "http://localhost:4000/api/orders/getallorders",
         formData,
         {
           withCredentials: true,
@@ -192,6 +195,77 @@ const MangeOrders = () => {
     }
   };
 
+  // Handle Get All Items Images
+  const handleGetAllImages = async () => {
+    // e.preventDefault();
+
+    // const name = e.target.name.value;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    if (AllItemsImages) {
+      return;
+    }
+
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+
+    // fetch request
+    try {
+      const datas = await axios.get(
+        "http://localhost:4000/api/items/itemsImages",
+
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers":
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+          // headers: {
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Content-Type": "application/json",
+          // },
+        }
+      );
+
+      // if (submission.message.length < 10) {
+      //   return { error: "Message must be over 10 chars long." };
+      // }
+
+      // console.log(datas);
+
+      // check response if ok
+      // console.log(datas.status === 200);
+
+      if (datas.status === 200) {
+        // console.log(datas.data);
+
+        // console.log(datas);
+        // setAllItems(datas.data);
+
+        setAllItemsImages(datas.data.images);
+
+        // setTimeout(() => {
+        //   setShowAllItems(true);
+        // }, 500);
+
+        // console.log("data");
+        // SetUserdataNameAddress(datas.data);
+      }
+    } catch (error) {
+      // console.log("error");
+      // if there is an error response
+      // console.log(error);
+      // if there is an error response
+      // console.log(error.response.data);
+      // setErrorSignup(error.response.data.error);
+    }
+  };
+
   // handleAddNoteToOrder
   const HandleAddNoteToOrder = async (e) => {
     e.preventDefault();
@@ -221,7 +295,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/orderaddnote/",
+        "http://localhost:4000/api/orders/orderaddnote/",
 
         { submission },
 
@@ -289,7 +363,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/deleteorder",
+        "http://localhost:4000/api/orders/deleteorder",
 
         { submission },
 
@@ -396,7 +470,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/markordercompleted",
+        "http://localhost:4000/api/orders/markordercompleted",
 
         { submission },
 
@@ -454,7 +528,7 @@ const MangeOrders = () => {
       // console.log(error);
 
       if (error.message) {
-        console.log("inside");
+        // console.log("inside");
         setErrorMarkOrderComplete(error.message);
       }
 
@@ -509,7 +583,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/updateOrder",
+        "http://localhost:4000/api/orders/updateOrder",
 
         formData,
 
@@ -586,6 +660,7 @@ const MangeOrders = () => {
           }}
           onClick={(e) => {
             handleGetAllOrders(e);
+            handleGetAllImages();
             setShowAllOrdersTab(true);
             setShowEditOrderCom(false);
             setShowDeleteOrderCom(false);
@@ -603,6 +678,8 @@ const MangeOrders = () => {
           }}
           onClick={(e) => {
             handleGetAllOrders(e);
+            handleGetAllImages();
+
             setShowEditOrderCom(true);
             setShowAllOrdersTab(false);
             setShowDeleteOrderCom(false);
@@ -619,6 +696,8 @@ const MangeOrders = () => {
           }}
           onClick={(e) => {
             handleGetAllOrders(e);
+            handleGetAllImages();
+
             setShowDeleteOrderCom(true);
             setShowEditOrderCom(false);
             setShowAllOrdersTab(false);
@@ -827,6 +906,7 @@ const MangeOrders = () => {
                   </div>
 
                   {ShowSpecficOrderProduct &&
+                    AllItemsImages &&
                     order.orderProducts.map((item, i) => {
                       return (
                         <div key={i} className={styles.OrderFullDetails}>
@@ -834,7 +914,8 @@ const MangeOrders = () => {
                             alt="image"
                             className={styles.productItemImage}
                             // src={require(`./../../../public/Items/${item.name}.png`)}
-                            src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                            // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                            src={AllItemsImages[item.name]}
                             // className="iconImage"
                             width={300}
                             height={300}
@@ -945,6 +1026,7 @@ const MangeOrders = () => {
               </div>
 
               {ShowSpecficOrderProductinEdit &&
+                AllItemsImages &&
                 OrderSelectedToEdit.orderProducts.map((item, i) => {
                   return (
                     <div key={i} className={styles.OrderFullDetails}>
@@ -952,7 +1034,8 @@ const MangeOrders = () => {
                         alt="image"
                         className={styles.productItemImage}
                         // src={require(`./../../../public/Items/${item.name}.png`)}
-                        src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                        // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                        src={AllItemsImages[item.name]}
                         // className="iconImage"
                         width={300}
                         height={300}
@@ -1120,6 +1203,7 @@ const MangeOrders = () => {
               </div>
 
               {ShowSpecficOrderProductinDelete &&
+                AllItemsImages &&
                 OrderSelectedToDelete.orderProducts.map((item, i) => {
                   return (
                     <div key={i} className={styles.OrderFullDetails}>
@@ -1127,7 +1211,8 @@ const MangeOrders = () => {
                         alt="image"
                         className={styles.productItemImage}
                         // src={require(`./../../../public/Items/${item.name}.png`)}
-                        src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                        // src={`https://next-ecommerce-s3.s3.eu-north-1.amazonaws.com/items/${item.name}.png`}
+                        src={AllItemsImages[item.name]}
                         // className="iconImage"
                         width={300}
                         height={300}

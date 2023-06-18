@@ -30,7 +30,7 @@ const MangeUsers = () => {
   // getting all orders to show for each user his order made
   const [AllOrders, setAllOrders] = useState();
 
-  console.log(AllOrders);
+  // console.log(AllOrders);
 
   // Show Products Details of the User
   const [ShowSpecficUserExtraData, setShowSpecficUserExtraData] =
@@ -163,7 +163,7 @@ const MangeUsers = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/getallusers",
+        "http://localhost:4000/api/users/getallusers",
         formData,
         {
           withCredentials: true,
@@ -233,7 +233,7 @@ const MangeUsers = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/getallorders",
+        "http://localhost:4000/api/orders/getallorders",
         formData,
         {
           withCredentials: true,
@@ -311,7 +311,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/addnotetouser",
+        "http://localhost:4000/api/users/addnotetouser",
 
         submission,
 
@@ -379,7 +379,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/Users/deleteuser",
+        "http://localhost:4000/api/Users/deleteuser",
 
         { submission },
 
@@ -486,7 +486,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/deactivateuser",
+        "http://localhost:4000/api/users/deactivateuser",
 
         { submission },
 
@@ -602,7 +602,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/updateuserinfo",
+        "http://localhost:4000/api/users/updateuserinfo",
 
         formData,
 
@@ -695,7 +695,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adduseradmin",
+        "http://localhost:4000/api/users/adduseradmin",
 
         { submission },
 

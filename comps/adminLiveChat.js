@@ -133,7 +133,7 @@ const LiveChat = () => {
 
   //   try {
   //     const datas = await axios.post(
-  //       "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/openchat/",
+  //       "http://localhost:4000/api/users/openchat/",
   //       {
   //         submission,
   //       },
@@ -190,7 +190,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/activechatpanel/",
+        "http://localhost:4000/api/users/activechatpanel/",
         formData,
         {
           withCredentials: true,
@@ -301,7 +301,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adminsendingchat/",
+        "http://localhost:4000/api/users/adminsendingchat/",
         {
           submission,
         },
@@ -408,7 +408,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adminjoinchat/",
+        "http://localhost:4000/api/users/adminjoinchat/",
         {
           submission,
         },
@@ -482,7 +482,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adminmarkchatcomplete/",
+        "http://localhost:4000/api/users/adminmarkchatcomplete/",
         {
           submission,
         },
@@ -537,7 +537,7 @@ const LiveChat = () => {
     // console.log(ItemAddNoteValue);
 
     if (ItemAddNoteValue.length < 1) {
-      console.log("nothing entered");
+      // console.log("nothing entered");
 
       return;
     }
@@ -552,7 +552,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adminaddnotetochat/",
+        "http://localhost:4000/api/users/adminaddnotetochat/",
         {
           submission,
         },
@@ -615,7 +615,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adminmarkformanger/",
+        "http://localhost:4000/api/users/adminmarkformanger/",
         {
           submission,
         },
@@ -688,7 +688,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/adminblockuseremail/",
+        "http://localhost:4000/api/users/adminblockuseremail/",
         {
           submission,
         },

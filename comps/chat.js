@@ -143,7 +143,7 @@ const Chat = (props) => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/openchat/",
+        "http://localhost:4000/api/users/openchat/",
         {
           submission,
         },
@@ -261,7 +261,7 @@ const Chat = (props) => {
   //   // fetch request
   //   try {
   //     const datas = await axios.post(
-  //       "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/openchat/",
+  //       "http://localhost:4000/api/users/openchat/",
   //       {
   //         submission,
   //       },
@@ -382,7 +382,7 @@ const Chat = (props) => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/getmessages/",
+        "http://localhost:4000/api/users/getmessages/",
         {
           submission,
         },
@@ -529,7 +529,7 @@ const Chat = (props) => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/sendingchat/",
+        "http://localhost:4000/api/users/sendingchat/",
         {
           submission,
         },

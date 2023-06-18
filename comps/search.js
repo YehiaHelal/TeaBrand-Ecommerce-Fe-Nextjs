@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./search.module.css";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Search = (props) => {
   // ITEM props

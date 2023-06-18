@@ -49,7 +49,7 @@ const OrderPage = () => {
   // order detail value
   const [OrderDetailsValue, setOrderDetailsValue] = useState();
 
-  console.log(OrderDetailsValue);
+  // console.log(OrderDetailsValue);
 
   const [showLoading, setShowLoading] = useState(false);
 
@@ -109,7 +109,7 @@ const OrderPage = () => {
 
         try {
           const response = await axios.post(
-            "https://tea-brand-ecommerce-be-node-js.vercel.app/api/users/profile",
+            "http://localhost:4000/api/users/profile",
             formData,
             {
               withCredentials: true,
@@ -167,7 +167,7 @@ const OrderPage = () => {
         orderTotalValue: orderPriceTotalvalue,
       };
 
-      console.log(OrderDetails);
+      // console.log(OrderDetails);
 
       setOrderDetailsValue(OrderDetails);
     }
@@ -239,7 +239,7 @@ const OrderPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://tea-brand-ecommerce-be-node-js.vercel.app/api/orders/cartorder",
+        "http://localhost:4000/api/orders/cartorder",
         { submission },
         {
           withCredentials: true,
@@ -286,21 +286,18 @@ const OrderPage = () => {
 
         setTimeout(() => {
           // navTo("/");
-          push("https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder");
+          push("http://localhost:3000/successorder");
 
           // redirecting to order was succesfully placed thank you
           // redirect to homepage option.
         }, 1500);
       }
     } catch (error) {
-      console.log("error");
-
+      // console.log("error");
       // if there is an error response
       // console.log(error);
-
       // if there is an error response
       // console.log(error.response.data);
-
       // setErrorSignup(error.response.data.error);
     }
   };
@@ -345,7 +342,7 @@ const OrderPage = () => {
         }
       );
 
-      console.log(datas);
+      // console.log(datas);
 
       if ((datas.data.status = 200)) {
         // console.log(datas.data);
@@ -357,7 +354,7 @@ const OrderPage = () => {
           JSON.stringify({ OrderDetailsValue, pendingstate })
         );
 
-        console.log(datas.data.sessionURL);
+        // console.log(datas.data.sessionURL);
 
         window.location = datas.data.sessionURL;
 
@@ -370,14 +367,11 @@ const OrderPage = () => {
         // }, 2000);
       }
     } catch (error) {
-      console.log("error");
-
+      // console.log("error");
       // if there is an error response
       // console.log(error);
-
       // if there is an error response
       // console.log(error.response.data);
-
       // setErrorSignup(error.response.data.error);
     }
   };
@@ -474,8 +468,8 @@ const OrderPage = () => {
                   //       quantity: 1,
                   //     },
                   //   ],
-                  // successUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder`,
-                  // cancelUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/failedpaymentorder`,
+                  // successUrl: `http://localhost:3000/successorder`,
+                  // cancelUrl: `http://localhost:3000/failedpaymentorder`,
                   // lineItems: [
                   //   // {
                   //   //   price_data: {
