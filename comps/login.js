@@ -320,7 +320,7 @@ const Login = () => {
 
   //   try {
   //     const datas = await axios.post(
-  //       "http://localhost:4000/api/users/imageupdate/",
+  //       "https://teabrand.onrender.com/api/users/imageupdate/",
 
   //       formData,
 
@@ -424,7 +424,7 @@ const Login = () => {
     // uploadprofileimgtos3
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/imagesendingtofe/",
+        "https://teabrand.onrender.com/api/users/imagesendingtofe/",
 
         formData,
 
@@ -478,9 +478,7 @@ const Login = () => {
       }
     } catch (error) {
       // console.log(error);
-
       // setErrorAddingImage("error");
-
       // setTimeout(() => {
       //   setErrorAddingImage("");
       // }, 3000);
@@ -506,7 +504,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://teabrand.onrender.com/api/items/itemsImages",
 
         {
           withCredentials: true,
@@ -582,7 +580,7 @@ const Login = () => {
     // uploadprofileimgtos3
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/imageupdate/",
+        "https://teabrand.onrender.com/api/users/imageupdate/",
 
         formData,
 
@@ -666,7 +664,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/getndata/",
+        "https://teabrand.onrender.com/api/users/getndata/",
         formData,
         {
           withCredentials: true,
@@ -710,13 +708,10 @@ const Login = () => {
       }
     } catch (error) {
       // console.log("error");
-
       // if there is an error response
       // console.log(error);
-
       // if there is an error response
       // console.log(error.response.data);
-
       // setErrorSignup(error.response.data.error);
     }
   };
@@ -746,7 +741,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/getuserorders",
+        "https://teabrand.onrender.com/api/orders/getuserorders",
         formData,
         {
           withCredentials: true,
@@ -789,13 +784,10 @@ const Login = () => {
       }
     } catch (error) {
       // console.log("error");
-
       // if there is an error response
       // console.log(error);
-
       // if there is an error response
       // console.log(error.response.data);
-
       // setErrorSignup(error.response.data.error);
     }
   };
@@ -822,7 +814,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/mail/resetpasswordemail",
+        "https://teabrand.onrender.com/api/mail/resetpasswordemail",
         {
           submission,
         },
@@ -911,12 +903,12 @@ const Login = () => {
       token: user.token,
     };
 
-    // "http://localhost:4000/api/mail/",
+    // "https://teabrand.onrender.com/api/mail/",
 
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/changepassword/",
+        "https://teabrand.onrender.com/api/users/changepassword/",
         {
           submission,
         },
@@ -995,7 +987,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/signup/",
+        "https://teabrand.onrender.com/api/users/signup/",
         {
           submission,
         },
@@ -1070,7 +1062,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/updateinfo/",
+        "https://teabrand.onrender.com/api/users/updateinfo/",
         {
           submission,
         },
@@ -1151,7 +1143,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/contactsend/",
+        "https://teabrand.onrender.com/api/users/contactsend/",
         {
           submission,
         },
@@ -1224,7 +1216,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/login/",
+        "https://teabrand.onrender.com/api/users/login/",
         {
           submission,
         },
@@ -1308,7 +1300,7 @@ const Login = () => {
   const LogoutFunctionHandler = async () => {
     // fetch request and if ok the cookie will be removed
     const datas = await axios.post(
-      "http://localhost:4000/api/users/logout",
+      "https://teabrand.onrender.com/api/users/logout",
       {},
       {
         withCredentials: true,
@@ -1344,7 +1336,7 @@ const Login = () => {
   //     const checkToken = async () => {
   //       try {
   //         const datas = await axios.post(
-  //           "http://localhost:4000/api/users/checktoken",
+  //           "https://teabrand.onrender.com/api/users/checktoken",
   //           {
   //             message: "checkme",
   //           },

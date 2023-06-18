@@ -33,7 +33,7 @@ const BlogPage = () => {
 
         try {
           const datas = await axios.post(
-            "http://localhost:4000/api/orders/getuserorders",
+            "https://teabrand.onrender.com/api/orders/getuserorders",
             formData,
             {
               withCredentials: true,
@@ -89,7 +89,7 @@ const BlogPage = () => {
           </div>
 
           <Link
-            href="http://localhost:3000/order"
+            href="https://tea-brand-ecommerce-fe-nextjs.vercel.app/order"
             className={styles.Linkredirect}
           >
             Redirect to Order Page

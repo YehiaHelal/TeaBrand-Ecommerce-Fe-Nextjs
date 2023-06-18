@@ -50,12 +50,12 @@ const ResetPassword = ({ params }) => {
       token: params.id,
     };
 
-    // "http://localhost:4000/api/mail/",
+    // "https://teabrand.onrender.com/api/mail/",
 
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/resetpassword/",
+        "https://teabrand.onrender.com/api/users/resetpassword/",
         {
           submission,
         },

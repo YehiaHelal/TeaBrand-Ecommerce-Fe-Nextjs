@@ -5,7 +5,6 @@ import styles from "./myBag.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 const MyBag = () => {
   if (typeof window !== "undefined") {
     // Perform localStorage action
@@ -91,7 +90,7 @@ const MyBag = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://teabrand.onrender.com/api/items/itemsImages",
 
         {
           withCredentials: true,

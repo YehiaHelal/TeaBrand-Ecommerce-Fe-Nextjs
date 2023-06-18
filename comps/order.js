@@ -91,7 +91,7 @@ const OrderItems = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://teabrand.onrender.com/api/items/itemsImages",
 
         {
           withCredentials: true,

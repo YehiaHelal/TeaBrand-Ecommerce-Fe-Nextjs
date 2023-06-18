@@ -113,7 +113,9 @@ const Home = ({ params }) => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch("http://localhost:4000/api/items/" + id);
+      const response = await fetch(
+        "https://teabrand.onrender.com/api/items/" + id
+      );
 
       const item = await response.json();
       // console.log("there");
@@ -129,7 +131,7 @@ const Home = ({ params }) => {
     };
 
     const fetchAllItems = async () => {
-      const response = await fetch("http://localhost:4000/api/items");
+      const response = await fetch("https://teabrand.onrender.com/api/items");
 
       const items = await response.json();
       // console.log("there");
@@ -185,7 +187,7 @@ const Home = ({ params }) => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://teabrand.onrender.com/api/items/itemsImages",
 
         {
           withCredentials: true,

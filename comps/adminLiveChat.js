@@ -133,7 +133,7 @@ const LiveChat = () => {
 
   //   try {
   //     const datas = await axios.post(
-  //       "http://localhost:4000/api/users/openchat/",
+  //       "https://teabrand.onrender.com/api/users/openchat/",
   //       {
   //         submission,
   //       },
@@ -190,7 +190,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/activechatpanel/",
+        "https://teabrand.onrender.com/api/users/activechatpanel/",
         formData,
         {
           withCredentials: true,
@@ -301,7 +301,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adminsendingchat/",
+        "https://teabrand.onrender.com/api/users/adminsendingchat/",
         {
           submission,
         },
@@ -408,7 +408,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adminjoinchat/",
+        "https://teabrand.onrender.com/api/users/adminjoinchat/",
         {
           submission,
         },
@@ -482,7 +482,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adminmarkchatcomplete/",
+        "https://teabrand.onrender.com/api/users/adminmarkchatcomplete/",
         {
           submission,
         },
@@ -552,7 +552,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adminaddnotetochat/",
+        "https://teabrand.onrender.com/api/users/adminaddnotetochat/",
         {
           submission,
         },
@@ -615,7 +615,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adminmarkformanger/",
+        "https://teabrand.onrender.com/api/users/adminmarkformanger/",
         {
           submission,
         },
@@ -688,7 +688,7 @@ const LiveChat = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adminblockuseremail/",
+        "https://teabrand.onrender.com/api/users/adminblockuseremail/",
         {
           submission,
         },

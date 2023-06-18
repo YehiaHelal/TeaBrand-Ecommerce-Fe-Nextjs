@@ -143,7 +143,7 @@ const MangeOrders = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/getallorders",
+        "https://teabrand.onrender.com/api/orders/getallorders",
         formData,
         {
           withCredentials: true,
@@ -214,7 +214,7 @@ const MangeOrders = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://teabrand.onrender.com/api/items/itemsImages",
 
         {
           withCredentials: true,
@@ -295,7 +295,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/orderaddnote/",
+        "https://teabrand.onrender.com/api/orders/orderaddnote/",
 
         { submission },
 
@@ -363,7 +363,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/deleteorder",
+        "https://teabrand.onrender.com/api/orders/deleteorder",
 
         { submission },
 
@@ -470,7 +470,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/markordercompleted",
+        "https://teabrand.onrender.com/api/orders/markordercompleted",
 
         { submission },
 
@@ -583,7 +583,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/updateOrder",
+        "https://teabrand.onrender.com/api/orders/updateOrder",
 
         formData,
 
