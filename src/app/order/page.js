@@ -109,7 +109,7 @@ const OrderPage = () => {
 
         try {
           const response = await axios.post(
-            "https://teabrand.onrender.com/api/users/profile",
+            "http://localhost:4000/api/users/profile",
             formData,
             {
               withCredentials: true,
@@ -239,7 +239,7 @@ const OrderPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://teabrand.onrender.com/api/orders/cartorder",
+        "http://localhost:4000/api/orders/cartorder",
         { submission },
         {
           withCredentials: true,
@@ -286,7 +286,7 @@ const OrderPage = () => {
 
         setTimeout(() => {
           // navTo("/");
-          push("https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder");
+          push("http://localhost:3000/successorder");
 
           // redirecting to order was succesfully placed thank you
           // redirect to homepage option.
@@ -468,8 +468,8 @@ const OrderPage = () => {
                   //       quantity: 1,
                   //     },
                   //   ],
-                  // successUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/successorder`,
-                  // cancelUrl: `https://tea-brand-ecommerce-fe-nextjs.vercel.app/failedpaymentorder`,
+                  // successUrl: `http://localhost:3000/successorder`,
+                  // cancelUrl: `http://localhost:3000/failedpaymentorder`,
                   // lineItems: [
                   //   // {
                   //   //   price_data: {

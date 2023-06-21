@@ -128,7 +128,7 @@ const Admin = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "https://teabrand.onrender.com/api/items/itemsImages",
+        "http://localhost:4000/api/items/itemsImages",
 
         {
           withCredentials: true,
@@ -200,7 +200,7 @@ const Admin = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://teabrand.onrender.com/api/users/dashboarddata",
+        "http://localhost:4000/api/users/dashboarddata",
         formData,
         {
           withCredentials: true,
@@ -265,7 +265,7 @@ const Admin = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "https://teabrand.onrender.com/api/items",
+        "http://localhost:4000/api/items",
 
         {
           withCredentials: true,
@@ -338,7 +338,7 @@ const Admin = () => {
 
     try {
       const datas = await axios.post(
-        "https://teabrand.onrender.com/api/items/addproduct/",
+        "http://localhost:4000/api/items/addproduct/",
 
         formData,
 
@@ -435,7 +435,7 @@ const Admin = () => {
 
     try {
       const datas = await axios.post(
-        "https://teabrand.onrender.com/api/items/deleteproduct",
+        "http://localhost:4000/api/items/deleteproduct",
 
         { submission },
 
@@ -546,7 +546,7 @@ const Admin = () => {
 
     try {
       const datas = await axios.post(
-        "https://teabrand.onrender.com/api/items/editproduct",
+        "http://localhost:4000/api/items/editproduct",
 
         formData,
 

@@ -57,7 +57,7 @@ const BlogPage = () => {
 
       try {
         const datas = await axios.post(
-          "https://teabrand.onrender.com/api/orders/getuserorders",
+          "http://localhost:4000/api/orders/getuserorders",
           { submission },
           {
             withCredentials: true,
@@ -129,7 +129,7 @@ const BlogPage = () => {
       // fetch request
       try {
         const datas = await axios.post(
-          "https://teabrand.onrender.com/api/orders/cartorder",
+          "http://localhost:4000/api/orders/cartorder",
           { OrderDetails },
           {
             withCredentials: true,
@@ -219,7 +219,7 @@ const BlogPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "https://teabrand.onrender.com/api/mail/emailorderplaced",
+        "http://localhost:4000/api/mail/emailorderplaced",
         {
           submission,
         },
