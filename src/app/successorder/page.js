@@ -57,7 +57,7 @@ const BlogPage = () => {
 
       try {
         const datas = await axios.post(
-          "http://localhost:4000/api/orders/getuserorders",
+          "https://backend.shoponlinemarket.cloud/api/orders/getuserorders",
           { submission },
           {
             withCredentials: true,
@@ -129,7 +129,7 @@ const BlogPage = () => {
       // fetch request
       try {
         const datas = await axios.post(
-          "http://localhost:4000/api/orders/cartorder",
+          "https://backend.shoponlinemarket.cloud/api/orders/cartorder",
           { OrderDetails },
           {
             withCredentials: true,
@@ -219,7 +219,7 @@ const BlogPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/mail/emailorderplaced",
+        "https://backend.shoponlinemarket.cloud/api/mail/emailorderplaced",
         {
           submission,
         },

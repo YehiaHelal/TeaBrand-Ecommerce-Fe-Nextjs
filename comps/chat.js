@@ -143,7 +143,7 @@ const Chat = (props) => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/openchat/",
+        "https://backend.shoponlinemarket.cloud/api/users/openchat/",
         {
           submission,
         },
@@ -261,7 +261,7 @@ const Chat = (props) => {
   //   // fetch request
   //   try {
   //     const datas = await axios.post(
-  //       "http://localhost:4000/api/users/openchat/",
+  //       "https://backend.shoponlinemarket.cloud/api/users/openchat/",
   //       {
   //         submission,
   //       },
@@ -382,7 +382,7 @@ const Chat = (props) => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/getmessages/",
+        "https://backend.shoponlinemarket.cloud/api/users/getmessages/",
         {
           submission,
         },
@@ -529,7 +529,7 @@ const Chat = (props) => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/sendingchat/",
+        "https://backend.shoponlinemarket.cloud/api/users/sendingchat/",
         {
           submission,
         },

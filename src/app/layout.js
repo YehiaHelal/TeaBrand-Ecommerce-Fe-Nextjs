@@ -40,7 +40,9 @@ function RootLayout({ children }) {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch("http://localhost:4000/api/items");
+      const response = await fetch(
+        "https://backend.shoponlinemarket.cloud/api/items"
+      );
 
       const item = await response.json();
 

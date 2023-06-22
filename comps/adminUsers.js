@@ -163,7 +163,7 @@ const MangeUsers = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/getallusers",
+        "https://backend.shoponlinemarket.cloud/api/users/getallusers",
         formData,
         {
           withCredentials: true,
@@ -233,7 +233,7 @@ const MangeUsers = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/getallorders",
+        "https://backend.shoponlinemarket.cloud/api/orders/getallorders",
         formData,
         {
           withCredentials: true,
@@ -311,7 +311,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/addnotetouser",
+        "https://backend.shoponlinemarket.cloud/api/users/addnotetouser",
 
         submission,
 
@@ -379,7 +379,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/Users/deleteuser",
+        "https://backend.shoponlinemarket.cloud/api/Users/deleteuser",
 
         { submission },
 
@@ -486,7 +486,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/deactivateuser",
+        "https://backend.shoponlinemarket.cloud/api/users/deactivateuser",
 
         { submission },
 
@@ -602,7 +602,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/updateuserinfo",
+        "https://backend.shoponlinemarket.cloud/api/users/updateuserinfo",
 
         formData,
 
@@ -695,7 +695,7 @@ const MangeUsers = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/adduseradmin",
+        "https://backend.shoponlinemarket.cloud/api/users/adduseradmin",
 
         { submission },
 

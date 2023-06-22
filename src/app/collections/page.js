@@ -247,7 +247,9 @@ function Collections() {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch("http://localhost:4000/api/items");
+      const response = await fetch(
+        "https://backend.shoponlinemarket.cloud/api/items"
+      );
 
       const item = await response.json();
 
@@ -293,7 +295,7 @@ function Collections() {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://backend.shoponlinemarket.cloud/api/items/itemsImages",
 
         {
           withCredentials: true,

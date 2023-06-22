@@ -320,7 +320,7 @@ const Login = () => {
 
   //   try {
   //     const datas = await axios.post(
-  //       "http://localhost:4000/api/users/imageupdate/",
+  //       "https://backend.shoponlinemarket.cloud/api/users/imageupdate/",
 
   //       formData,
 
@@ -424,7 +424,7 @@ const Login = () => {
     // uploadprofileimgtos3
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/imagesendingtofe/",
+        "https://backend.shoponlinemarket.cloud/api/users/imagesendingtofe/",
 
         formData,
 
@@ -504,7 +504,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://backend.shoponlinemarket.cloud/api/items/itemsImages",
 
         {
           withCredentials: true,
@@ -580,7 +580,7 @@ const Login = () => {
     // uploadprofileimgtos3
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/imageupdate/",
+        "https://backend.shoponlinemarket.cloud/api/users/imageupdate/",
 
         formData,
 
@@ -664,7 +664,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/getndata/",
+        "https://backend.shoponlinemarket.cloud/api/users/getndata/",
         formData,
         {
           withCredentials: true,
@@ -741,7 +741,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/getuserorders",
+        "https://backend.shoponlinemarket.cloud/api/orders/getuserorders",
         formData,
         {
           withCredentials: true,
@@ -814,7 +814,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/mail/resetpasswordemail",
+        "https://backend.shoponlinemarket.cloud/api/mail/resetpasswordemail",
         {
           submission,
         },
@@ -903,12 +903,12 @@ const Login = () => {
       token: user.token,
     };
 
-    // "http://localhost:4000/api/mail/",
+    // "https://backend.shoponlinemarket.cloud/api/mail/",
 
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/changepassword/",
+        "https://backend.shoponlinemarket.cloud/api/users/changepassword/",
         {
           submission,
         },
@@ -987,7 +987,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/signup/",
+        "https://backend.shoponlinemarket.cloud/api/users/signup/",
         {
           submission,
         },
@@ -1062,7 +1062,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/updateinfo/",
+        "https://backend.shoponlinemarket.cloud/api/users/updateinfo/",
         {
           submission,
         },
@@ -1143,7 +1143,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/contactsend/",
+        "https://backend.shoponlinemarket.cloud/api/users/contactsend/",
         {
           submission,
         },
@@ -1216,7 +1216,7 @@ const Login = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/users/login/",
+        "https://backend.shoponlinemarket.cloud/api/users/login/",
         {
           submission,
         },
@@ -1300,7 +1300,7 @@ const Login = () => {
   const LogoutFunctionHandler = async () => {
     // fetch request and if ok the cookie will be removed
     const datas = await axios.post(
-      "http://localhost:4000/api/users/logout",
+      "https://backend.shoponlinemarket.cloud/api/users/logout",
       {},
       {
         withCredentials: true,
@@ -1336,7 +1336,7 @@ const Login = () => {
   //     const checkToken = async () => {
   //       try {
   //         const datas = await axios.post(
-  //           "http://localhost:4000/api/users/checktoken",
+  //           "https://backend.shoponlinemarket.cloud/api/users/checktoken",
   //           {
   //             message: "checkme",
   //           },

@@ -109,7 +109,7 @@ const OrderPage = () => {
 
         try {
           const response = await axios.post(
-            "http://localhost:4000/api/users/profile",
+            "https://backend.shoponlinemarket.cloud/api/users/profile",
             formData,
             {
               withCredentials: true,
@@ -239,7 +239,7 @@ const OrderPage = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/cartorder",
+        "https://backend.shoponlinemarket.cloud/api/orders/cartorder",
         { submission },
         {
           withCredentials: true,
@@ -286,7 +286,7 @@ const OrderPage = () => {
 
         setTimeout(() => {
           // navTo("/");
-          push("http://localhost:3000/successorder");
+          push("https://www.shoponlinemarket.cloud/successorder");
 
           // redirecting to order was succesfully placed thank you
           // redirect to homepage option.
@@ -468,8 +468,8 @@ const OrderPage = () => {
                   //       quantity: 1,
                   //     },
                   //   ],
-                  // successUrl: `http://localhost:3000/successorder`,
-                  // cancelUrl: `http://localhost:3000/failedpaymentorder`,
+                  // successUrl: `https://www.shoponlinemarket.cloud/successorder`,
+                  // cancelUrl: `https://www.shoponlinemarket.cloud/failedpaymentorder`,
                   // lineItems: [
                   //   // {
                   //   //   price_data: {

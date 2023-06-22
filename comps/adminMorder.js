@@ -143,7 +143,7 @@ const MangeOrders = () => {
     // fetch request
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/getallorders",
+        "https://backend.shoponlinemarket.cloud/api/orders/getallorders",
         formData,
         {
           withCredentials: true,
@@ -214,7 +214,7 @@ const MangeOrders = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://backend.shoponlinemarket.cloud/api/items/itemsImages",
 
         {
           withCredentials: true,
@@ -295,7 +295,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/orderaddnote/",
+        "https://backend.shoponlinemarket.cloud/api/orders/orderaddnote/",
 
         { submission },
 
@@ -363,7 +363,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/deleteorder",
+        "https://backend.shoponlinemarket.cloud/api/orders/deleteorder",
 
         { submission },
 
@@ -470,7 +470,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/markordercompleted",
+        "https://backend.shoponlinemarket.cloud/api/orders/markordercompleted",
 
         { submission },
 
@@ -583,7 +583,7 @@ const MangeOrders = () => {
 
     try {
       const datas = await axios.post(
-        "http://localhost:4000/api/orders/updateOrder",
+        "https://backend.shoponlinemarket.cloud/api/orders/updateOrder",
 
         formData,
 

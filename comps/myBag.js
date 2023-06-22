@@ -90,7 +90,7 @@ const MyBag = () => {
     // fetch request
     try {
       const datas = await axios.get(
-        "http://localhost:4000/api/items/itemsImages",
+        "https://backend.shoponlinemarket.cloud/api/items/itemsImages",
 
         {
           withCredentials: true,
