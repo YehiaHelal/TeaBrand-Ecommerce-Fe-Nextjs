@@ -54,10 +54,10 @@ function RootLayout({ children }) {
     };
 
     fetchItems();
-    alert("Hello!");
-    alert(
-      "Please wait 30 seconds for the Backend/Database server to start working again (because it's a free hosting after 15min of inactivity it stops working)"
-    );
+    // alert("Hello!");
+    // alert(
+    //   "Please wait 30 seconds for the Backend/Database server to start working again (because it's a free hosting after 15min of inactivity it stops working)"
+    // );
   }, []);
 
   if (typeof window !== "undefined") {

@@ -357,7 +357,7 @@ function Collections() {
 
         // className="iconImage"
       ></Image>
-      <p className={styles.BreadCrumbs}>Directions BreadCrumbs</p>
+      {/* <p className={styles.BreadCrumbs}>Directions BreadCrumbs</p> */}
 
       <div className={styles.Sorting}>
         <select
