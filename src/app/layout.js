@@ -92,7 +92,7 @@ function RootLayout({ children }) {
               <div className="nav-each-part-two">
                 <Link href="/collections">TEA COLLECTIONS</Link>
                 {/* <Link href="/">ACCESSORIES</Link> */}
-                <Link href="/Blog">BLOGss</Link>
+                <Link href="/Blog">BLOG</Link>
                 <Link href="/contacts">CONTACT US</Link>
                 <Link href="/admin">ADMIN DASHBOARD</Link>
               </div>
