@@ -18,7 +18,10 @@ const Admin = () => {
   const [AllItemsImages, setAllItemsImages] = useState();
 
   // Show Dashboard
-  const [showDashboard, setShowDashboard] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(true);
+
+  // set show no user was found
+  const [noUserSigned, setnoUserSigned] = useState(false);
 
   // Set Dashboard Total Data
   const [dashboardTotalData, setDashboardTotalData] = useState();
@@ -113,6 +116,10 @@ const Admin = () => {
   // // Show Contacts
   // const [showContacts, setShowContacts] = useState(false);
 
+  useEffect(() => {
+    handleGetDashboardData();
+  }, [user]);
+
   // Handle Get All Items Images
   const handleGetAllImages = async () => {
     // e.preventDefault();
@@ -192,6 +199,11 @@ const Admin = () => {
     // console.log(email);
     // console.log(password);
 
+    if (!user) {
+      setnoUserSigned(true);
+      return;
+    }
+
     const formData = new FormData();
     formData.append("jwt", user.token);
 
@@ -231,6 +243,7 @@ const Admin = () => {
         // console.log(datas.data);
 
         setDashboardTotalData(datas.data);
+        setnoUserSigned(false);
 
         // setTimeout(() => {
         //   setShowAllItems(true);
@@ -661,10 +674,6 @@ const Admin = () => {
         )}
         <button
           onClick={() => {
-            if (showDashboard === true) {
-              setShowDashboard(false);
-            }
-
             if (showDashboard !== true) {
               setShowDashboard(true);
               setShowOrders(false);
@@ -848,7 +857,16 @@ const Admin = () => {
       </div>
 
       <div className={styles.ManagingExpandingComponent}>
-        {showDashboard && dashboardTotalData && (
+        {showDashboard && noUserSigned && (
+          <div className={styles.dashboardTextBeforelogin}>
+            <div>
+              Please log in or sign up to be able to view admin dashboard
+            </div>
+            <div>Any new user by default is an admin</div>
+          </div>
+        )}
+
+        {showDashboard && user && dashboardTotalData && (
           <div>
             {/* <h3 className={styles.DashboardNotifcationDefault}>
               By Default any user created is Admin, you can change user role if

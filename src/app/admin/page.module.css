@@ -298,3 +298,8 @@
 .DashboardData > h3 {
   text-decoration: underline;
 }
+
+.dashboardTextBeforelogin * {
+  font-size: 18px;
+  padding: 5px;
+}
